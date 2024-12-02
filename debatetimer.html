@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             background-image: url('navidad1.png'); 
+
             background-size: cover;
             background-position: center;
         }
@@ -73,7 +74,6 @@
         <button onclick="setTime(5)">5 minutos</button>
         <input type="number" id="customTime" class="custom-input" placeholder="Minutos">
         <button onclick="startCustomTimer()">Iniciar</button>
-        <button onclick="togglePause()" id="pause-button">Pausar</button>
         <div class="courtesy-timer" id="courtesy-timer"></div>
     </div>
     <div class="cortesia">
@@ -82,27 +82,11 @@
     </div>
 
     <audio id="alert-sound" src="sonido.mp3"></audio> 
-
+    
+    
     <script>
         let countdown;
         let courtesyCountdown;
-        let isPaused = false; // Estado de pausa
-        let remainingTime = 0; // Tiempo restante
-
-        function togglePause() {
-            const pauseButton = document.getElementById("pause-button");
-            if (isPaused) {
-                // Reanudar
-                startTimer(remainingTime);
-                pauseButton.textContent = "Pausar";
-                isPaused = false;
-            } else {
-                // Pausar
-                clearInterval(countdown);
-                isPaused = true;
-                pauseButton.textContent = "Reanudar";
-            }
-        }
 
         function setTime(minutes) {
             startTimer(minutes * 60);
@@ -119,15 +103,15 @@
 
         function startTimer(seconds) {
             clearInterval(countdown);
-            isPaused = false; // Reinicia el estado de pausa
-            remainingTime = seconds; // Guarda el tiempo inicial
             const timerDisplay = document.getElementById("timer");
             const courtesyTimerDisplay = document.getElementById("courtesy-timer");
             const endTime = Date.now() + seconds * 1000;
 
-            countdown = setInterval(() => {
-                if (isPaused) return; // Detiene la ejecución si está en pausa
+            // Reiniciar timers
+            timerDisplay.textContent = "00:00";
+            courtesyTimerDisplay.textContent = "";
 
+            countdown = setInterval(() => {
                 const timeLeft = Math.round((endTime - Date.now()) / 1000);
                 if (timeLeft < 0) {
                     clearInterval(countdown);
@@ -136,8 +120,6 @@
                     checkCourtesy();
                     return;
                 }
-
-                remainingTime = timeLeft; // Actualiza el tiempo restante
                 displayTime(timeLeft, timerDisplay);
             }, 1000);
         }
@@ -145,7 +127,7 @@
         function displayTime(seconds, display) {
             const minutes = Math.floor(seconds / 60);
             const remainingSeconds = seconds % 60;
-            const formattedTime = ${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds};
+            const formattedTime = `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
             display.textContent = formattedTime;
         }
 
