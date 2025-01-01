@@ -120,7 +120,8 @@
 
             countdown = setInterval(() => {
                 if (!isPaused) {
-                    let timeLeft = Math.round((originalEndTime - pauseTime - Date.now()) / 1000);
+                    let currentTime = Date.now();
+                    let timeLeft = Math.round((originalEndTime - currentTime) / 1000);
                     if (timeLeft < 0) {
                         clearInterval(countdown);
                         timerDisplay.textContent = "¡Tiempo terminado!";
@@ -171,11 +172,11 @@
 
         function togglePause() {
             isPaused = !isPaused;
-            const pauseResumeBtn = document.getElementById('pauseResumeBtn');
             if (isPaused) {
-                pauseTime = Date.now();
+                pauseTime = Date.now(); // Guardamos el momento en que se pausa
                 updateButtonText('Reanudar');
             } else {
+                // Actualizamos el tiempo restante con el tiempo pausado
                 originalEndTime += (Date.now() - pauseTime);
                 updateButtonText('Pausar');
             }
