@@ -14,7 +14,6 @@
             align-items: center;
             height: 100vh;
             background-image: url('navidad1.png'); 
-
             background-size: cover;
             background-position: center;
         }
@@ -74,6 +73,7 @@
         <button onclick="setTime(5)">5 minutos</button>
         <input type="number" id="customTime" class="custom-input" placeholder="Minutos">
         <button onclick="startCustomTimer()">Iniciar</button>
+        <button id="pauseResumeBtn" onclick="togglePause()">Pausar/Reanudar</button>
         <div class="courtesy-timer" id="courtesy-timer"></div>
     </div>
     <div class="cortesia">
@@ -83,10 +83,12 @@
 
     <audio id="alert-sound" src="sonido.mp3"></audio> 
     
-    
     <script>
         let countdown;
         let courtesyCountdown;
+        let isPaused = false;
+        let pauseTime = 0;
+        let originalEndTime;
 
         function setTime(minutes) {
             startTimer(minutes * 60);
@@ -105,22 +107,29 @@
             clearInterval(countdown);
             const timerDisplay = document.getElementById("timer");
             const courtesyTimerDisplay = document.getElementById("courtesy-timer");
-            const endTime = Date.now() + seconds * 1000;
+            const currentTime = Date.now();
+            originalEndTime = currentTime + seconds * 1000;
 
             // Reiniciar timers
             timerDisplay.textContent = "00:00";
             courtesyTimerDisplay.textContent = "";
+            isPaused = false;
+            pauseTime = 0;
+
+            updateButtonText('Pausar');
 
             countdown = setInterval(() => {
-                const timeLeft = Math.round((endTime - Date.now()) / 1000);
-                if (timeLeft < 0) {
-                    clearInterval(countdown);
-                    timerDisplay.textContent = "¡Tiempo terminado!";
-                    playSound();
-                    checkCourtesy();
-                    return;
+                if (!isPaused) {
+                    let timeLeft = Math.round((originalEndTime - pauseTime - Date.now()) / 1000);
+                    if (timeLeft < 0) {
+                        clearInterval(countdown);
+                        timerDisplay.textContent = "¡Tiempo terminado!";
+                        playSound();
+                        checkCourtesy();
+                        return;
+                    }
+                    displayTime(timeLeft, timerDisplay);
                 }
-                displayTime(timeLeft, timerDisplay);
             }, 1000);
         }
 
@@ -158,6 +167,22 @@
                 displayTime(seconds, courtesyTimerDisplay);
                 seconds--;
             }, 1000);
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            const pauseResumeBtn = document.getElementById('pauseResumeBtn');
+            if (isPaused) {
+                pauseTime = Date.now();
+                updateButtonText('Reanudar');
+            } else {
+                originalEndTime += (Date.now() - pauseTime);
+                updateButtonText('Pausar');
+            }
+        }
+
+        function updateButtonText(text) {
+            document.getElementById('pauseResumeBtn').textContent = text;
         }
     </script>
 </body>
