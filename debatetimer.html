@@ -69,8 +69,8 @@
 <body>
     <div class="container">
         <div class="timer" id="timer">00:00</div>
-        <button onclick="setTime(7)">7 minutos</button>
-        <button onclick="setTime(5)">5 minutos</button>
+        <button onclick="setCustomTime(7)">7 minutos</button>
+        <button onclick="setCustomTime(5)">5 minutos</button>
         <input type="number" id="customTime" class="custom-input" placeholder="Minutos">
         <button onclick="startCustomTimer()">Iniciar</button>
         <button id="pauseResumeBtn" onclick="togglePause()">Pausar/Reanudar</button>
@@ -90,8 +90,8 @@
         let pauseTime = 0;
         let originalEndTime;
 
-        function setTime(minutes) {
-            startTimer(minutes * 60);
+        function setCustomTime(minutes) {
+            document.getElementById("customTime").value = minutes;
         }
 
         function startCustomTimer() {
@@ -110,7 +110,6 @@
             const currentTime = Date.now();
             originalEndTime = currentTime + seconds * 1000;
 
-            // Reiniciar timers
             timerDisplay.textContent = "00:00";
             courtesyTimerDisplay.textContent = "";
             isPaused = false;
@@ -173,10 +172,9 @@
         function togglePause() {
             isPaused = !isPaused;
             if (isPaused) {
-                pauseTime = Date.now(); // Guardamos el momento en que se pausa
+                pauseTime = Date.now();
                 updateButtonText('Reanudar');
             } else {
-                // Actualizamos el tiempo restante con el tiempo pausado
                 originalEndTime += (Date.now() - pauseTime);
                 updateButtonText('Pausar');
             }
