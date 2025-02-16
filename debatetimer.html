@@ -1,1 +1,188 @@
-google-site-verification: google8a7197bbf5fdece6.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate UMU</title>
+    <link rel="icon" href="img/sinf.png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('img/fondoBlancoMuchos.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+        }
+        .timer {
+            font-size: 4rem;
+            margin: 20px 0;
+        }
+        button, .custom-input {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #555;
+            color: white;
+            display: inline-block;
+            text-align: center;
+        }
+        button:hover, .custom-input:hover {
+            background-color: #444;
+        }
+        .custom-input {
+            width: auto;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        .cortesia {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .cortesia input {
+            transform: scale(1.5);
+        }
+        .courtesy-timer {
+            font-size: 2rem;
+            margin-top: 10px;
+            color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer" id="timer">00:00</div>
+        <button onclick="setCustomTime(7)">7 minutos</button>
+        <button onclick="setCustomTime(5)">5 minutos</button>
+        <input type="number" id="customTime" class="custom-input" placeholder="Minutos">
+        <button onclick="startCustomTimer()">Iniciar</button>
+        <button id="pauseResumeBtn" onclick="togglePause()">Pausar/Reanudar</button>
+        <div class="courtesy-timer" id="courtesy-timer"></div>
+    </div>
+    <div class="cortesia">
+        <label for="courtesy-checkbox">Cortesía</label>
+        <input type="checkbox" id="courtesy-checkbox">
+    </div>
+
+    <audio id="alert-sound" src="campana.mp3"></audio> 
+    
+    <script>
+        let countdown;
+        let courtesyCountdown;
+        let isPaused = false;
+        let pauseTime = 0;
+        let originalEndTime;
+
+        function setCustomTime(minutes) {
+            document.getElementById("customTime").value = minutes;
+        }
+
+        function startCustomTimer() {
+            const customMinutes = document.getElementById("customTime").value;
+            if (customMinutes > 0) {
+                startTimer(customMinutes * 60);
+            } else {
+                alert("Por favor, introduce un tiempo válido.");
+            }
+        }
+
+        function startTimer(seconds) {
+            clearInterval(countdown);
+            const timerDisplay = document.getElementById("timer");
+            const courtesyTimerDisplay = document.getElementById("courtesy-timer");
+            const currentTime = Date.now();
+            originalEndTime = currentTime + seconds * 1000;
+
+            timerDisplay.textContent = "00:00";
+            courtesyTimerDisplay.textContent = "";
+            isPaused = false;
+            pauseTime = 0;
+
+            updateButtonText('Pausar');
+
+            countdown = setInterval(() => {
+                if (!isPaused) {
+                    let currentTime = Date.now();
+                    let timeLeft = Math.round((originalEndTime - currentTime) / 1000);
+                    if (timeLeft < 0) {
+                        clearInterval(countdown);
+                        timerDisplay.textContent = "¡Tiempo terminado!";
+                        playSound();
+                        checkCourtesy();
+                        return;
+                    }
+                    displayTime(timeLeft, timerDisplay);
+                }
+            }, 1000);
+        }
+
+        function displayTime(seconds, display) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            const formattedTime = `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+            display.textContent = formattedTime;
+        }
+
+        function playSound() {
+            const alertSound = document.getElementById("alert-sound");
+            alertSound.play();
+        }
+
+        function checkCourtesy() {
+            const courtesyCheckbox = document.getElementById("courtesy-checkbox");
+            if (courtesyCheckbox.checked) {
+                startCourtesyTimer();
+            }
+        }
+
+        function startCourtesyTimer() {
+            clearInterval(courtesyCountdown);
+            const courtesyTimerDisplay = document.getElementById("courtesy-timer");
+            let seconds = 15;
+
+            courtesyCountdown = setInterval(() => {
+                if (seconds <= 0) {
+                    clearInterval(courtesyCountdown);
+                    courtesyTimerDisplay.textContent = "¡Cortesía terminada!";
+                    playSound();
+                    return;
+                }
+                displayTime(seconds, courtesyTimerDisplay);
+                seconds--;
+            }, 1000);
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            if (isPaused) {
+                pauseTime = Date.now();
+                updateButtonText('Reanudar');
+            } else {
+                originalEndTime += (Date.now() - pauseTime);
+                updateButtonText('Pausar');
+            }
+        }
+
+        function updateButtonText(text) {
+            document.getElementById('pauseResumeBtn').textContent = text;
+        }
+    </script>
+</body>
+</html>
