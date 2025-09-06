@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Club de Debate UMU — Landing</title>
+  <meta name="description" content="Formamos en argumentación, oratoria y debate. Construimos pensamiento crítico. ¡Únete al Club de Debate UMU!" />
+  <meta property="og:title" content="Club de Debate UMU — Landing" />
+  <meta property="og:description" content="Formamos en argumentación, oratoria y debate. Construimos pensamiento crítico." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/ffffff/000000.png&text=Club+de+Debate+UMU" />
+  <meta name="theme-color" content="#b00020" />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    html { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial; }
+
+    /* Botones mobile-friendly */
+    .btn {
+      @apply w-full py-5 px-6 rounded-2xl text-lg sm:text-xl font-bold shadow-lg transition transform hover:scale-105 active:scale-95;
+    }
+
+    .btn-primary {
+      @apply text-white bg-gradient-to-r from-orange-400 to-orange-500;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 18px rgba(249,115,22,0.5);
+    }
+
+    .btn-instagram {
+      @apply text-white bg-gradient-to-r from-green-400 to-green-500;
+    }
+    .btn-instagram:hover {
+      box-shadow: 0 0 18px rgba(34,197,94,0.5);
+    }
+
+    .btn-ghost {
+      @apply bg-white/80 backdrop-blur border border-zinc-300 text-zinc-800;
+    }
+    .btn-ghost:hover {
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    .card { 
+      @apply max-w-md w-full bg-white/90 backdrop-blur border border-zinc-200 rounded-3xl shadow-xl p-6;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-orange-100 via-white to-green-100">
+
+  <!-- Header con logo -->
+  <header class="relative text-center py-8 px-6">
+    <div class="flex justify-center mb-4">
+      <img src="logo.png" alt="Logo Club de Debate UMU" class="h-16 w-auto sm:h-20">
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold text-zinc-900">Club de Debate UMU</h1>
+    <p class="mt-3 text-base sm:text-lg text-zinc-700">Formamos en argumentación, oratoria y debate. Construimos pensamiento crítico.</p>
+  </header>
+
+  <!-- Links Section -->
+  <main class="px-6 pb-16">
+    <section class="mx-auto card text-center space-y-5">
+      <a class="btn btn-primary" href="https://forms.gle/REEMPLAZA_FORMULARIO" target="_blank" rel="noopener">📝 Formulario de inscripción</a>
+      <br>
+      <a class="btn btn-instagram" href="https://www.instagram.com/clubdedebateum/" target="_blank" rel="noopener">📸 Instagram oficial</a>
+      <br>
+      <a class="btn btn-ghost" href="https://clubdedebateum.com" target="_blank" rel="noopener">🌐 Canva con más info</a>
+    </section>
+
+    <!-- Opiniones -->
+    <section class="mx-auto mt-12 max-w-2xl">
+      <h2 class="text-2xl font-bold text-center mb-6">✨ Opiniones del Club</h2>
+      <div id="opiniones" class="space-y-4">
+
+        <div class="p-4 bg-white rounded-xl shadow border border-zinc-200">
+          <p class="text-zinc-700 italic">“El Club de Debate me ayudó a perder el miedo a hablar en público.”</p>
+          <p class="mt-2 text-sm text-zinc-500">— Ana, Derecho</p>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl shadow border border-zinc-200">
+          <p class="text-zinc-700 italic">“He hecho amistades increíbles y viajado a torneos por toda España.”</p>
+          <p class="mt-2 text-sm text-zinc-500">— Javier, Ingeniería</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pie -->
+    <p class="mt-12 text-center text-xs text-zinc-500">© <span id="year"></span> Club de Debate UMU · Hecho con ❤️ por el club</p>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
