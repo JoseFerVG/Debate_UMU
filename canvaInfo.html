@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Club de Debate UMU</title>
   <link rel="icon" href="img/sinf.png">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -10,6 +10,35 @@
   <style>
     body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
     h1, h2, .frase { font-family: 'Anton', sans-serif; }
+
+    /* Fallback robusto para 16:9 si por alguna razón aspect-video no existe */
+    .my-aspect-video {
+      /* prefer native aspect-ratio */
+      aspect-ratio: 16 / 9;
+      /* fallback antiguo (padding trick) */
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 9 / 16 * 100% */
+      overflow: hidden;
+      background: #000;
+    }
+    /* Cuando el navegador soporta aspect-ratio, la padding-top sobra; forzamos la posición absoluta de la imagen */
+    .my-aspect-video img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Transiciones de entrada */
+    .fade-in { transition: opacity .4s ease; opacity: 1; }
+    .fade-out { opacity: 0; }
+
+    /* Dots */
+    .dot { width:10px; height:10px; border-radius:9999px; background:#222; opacity:.5; }
+    .dot.active { opacity:1; transform:scale(1.15); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between text-black">
@@ -27,37 +56,44 @@
   </section>
 
   <!-- GALERÍA / CARRUSEL -->
-  <section class="px-6 py-4 text-center"> <!-- Muy compactado -->
+  <section class="px-6 py-4 text-center">
     <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-6 drop-shadow-lg">📸 Info del Club</h2>
 
     <div class="relative max-w-4xl mx-auto">
-      <!-- Imagen principal -->
-      <div id="carousel" class="overflow-hidden rounded-3xl shadow-xl border-4 border-black">
-        <img id="carousel-img" 
-             src="https://raw.githubusercontent.com/usuario/repositorio/main/foto1.jpg" 
-             alt="Foto del Club" 
-             class="w-full h-64 sm:h-80 object-cover transition-all duration-500">
+      <!-- Contenedor 16:9 -->
+      <div id="carousel" class="my-aspect-video rounded-3xl shadow-xl border-4 border-black">
+        <!-- loader -->
+        <div id="loader" class="absolute inset-0 flex items-center justify-center">
+          <div class="animate-spin border-4 border-transparent border-t-black rounded-full w-10 h-10"></div>
+        </div>
+
+        <img id="carousel-img"
+             src=""
+             alt="Foto del Club"
+             class="w-full h-full object-cover transition-all duration-500 fade-in" />
       </div>
 
       <!-- Botones de navegación -->
-      <button onclick="prevImage()" 
+      <button id="prevBtn" type="button"
               class="absolute top-1/2 left-3 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
         ◀
       </button>
-      <button onclick="nextImage()" 
+      <button id="nextBtn" type="button"
               class="absolute top-1/2 right-3 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
         ▶
       </button>
+
+      <!-- Dots -->
+      <div id="dots" class="flex justify-center mt-3 gap-2"></div>
     </div>
 
-
- <!-- Botón volver -->
-    <a href="pagpubli.html" 
+    <!-- Botón volver -->
+    <a href="pagpubli.html"
        class="mt-4 inline-block bg-pink-500 text-white text-xl font-extrabold py-3 px-6 rounded-2xl shadow-lg hover:scale-105 transition">
       🔙 Volver
     </a>
   </section>
-  
+
   <!-- FOOTER -->
   <footer class="py-6 text-center text-xs bg-black text-white w-full">
     © <span id="year"></span> Club de Debate UMU · Hecho con ❤️ por el club
@@ -65,42 +101,112 @@
 
   <script>
     // Paleta fosforita
-    const colores = [
-      "#fffb00", // amarillo fosforito
-      "#39ff14", // verde fosforito
-      "#00f0ff"  // cian brillante
-    ];
+    const colores = ["#fffb00","#39ff14","#00f0ff"];
     document.body.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
 
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Carrusel de imágenes
+    // IMÁGENES 
     const images = [
-      "https://github.com/JoseFerVG/Debate_UMU/blob/67704b31868aa6f487881d761ab25afc4d388d6b/img/imagenesInfo/info(1).jpg",
-      "https://github.com/JoseFerVG/Debate_UMU/blob/10edc8b738649a3e407d65f854924bbdcad2ea11/img/imagenesInfo/info(2).jpg",
-      "https://github.com/JoseFerVG/Debate_UMU/blob/10edc8b738649a3e407d65f854924bbdcad2ea11/img/imagenesInfo/info(3).jpg"
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%281%29.jpg",
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%282%29.jpg",
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%283%29.jpg",
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%284%29.jpg",
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%285%29.jpg"
     ];
 
     let currentIndex = 0;
     const imgElement = document.getElementById('carousel-img');
+    const loader = document.getElementById('loader');
+    const dotsContainer = document.getElementById('dots');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const carousel = document.getElementById('carousel');
 
+    // Crear dots
+    function buildDots() {
+      dotsContainer.innerHTML = "";
+      images.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.type = "button";
+        d.className = "dot";
+        d.setAttribute('aria-label', 'Ir a imagen ' + (i+1));
+        d.addEventListener('click', () => { showImage(i); });
+        dotsContainer.appendChild(d);
+      });
+      updateDots();
+    }
+
+    function updateDots() {
+      Array.from(dotsContainer.children).forEach((el, i) => {
+        el.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    // Carga con preloader para evitar flash de imagen rota
     function showImage(index) {
-      imgElement.src = images[index];
+      currentIndex = index;
+      loader.style.display = 'flex';
+      imgElement.classList.add('fade-out');
+      imgElement.classList.remove('fade-in');
+
+      const tmp = new Image();
+      tmp.onload = () => {
+        imgElement.src = images[index];
+        imgElement.alt = `Imagen ${index + 1}`;
+        // small delay para transición
+        setTimeout(() => {
+          imgElement.classList.remove('fade-out');
+          imgElement.classList.add('fade-in');
+          loader.style.display = 'none';
+          updateDots();
+        }, 80);
+      };
+      tmp.onerror = () => {
+        loader.style.display = 'none';
+        imgElement.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450"><rect width="100%" height="100%" fill="%23ddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-size="20">Imagen no disponible</text></svg>';
+        imgElement.alt = 'Imagen no disponible';
+        imgElement.classList.remove('fade-out');
+        imgElement.classList.add('fade-in');
+        updateDots();
+      };
+      tmp.src = images[index];
     }
 
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    }
+    function nextImage(){ showImage((currentIndex + 1) % images.length); }
+    function prevImage(){ showImage((currentIndex - 1 + images.length) % images.length); }
 
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
-    }
+    nextBtn.addEventListener('click', nextImage);
+    prevBtn.addEventListener('click', prevImage);
 
-    // Autoplay opcional cada 5 segundos
-    setInterval(nextImage, 5000);
+    // teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // swipe sencillo (móvil)
+    let startX = null;
+    carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    carousel.addEventListener('touchend', e => {
+      if (startX === null) return;
+      const endX = (e.changedTouches && e.changedTouches[0].clientX) || 0;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) nextImage(); else prevImage();
+      }
+      startX = null;
+    });
+
+    // Iniciar
+    buildDots();
+    showImage(0);
+
+    // Si quieres autoplay, descomenta:
+    // const AUTOPLAY = setInterval(nextImage, 5000);
+    // para parar: clearInterval(AUTOPLAY);
+
   </script>
 </body>
 </html>
