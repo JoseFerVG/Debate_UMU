@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Club de Debate UMU</title>
+  <link rel="icon" href="img/sinf.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -23,39 +24,39 @@
       Debate, lo estás deseando.<br>
       <span class="underline decoration-pink-600 font-bold">Y 3 CRÉDITOS</span> que te llevas.
     </p>
-
-    <!-- Botones -->
-    <div class="mt-12 space-y-4 w-full max-w-md">
-      <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener"
-         class="block w-full bg-pink-500 text-white text-xl font-extrabold py-5 rounded-2xl shadow-lg hover:scale-105 transition">
-         📝 Rellenar Formulario de Inscripción
-      </a>
-      <a href="https://www.instagram.com/clubdedebateum/" target="_blank" rel="noopener"
-         class="block w-full bg-yellow-300 text-black text-xl font-extrabold py-5 rounded-2xl shadow-lg hover:scale-105 transition">
-         📸 Ir al Instagram Oficial
-      </a>
-      <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener"
-         class="block w-full bg-lime-400 text-black text-xl font-extrabold py-5 rounded-2xl shadow-lg hover:scale-105 transition">
-         🌐 Canva con Más Info
-      </a>
-    </div>
   </section>
 
-  <!-- OPINIONES -->
-  <section class="px-6 py-16 text-center">
-    <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-12 drop-shadow-lg">✨ Opiniones del Club</h2>
-    <div class="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
-      <div class="p-6 bg-white border-4 border-black rounded-3xl shadow-xl transform hover:rotate-1 hover:scale-105 transition">
-        <p class="italic text-lg">“El Club de Debate me ayudó a perder el miedo a hablar en público.”</p>
-        <p class="mt-4 font-bold">— Ana, Derecho</p>
-      </div>
-      <div class="p-6 bg-white border-4 border-black rounded-3xl shadow-xl transform hover:-rotate-1 hover:scale-105 transition">
-        <p class="italic text-lg">“He hecho amistades increíbles y me ha permitido viajar representando a la UMU por España.”</p>
-        <p class="mt-4 font-bold">— José Fernando, Ingeniería Informática</p>
-      </div>
-    </div>
-  </section>
+  <!-- GALERÍA / CARRUSEL -->
+  <section class="px-6 py-4 text-center">
+    <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-6 drop-shadow-lg">📸 Info del Club</h2>
 
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Imagen principal -->
+      <div id="carousel" class="overflow-hidden rounded-3xl shadow-xl border-4 border-black">
+        <img id="carousel-img" 
+             src="https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info(1).jpg" 
+             alt="Foto del Club" 
+             class="w-full h-64 sm:h-80 object-cover transition-all duration-500">
+      </div>
+
+      <!-- Botones de navegación -->
+      <button onclick="prevImage()" 
+              class="absolute top-1/2 left-3 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
+        ◀
+      </button>
+      <button onclick="nextImage()" 
+              class="absolute top-1/2 right-3 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
+        ▶
+      </button>
+    </div>
+
+    <!-- Botón volver -->
+    <a href="pagpubli.html" 
+       class="mt-4 inline-block bg-pink-500 text-white text-xl font-extrabold py-3 px-6 rounded-2xl shadow-lg hover:scale-105 transition">
+      🔙 Volver
+    </a>
+  </section>
+  
   <!-- FOOTER -->
   <footer class="py-6 text-center text-xs bg-black text-white w-full">
     © <span id="year"></span> Club de Debate UMU · Hecho con ❤️ por el club
@@ -63,18 +64,38 @@
 
   <script>
     // Paleta fosforita
-    const colores = [
-      "#fffb00", // amarillo fosforito
-      "#39ff14", // verde fosforito
-      "#ff00ff", // magenta
-      "#ff3131", // rojo neon
-      "#00f0ff"  // cian brillante
-    ];
-    // Escoger aleatorio al cargar
+    const colores = ["#fffb00", "#39ff14", "#00f0ff"];
     document.body.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
 
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Carrusel de imágenes (usar enlaces RAW de GitHub)
+    const images = [
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info(1).jpg",
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info(2).jpg",
+      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info(3).jpg"
+    ];
+
+    let currentIndex = 0;
+    const imgElement = document.getElementById('carousel-img');
+
+    function showImage(index) {
+      imgElement.src = images[index];
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Autoplay cada 5s
+    setInterval(nextImage, 5000);
   </script>
 </body>
 </html>
