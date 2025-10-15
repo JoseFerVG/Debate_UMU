@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Generador de Acreditaciones</title>
+  <link rel="icon" href="img/sinf.png">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuentes seleccionadas (mantener estética) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@400;600;800&family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    html {
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, Arial;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: 1rem;
+    }
+
+    .canvas-border {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 8px;
+    }
+
+    canvas {
+      background: #fff;
+      border-radius: 8px;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .dropzone {
+      border-radius: 12px;
+      border: 2px dashed rgba(15, 23, 42, 0.08);
+      padding: 14px;
+      cursor: pointer;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dropzone.dragover {
+      border-color: #f97316;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(249, 115, 22, 0.12);
+    }
+
+    .dropzone .meta {
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .file-name {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .small-muted {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .btn-fixed {
+      right: 1.5rem;
+      bottom: 1.5rem;
+      position: fixed;
+      z-index: 60;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-r from-orange-100 via-white to-green-100 text-zinc-900">
+
+  <header class="text-center py-8 px-6">
+    <div class="flex justify-center mb-4">
+      <img src="img/sinf.png" alt="Logo Club de Debate UMU" class="h-24 w-auto sm:h-32">
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold">Club de Debate UMU</h1>
+    <p class="mt-3 text-base sm:text-lg text-zinc-700">Formamos en argumentación, oratoria y debate. Construimos
+      pensamiento crítico.</p>
+  </header>
+
+  <main class="px-6 pb-16 max-w-6xl mx-auto">
+    <section class="card p-6 shadow-xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Generador de imágenes (CSV)</h2>
+          <p class="text-sm text-zinc-600">Sube una imagen de fondo y el CSV. <strong>Lo puedes sacar guardando como CSV cualquier Exel</strong></p>
+
+          <div id="imgDropzone" class="dropzone" title="Arrastra / suelta imagen o haz click">
+            <input id="imgInput" type="file" accept="image/*" class="hidden" />
+            <div
+              style="width:44px;height:44px;border-radius:8px;background:linear-gradient(180deg,#f97316,#fb923c);display:flex;align-items:center;justify-content:center;color:white;font-weight:700">
+              IMG</div>
+            <div class="meta">
+              <div class="file-name" id="imgName">Arrastra una imagen o haz click</div>
+              <div class="small-muted">Recomendado: JPG/PNG &gt;=1200px de ancho.</div>
+            </div>
+          </div>
+
+          <div id="csvDropzone" class="dropzone" title="Arrastra / suelta CSV o haz click">
+            <input id="csvInput" type="file" accept=".csv,text/csv" class="hidden" />
+            <div
+              style="width:44px;height:44px;border-radius:8px;background:linear-gradient(180deg,#10b981,#34d399);display:flex;align-items:center;justify-content:center;color:white;font-weight:700">
+              CSV</div>
+            <div class="meta">
+              <div class="file-name" id="csvName">Arrastra el CSV o haz click</div>
+              <div class="small-muted">Guarda el CSV en UTF-8. <strong>La primera línea también se tratará como cabecera.</strong></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            <div>
+              <label class="block text-sm">Columna 1 (nombre)</label>
+              <select id="colNameSelect"
+                class="mt-1 block w-full rounded-2xl border border-zinc-200 p-3 bg-white text-sm"></select>
+            </div>
+            <div>
+              <label class="block text-sm">Columna 2 (equipo)</label>
+              <select id="colTeamSelect"
+                class="mt-1 block w-full rounded-2xl border border-zinc-200 p-3 bg-white text-sm"></select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div>
+              <label class="block text-sm">Fuente</label>
+              <select id="fontFamily" class="mt-1 block w-full rounded-2xl border border-zinc-200 p-3 bg-white text-sm">
+                <option>Inter</option>
+                <option>Poppins</option>
+                <option>Montserrat</option>
+                <option>Roboto Slab</option>
+                <option>Lato</option>
+                <option>Open Sans</option>
+                <option>Oswald</option>
+                <option>Arial</option>
+                <option>Verdana</option>
+                <option>Times New Roman</option>
+                <option>Georgia</option>
+                <option>Courier New</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm">Color</label>
+              <input id="fontColor" type="color" value="#ffffff" class="mt-1 w-full h-11 rounded-2xl p-1" />
+            </div>
+
+            <div class="col-span-2">
+              <label class="block text-sm">Tamaño (px) — <span id="fontSizeVal">36</span>px</label>
+              <input id="fontSize" type="range" min="12" max="120" value="36" class="w-full mt-2" />
+            </div>
+
+            <div>
+              <label class="block text-sm">Posición</label>
+              <select id="positionPreset"
+                class="mt-1 block w-full rounded-2xl border border-zinc-200 p-3 bg-white text-sm">
+                <option value="10,10">Arriba izquierda</option>
+                <option value="50,10">Arriba centro</option>
+                <option value="90,10">Arriba derecha</option>
+                <option value="50,50">Centro</option>
+                <option value="10,90">Abajo izquierda</option>
+                <option value="50,90">Abajo centro</option>
+                <option value="90,90">Abajo derecha</option>
+              </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <input id="clickToPlace" type="checkbox" checked class="h-5 w-5" />
+              <label class="text-sm">Click para Posicionar</label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <button id="prevBtn"
+              class="w-full py-3 rounded-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-500 text-white">◀
+              Anterior</button>
+            <button id="nextBtn"
+              class="w-full py-3 rounded-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-500 text-white">Siguiente
+              ▶</button>
+            <button id="downloadBtn"
+              class="w-full py-3 rounded-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-500 text-white">Descargar
+              actual</button>
+            <button id="downloadAllBtn"
+              class="w-full py-3 rounded-2xl font-bold bg-gradient-to-r from-green-400 to-green-500 text-white">Descargar
+              todo (ZIP)</button>
+          </div>
+
+          <div class="mt-4 rounded-xl border border-zinc-100 p-3 bg-white">
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-semibold">Exportar a PDF para impresión A4</label>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-3">
+              <div>
+                <label class="text-xs">Columnas</label>
+                <input id="pdfCols" type="number" min="1" max="10" value="2"
+                  class="mt-1 w-full rounded-2xl border p-2" />
+              </div>
+              <div>
+                <label class="text-xs">Filas</label>
+                <input id="pdfRows" type="number" min="1" max="10" value="4"
+                  class="mt-1 w-full rounded-2xl border p-2" />
+              </div>
+
+              <div>
+                <label class="text-xs">Orientación A4</label>
+                <select id="a4Orientation" class="mt-1 w-full rounded-2xl border p-2">
+                  <option value="portrait" selected>Vertical</option>
+                  <option value="landscape">Horizontal</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-xs">Ajuste de imagen</label>
+                <select id="pdfFitMode" class="mt-1 w-full rounded-2xl border p-2">
+                  <option value="contain">Normal (sin recortar — recomendado)</option>
+                  <option value="cover">Cubriendo todo (llenar y recortar)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-xs">Calidad</label>
+                <select id="pdfQuality" class="mt-1 w-full rounded-2xl border p-2">
+                  <option value="low">Baja — PDF ligero (pantalla)</option>
+                  <option value="medium" selected>Media — Imprimir en casa</option>
+                  <option value="high">Alta — Impresión profesional</option>
+                  <option value="ultra">Ultra — Máxima nitidez (imprenta de alta gama)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-xs">Separación para recorte mm</label>
+                <input id="pdfGutter" type="number" min="0" max="30" step="0.1" value="3"
+                  class="mt-1 w-full rounded-2xl border p-2" />
+              </div>
+
+              <div class="col-span-2 mt-2">
+                <label class="text-xs">Opciones de recorte</label>
+                <div class="flex items-center gap-3 mt-2">
+                  <input id="pdfCropMarks" type="checkbox" class="h-5 w-5" />
+                  <label class="text-sm">Incluir marcas de corte en PDF</label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="mt-3 text-sm text-zinc-600">
+              <div id="cellSizeInfo">Tamaño: — </div>
+              <div class="mt-2 grid grid-cols-1 gap-2">
+                <button id="downloadPdfBtn"
+                  class="py-2 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold">Descargar
+                  PDF</button>
+              </div>
+
+              <div class="mt-2 text-xs small-muted" id="pdfHelp">Las medidas se calculan automáticamente al cambiar las
+                opciones de PDF.</div>
+            </div>
+          </div>
+
+          <p class="text-xs text-zinc-500 mt-2">Apunte: si la fuente tarda en cargar, espera ~0.5s antes de descargar.
+            Si le das a descargar el pdf y has puesto alta o muy alta resolución espera y no seas impaciente.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="canvas-border">
+            <canvas id="preview" width="800" height="450"></canvas>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <div class="text-sm text-zinc-600">Entrada CSV / Apuntes (primeras 50 líneas):</div>
+              <div id="csvList" class="mt-2 max-h-48 overflow-auto rounded-xl border border-zinc-100 p-3 bg-white">
+              </div>
+            </div>
+
+            <div>
+              <div class="text-sm text-zinc-600">Datos actuales</div>
+              <div class="mt-2 rounded-xl border border-zinc-100 p-3 bg-white">
+                <div><strong>Índice:</strong> <span id="idx">-</span></div>
+                <div><strong>Nombre:</strong> <span id="curName">-</span></div>
+                <div><strong>Equipo:</strong> <span id="curTeam">-</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="mt-10 text-center">
+      <p class="text-xs text-zinc-500">© <span id="year"></span> Club de Debate UMU · Hecho con ❤️ por JFK</p>
+    </section>
+  </main>
+
+  <a href="./index.html"
+    class="btn-fixed bg-white/90 backdrop-blur px-4 py-3 rounded-full shadow-lg border border-zinc-200 text-sm font-semibold hover:scale-105 transition-transform">←
+    Página principal</a>
+
+  <script>
+    // Todo lo que hace que funke (la chicha)
+    let participants = [];
+    let rawRowsAll = [];
+    let headerRow = null;
+    let dataRows = [];
+    let current = 0;
+    let img = new Image();
+    let imgLoaded = false;
+
+    const canvas = document.getElementById('preview');
+    const ctx = canvas.getContext('2d');
+
+    const imgInput = document.getElementById('imgInput');
+    const csvInput = document.getElementById('csvInput');
+    const imgDrop = document.getElementById('imgDropzone');
+    const csvDrop = document.getElementById('csvDropzone');
+    const imgName = document.getElementById('imgName');
+    const csvName = document.getElementById('csvName');
+
+    const csvList = document.getElementById('csvList');
+    const fontSize = document.getElementById('fontSize');
+    const fontSizeVal = document.getElementById('fontSizeVal');
+    const fontFamily = document.getElementById('fontFamily');
+    const fontColor = document.getElementById('fontColor');
+    const positionPreset = document.getElementById('positionPreset');
+    const clickToPlace = document.getElementById('clickToPlace');
+
+    const idxEl = document.getElementById('idx');
+    const curName = document.getElementById('curName');
+    const curTeam = document.getElementById('curTeam');
+
+    const colNameSelect = document.getElementById('colNameSelect');
+    const colTeamSelect = document.getElementById('colTeamSelect');
+    const pdfCropMarks = document.getElementById('pdfCropMarks');
+
+    const pdfCols = document.getElementById('pdfCols');
+    const pdfRows = document.getElementById('pdfRows');
+    const pdfFitMode = document.getElementById('pdfFitMode');
+    const pdfQuality = document.getElementById('pdfQuality');
+    const a4Orientation = document.getElementById('a4Orientation');
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+    const cellSizeInfo = document.getElementById('cellSizeInfo');
+    const pdfGutter = document.getElementById('pdfGutter');
+
+    let textPos = { xPct: 50, yPct: 85 };
+
+    function setupDropzone(dropEl, inputEl, onFile) {
+      dropEl.addEventListener('click', () => inputEl.click());
+      dropEl.addEventListener('dragover', (e) => { e.preventDefault(); dropEl.classList.add('dragover'); });
+      dropEl.addEventListener('dragleave', (e) => { e.preventDefault(); dropEl.classList.remove('dragover'); });
+      dropEl.addEventListener('drop', (e) => { e.preventDefault(); dropEl.classList.remove('dragover'); const f = e.dataTransfer.files[0]; if (f) inputEl.files = e.dataTransfer.files; onFile(f); });
+      inputEl.addEventListener('change', () => { const f = inputEl.files[0]; onFile(f); });
+    }
+
+    setupDropzone(imgDrop, imgInput, (f) => {
+      if (!f) return;
+      imgName.textContent = f.name;
+      const url = URL.createObjectURL(f);
+      img.onload = () => { document.fonts.ready.then(() => { imgLoaded = true; fitCanvasToImage(); render(true); updatePdfSizes(); URL.revokeObjectURL(url); }); };
+      img.src = url; img.crossOrigin = 'anonymous';
+    });
+
+    setupDropzone(csvDrop, csvInput, (f) => {
+      if (!f) return;
+      csvName.textContent = f.name;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          parseCSV(reader.result);
+          populateColumnSelectors();
+          mapParticipantsFromSelectedCols();
+          showList();
+          document.fonts.ready.then(() => { render(true); updatePdfSizes(); });
+        } catch (e) { alert('Error al parsear CSV: ' + e.message); }
+      };
+      reader.readAsText(f, 'utf-8');
+    });
+
+    if (fontSize) { fontSize.addEventListener('input', () => { fontSizeVal.textContent = fontSize.value; render(true); }); }
+    fontFamily.addEventListener('change', () => { document.fonts.ready.then(() => render(true)); });
+    fontColor.addEventListener('change', () => render(true));
+    positionPreset.addEventListener('change', () => { const [x, y] = positionPreset.value.split(',').map(v => Number(v)); textPos.xPct = x; textPos.yPct = y; render(true); });
+
+    colNameSelect.addEventListener('change', () => { mapParticipantsFromSelectedCols(); showList(); render(true); updatePdfSizes(); });
+    colTeamSelect.addEventListener('change', () => { mapParticipantsFromSelectedCols(); showList(); render(true); updatePdfSizes(); });
+
+    document.getElementById('prevBtn').addEventListener('click', () => { if (participants.length === 0) return; current = (current - 1 + participants.length) % participants.length; updateCurrentUI(); render(true); });
+    document.getElementById('nextBtn').addEventListener('click', () => { if (participants.length === 0) return; current = (current + 1) % participants.length; updateCurrentUI(); render(true); });
+
+    document.getElementById('downloadBtn').addEventListener('click', async () => { if (!imgLoaded || participants.length === 0) return alert('Necesitas imagen y CSV con al menos una línea'); await exportCurrentImage(); });
+    document.getElementById('downloadAllBtn').addEventListener('click', async () => { if (!imgLoaded || participants.length === 0) return alert('Necesitas imagen y CSV con al menos una línea'); await exportAllZip(); });
+
+    downloadPdfBtn.addEventListener('click', async () => { if (!imgLoaded || participants.length === 0) return alert('Necesitas imagen y CSV con al menos una línea'); await exportAllPdf(); });
+
+    
+
+    function parseCSV(text) {
+      rawRowsAll = [];
+      const lines = text.split(/\r?\n/);
+      for (const line of lines) {
+        if (line.trim().length === 0) continue;
+        rawRowsAll.push(parseCSVLine(line));
+      }
+      if (rawRowsAll.length > 0) {
+        // Guardamos la primera línea en headerRow (para etiquetas de columnas si existen),
+        // pero ahora INCLUIMOS la primera línea como fila de datos también.
+        headerRow = rawRowsAll[0];
+        dataRows = rawRowsAll.slice(0); // <- incluye la primera línea
+      } else {
+        headerRow = null;
+        dataRows = [];
+      }
+      current = 0;
+      updateCurrentUI();
+    }
+    // -------------------------------------------------------------------------------
+
+    function parseCSVLine(line) {
+      const result = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (inQuotes) {
+          if (ch === '"') {
+            if (line[i + 1] === '"') {
+              cur += '"';
+              i++;
+            } else {
+              inQuotes = false;
+            }
+          } else {
+            cur += ch;
+          }
+        } else {
+          if (ch === ',') {
+            result.push(cur);
+            cur = '';
+          } else if (ch === '"') {
+            inQuotes = true;
+          } else {
+            cur += ch;
+          }
+        }
+      }
+      result.push(cur);
+      return result.map(s => s.trim());
+    }
+
+    function populateColumnSelectors() {
+      let maxCols = 0;
+      if (headerRow && headerRow.length > 0) {
+        maxCols = headerRow.length;
+      }
+      dataRows.forEach(r => {
+        if (r.length > maxCols) maxCols = r.length;
+      });
+      if (maxCols === 0) maxCols = 2;
+      colNameSelect.innerHTML = '';
+      colTeamSelect.innerHTML = '';
+      for (let i = 0; i < maxCols; i++) {
+        const label = (headerRow && headerRow[i]) ? headerRow[i] : `Col ${i + 1}`;
+        const opt1 = document.createElement('option');
+        opt1.value = i;
+        opt1.textContent = label;
+        const opt2 = document.createElement('option');
+        opt2.value = i;
+        opt2.textContent = label;
+        colNameSelect.appendChild(opt1);
+        colTeamSelect.appendChild(opt2);
+      }
+      colNameSelect.value = 0;
+      colTeamSelect.value = Math.min(1, maxCols - 1);
+    }
+
+    function mapParticipantsFromSelectedCols() {
+      participants = [];
+      const nameCol = Number(colNameSelect.value || 0);
+      const teamCol = Number(colTeamSelect.value || 1);
+      for (const row of dataRows) {
+        const name = (row[nameCol] || '').trim();
+        const team = (row[teamCol] || '').trim();
+        participants.push({ fields: row, name, team });
+      }
+      current = 0;
+      updateCurrentUI();
+    }
+
+    function showList() {
+      csvList.innerHTML = '';
+      const max = Math.min(50, participants.length);
+      for (let i = 0; i < max; i++) {
+        const p = participants[i];
+        const div = document.createElement('div');
+        div.textContent = `${i + 1}. ${p.name}${p.team ? ' — ' + p.team : ''}`;
+        if (i === current) div.style.background = '#f7faff';
+        div.className = 'py-1';
+        csvList.appendChild(div);
+      }
+      if (participants.length > 50) {
+        const more = document.createElement('div');
+        more.className = 'small-muted';
+        more.textContent = `... (${participants.length - 50} más)`;
+        csvList.appendChild(more);
+      }
+    }
+
+    function updateCurrentUI() {
+      idxEl.textContent = participants.length ? (current + 1) + '/' + participants.length : '-';
+      curName.textContent = participants.length ? participants[current].name : '-';
+      curTeam.textContent = participants.length ? participants[current].team : '-';
+      showList();
+    }
+
+    function fitCanvasToImage() {
+      const maxW = 1200;
+      const scale = Math.min(1, maxW / img.width);
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+    }
+
+    function render(showMarker = true) {
+      ctx.imageSmoothingEnabled = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (imgLoaded) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      } else {
+        ctx.fillStyle = '#f3f4f6';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#475569';
+        ctx.font = '18px Inter, sans-serif';
+        ctx.fillText('Sube una imagen para vista previa', 20, 40);
+      }
+      if (participants.length === 0) return;
+      const p = participants[current];
+      const nameText = p.name;
+      const teamText = p.team;
+      const fsize = Number((fontSize && fontSize.value) || 36);
+      const family = (fontFamily && fontFamily.value) || 'Inter';
+      const color = (fontColor && fontColor.value) || '#ffffff';
+      const familySafe = family.replace(/"/g, '');
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = color;
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      const x = Math.round(canvas.width * textPos.xPct / 100);
+      const y = Math.round(canvas.height * textPos.yPct / 100);
+      ctx.font = `bold ${fsize}px "${familySafe}", sans-serif`;
+      ctx.fillText(nameText, x, y - Math.round(fsize * 0.22));
+      ctx.font = `normal ${Math.round(fsize * 0.6)}px "${familySafe}", sans-serif`;
+      ctx.fillText(teamText, x, y + Math.round(fsize * 0.6));
+      if (showMarker && clickToPlace && clickToPlace.checked) {
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,99,71,0.95)';
+        ctx.fill();
+      }
+      drawPreviewCropMarks();
+    }
+
+    function drawPreviewCropMarks() {
+      const markLen = Math.max(6, Math.round(Math.min(canvas.width, canvas.height) * 0.01));
+      const x = Math.round(canvas.width * textPos.xPct / 100);
+      const y = Math.round(canvas.height * textPos.yPct / 100);
+      ctx.save();
+      ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+      ctx.lineWidth = 0.6;
+      const offX = Math.round(Math.min(canvas.width, 1200) * 0.0375);
+      const offY = Math.round(Math.min(canvas.height, 800) * 0.03);
+      ctx.beginPath();
+      ctx.moveTo(x - offX, y - offY);
+      ctx.lineTo(x - offX + markLen, y - offY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - offX, y - offY);
+      ctx.lineTo(x - offX, y - offY + markLen);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + offX, y - offY);
+      ctx.lineTo(x + offX - markLen, y - offY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + offX, y - offY);
+      ctx.lineTo(x + offX, y - offY + markLen);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - offX, y + offY);
+      ctx.lineTo(x - offX + markLen, y + offY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - offX, y + offY);
+      ctx.lineTo(x - offX, y + offY - markLen);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + offX, y + offY);
+      ctx.lineTo(x + offX - markLen, y + offY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + offX, y + offY);
+      ctx.lineTo(x + offX, y + offY - markLen);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    async function exportCurrentImage() {
+      render(false);
+      await new Promise(r => setTimeout(r, 80));
+      canvas.toBlob(blob => {
+        const p = participants[current];
+        const safeName = sanitizeFilename((p.name || 'participante') + ' - ' + (p.team || 'equipo'));
+        const a = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        a.href = url;
+        a.download = safeName + '.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        render(true);
+      }, 'image/png');
+    }
+
+    async function exportAllZip() {
+      if (typeof JSZip === 'undefined') {
+        try {
+          await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js');
+        } catch (e) {
+          alert('No se pudo cargar JSZip');
+          return;
+        }
+      }
+      const zip = new JSZip();
+      const folder = zip.folder('participantes');
+      const initialIndex = current;
+      for (let i = 0; i < participants.length; i++) {
+        current = i;
+        updateCurrentUI();
+        render(false);
+        await new Promise(r => setTimeout(r, 80));
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        const p = participants[i];
+        const fname = sanitizeFilename((i + 1) + ' - ' + (p.name || 'participante') + ' - ' + (p.team || 'equipo') + '.png');
+        folder.file(fname, blob);
+      }
+      current = initialIndex;
+      updateCurrentUI();
+      render(true);
+      const content = await zip.generateAsync({ type: 'blob' });
+      const a = document.createElement('a');
+      const url = URL.createObjectURL(content);
+      a.href = url;
+      a.download = 'imagenes_participantes.zip';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function qualityToDpi(q) {
+      if (q === 'low') return 96;
+      if (q === 'high') return 300;
+      if (q === 'ultra') return 600;
+      return 150;
+    }
+
+    function computeCellSizes() {
+      const cols = Math.max(1, Math.floor(Number(pdfCols.value) || 1));
+      const rows = Math.max(1, Math.floor(Number(pdfRows.value) || 1));
+      const quality = (pdfQuality && pdfQuality.value) || 'medium';
+      const dpi = Math.max(72, qualityToDpi(quality));
+      const orientation = (a4Orientation && a4Orientation.value) === 'landscape' ? 'landscape' : 'portrait';
+      const Wmm = orientation === 'portrait' ? 210 : 297;
+      const Hmm = orientation === 'portrait' ? 297 : 210;
+      const gutterMm = Math.max(0, Number(pdfGutter.value) || 0);
+      const totalGutterW = Math.max(0, (cols - 1) * gutterMm);
+      const totalGutterH = Math.max(0, (rows - 1) * gutterMm);
+      const cellWidthMm = (Wmm - totalGutterW) / cols;
+      const cellHeightMm = (Hmm - totalGutterH) / rows;
+      const cellWidthPx = Math.max(1, Math.round(cellWidthMm * dpi / 25.4));
+      const cellHeightPx = Math.max(1, Math.round(cellHeightMm * dpi / 25.4));
+      const qualityText = quality === 'low' ? 'Baja' : (quality === 'high' ? 'Alta' : (quality === 'ultra' ? 'Ultra' : 'Media'));
+      return { cols, rows, dpi, orientation, cellWidthMm, cellHeightMm, cellWidthPx, cellHeightPx, orientationText: orientation, qualityText, gutterMm };
+    }
+
+    async function ensureJsPdf() {
+      if (window.jspdf && window.jspdf.jsPDF) return window.jspdf.jsPDF;
+      try {
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+        return window.jspdf && window.jspdf.jsPDF ? window.jspdf.jsPDF : (window.jspdf && window.jspdf.jsPDF);
+      } catch (e) {
+        throw new Error('No se pudo cargar jsPDF');
+      }
+    }
+
+    function drawImageWithMode(ctxLocal, imgLocal, dstW, dstH, mode) {
+      const imgAspect = imgLocal.width / imgLocal.height;
+      const dstAspect = dstW / dstH;
+      let drawW, drawH, drawX, drawY;
+      if (mode === 'cover') {
+        if (imgAspect > dstAspect) {
+          drawH = dstH;
+          drawW = Math.round(drawH * imgAspect);
+          drawX = Math.round((dstW - drawW) / 2);
+          drawY = 0;
+        } else {
+          drawW = dstW;
+          drawH = Math.round(drawW / imgAspect);
+          drawX = 0;
+          drawY = Math.round((dstH - drawH) / 2);
+        }
+      } else {
+        if (imgAspect > dstAspect) {
+          drawW = dstW;
+          drawH = Math.round(drawW / imgAspect);
+          drawX = 0;
+          drawY = Math.round((dstH - drawH) / 2);
+        } else {
+          drawH = dstH;
+          drawW = Math.round(drawH * imgAspect);
+          drawX = Math.round((dstW - drawW) / 2);
+          drawY = 0;
+        }
+      }
+      ctxLocal.fillStyle = '#ffffff';
+      ctxLocal.fillRect(0, 0, dstW, dstH);
+      ctxLocal.imageSmoothingEnabled = true;
+      ctxLocal.drawImage(imgLocal, drawX, drawY, drawW, drawH);
+    }
+
+    async function exportAllPdf() {
+      const info = computeCellSizes();
+      cellSizeInfo.innerHTML = `Tamaño celda (útil): <strong>${info.cellWidthMm.toFixed(2)} × ${info.cellHeightMm.toFixed(2)} mm</strong> — aprox. <strong>${info.cellWidthPx} × ${info.cellHeightPx} px</strong> (calidad: ${info.qualityText}).`;
+      const jsPDFCtor = await ensureJsPdf();
+      const orientation = (a4Orientation && a4Orientation.value) === 'landscape' ? 'landscape' : 'portrait';
+      const doc = new jsPDFCtor({ unit: 'mm', format: 'a4', orientation });
+      const off = document.createElement('canvas');
+      const offCtx = off.getContext('2d');
+      off.width = info.cellWidthPx;
+      off.height = info.cellHeightPx;
+      const previewW = canvas.width || 800;
+      let placedOnPage = 0;
+      const perPage = info.cols * info.rows;
+      for (let i = 0; i < participants.length; i++) {
+        offCtx.clearRect(0, 0, off.width, off.height);
+        offCtx.imageSmoothingEnabled = true;
+        offCtx.textBaseline = 'middle';
+        offCtx.textAlign = 'center';
+        const mode = (pdfFitMode && pdfFitMode.value) || 'contain';
+        drawImageWithMode(offCtx, img, off.width, off.height, mode);
+        const p = participants[i];
+        const nameText = p.name;
+        const teamText = p.team;
+        const baseFsize = Number((fontSize && fontSize.value) || 36);
+        const scaleFactor = off.width / Math.max(previewW, 1);
+        const fsize = Math.max(8, Math.round(baseFsize * scaleFactor));
+        const familySafe = ((fontFamily && fontFamily.value) || 'Inter').replace(/"/g, '');
+        offCtx.fillStyle = (fontColor && fontColor.value) || '#ffffff';
+        offCtx.shadowColor = 'transparent';
+        offCtx.shadowBlur = 0;
+        const x = Math.round(off.width * textPos.xPct / 100);
+        const y = Math.round(off.height * textPos.yPct / 100);
+        offCtx.font = `bold ${fsize}px "${familySafe}", sans-serif`;
+        offCtx.fillText(nameText, x, y - Math.round(fsize * 0.22));
+        offCtx.font = `normal ${Math.round(fsize * 0.6)}px "${familySafe}", sans-serif`;
+        offCtx.fillText(teamText, x, y + Math.round(fsize * 0.6));
+        const jpegQuality = (pdfQuality && pdfQuality.value) === 'low' ? 0.7 : ((pdfQuality && pdfQuality.value) === 'ultra' ? 0.98 : 0.92);
+        const dataUrl = off.toDataURL('image/jpeg', jpegQuality);
+        const posInPage = placedOnPage;
+        const col = posInPage % info.cols;
+        const row = Math.floor(posInPage / info.cols);
+        const xMm = col * (info.cellWidthMm + info.gutterMm);
+        const yMm = row * (info.cellHeightMm + info.gutterMm);
+        doc.addImage(dataUrl, 'JPEG', xMm, yMm, info.cellWidthMm, info.cellHeightMm);
+        if (pdfCropMarks && pdfCropMarks.checked) {
+          drawPdfCropMarks(doc, xMm, yMm, info.cellWidthMm, info.cellHeightMm);
+        }
+        placedOnPage++;
+        if (placedOnPage >= perPage && i < participants.length - 1) {
+          doc.addPage();
+          placedOnPage = 0;
+        }
+      }
+      doc.save('imagenes_participantes.pdf');
+    }
+
+    function drawPdfCropMarks(doc, x, y, w, h) {
+      const mark = 2;
+      doc.setDrawColor(0);
+      doc.setLineWidth(0.2);
+      doc.line(x, y + mark, x, y);
+      doc.line(x, y, x + mark, y);
+      doc.line(x + w, y + mark, x + w, y);
+      doc.line(x + w - mark, y, x + w, y);
+      doc.line(x, y + h - mark, x, y + h);
+      doc.line(x, y + h, x + mark, y + h);
+      doc.line(x + w, y + h - mark, x + w, y + h);
+      doc.line(x + w - mark, y + h, x + w, y + h);
+    }
+
+    function sanitizeFilename(name) {
+      return name.replace(/[\\\/:*?"<>|]/g, '').replace(/\s+/g, ' ').trim();
+    }
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    canvas.width = 800;
+    canvas.height = 450;
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.fonts.ready.then(() => { render(true); updatePdfSizes(); });
+  </script>
+</body>
+
+</html>
