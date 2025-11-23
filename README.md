@@ -12,5 +12,7 @@ Estas son todas las pags relacionadas con mi proyecto para el club
 
 5.  [**Link de la pag con el canva con info**](https://josefervg.github.io/Debate_UMU/canvaInfo)
 
+6.  [**Link de la pag para crear autorizaciones**](https://josefervg.github.io/Debate_UMU/autorizaciones)
+
 
 ---
