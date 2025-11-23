@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Generador Club Debate UMU</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.37.2/docxtemplater.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Inter"', 'sans-serif'] },
+          colors: {
+            orange: { 500: '#f97316', 600: '#ea580c' },
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos personalizados para las tarjetas y zonas de carga */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+    }
+
+    .upload-zone {
+      border: 3px dashed #e5e7eb;
+      background: #f9fafb;
+      transition: all 0.2s ease-out;
+    }
+    .upload-zone:hover {
+      border-color: #f97316;
+      background: #fff7ed;
+      transform: translateY(-2px);
+    }
+    .upload-zone.drag-active {
+      border-color: #22c55e;
+      background: #f0fdf4;
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2);
+    }
+    .upload-zone.file-loaded {
+      border-style: solid;
+      border-color: #22c55e;
+      background: #ffffff;
+    }
+    
+    .btn-main {
+      background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+      transition: all 0.3s;
+    }
+    .btn-main:hover {
+      box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4);
+      transform: translateY(-2px);
+    }
+    .btn-main:active { transform: scale(0.98); }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4 text-slate-800 flex justify-center items-start bg-gradient-to-r from-orange-100 via-white to-green-100 relative">
+
+  <main class="w-full max-w-5xl glass-card rounded-3xl p-8 md:p-12 mb-20">
+    
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
+        Generador de <span class="text-orange-500">Acreditaciones</span>
+      </h1>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        Club de Debate UMU. Crea certificados individuales masivos en segundos.
+      </p>
+    </header>
+
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">1</span>
+        <h2 class="text-xl font-bold text-slate-900">Arrastra tus archivos aquí</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <div id="dropDocx" class="upload-zone rounded-2xl p-8 cursor-pointer relative group flex flex-col items-center justify-center min-h-[240px]">
+          <input type="file" id="inputDocx" accept=".docx" class="hidden" />
+          <div id="contentDocx" class="pointer-events-none text-center">
+            <div class="w-20 h-20 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform">📄</div>
+            <h3 class="font-bold text-lg text-slate-700">Plantilla Word (.docx)</h3>
+            <p class="text-sm text-slate-500 mt-2 mb-6">Debe contener las variables (ej: _DNI_)</p>
+            <span class="px-5 py-2 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-600 shadow-sm group-hover:border-blue-400 group-hover:text-blue-500 transition">📂 Seleccionar archivo</span>
+          </div>
+        </div>
+
+        <div id="dropCsv" class="upload-zone rounded-2xl p-8 cursor-pointer relative group flex flex-col items-center justify-center min-h-[240px]">
+          <input type="file" id="inputCsv" accept=".csv" class="hidden" />
+          <div id="contentCsv" class="pointer-events-none text-center">
+            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform">📊</div>
+            <h3 class="font-bold text-lg text-slate-700">Listado de Datos (.csv)</h3>
+            <p class="text-sm text-slate-500 mt-2 mb-6">Archivo delimitado por comas sin cabecera</p>
+            <span class="px-5 py-2 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-600 shadow-sm group-hover:border-green-400 group-hover:text-green-500 transition">📂 Seleccionar archivo</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="configSection" class="mb-12 opacity-50 pointer-events-none transition-opacity duration-500 grayscale">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">2</span>
+        <h2 class="text-xl font-bold text-slate-900">Conecta los datos</h2>
+      </div>
+
+      <div class="bg-white/60 p-6 rounded-2xl border border-slate-200 grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Columna Nombre</label>
+          <select id="colName" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer font-medium">
+            <option>Carga el CSV primero...</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Columna DNI</label>
+          <select id="colDNI" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-orange-500 outline-none cursor-pointer font-medium">
+            <option>Carga el CSV primero...</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+           <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Nombre Catedratico</label>
+           <input type="text" id="inCat" placeholder="Ej: Dr. Martínez" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
+        </div>
+        <div>
+           <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Fecha</label>
+           <input type="text" id="inDate" placeholder="Ej: 24 Noviembre" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
+        </div>
+        <div>
+           <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Torneo</label>
+           <input type="text" id="inTour" placeholder="Ej: Torneo BP" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">3</span>
+        <h2 class="text-xl font-bold text-slate-900">Descargar documentos</h2>
+      </div>
+
+      <div class="bg-orange-50 border border-orange-100 p-4 rounded-2xl flex items-start gap-3 mb-6">
+        <div class="text-2xl">📦</div>
+        <div>
+            <h3 class="font-bold text-slate-800">Formato de salida: ZIP de Words Individuales</h3>
+            <p class="text-sm text-slate-600 mt-1">Se generará un archivo comprimido (.zip) que contiene un documento Word (.docx) editable por cada persona del listado.</p>
+        </div>
+      </div>
+
+      <button id="btnGenerate" class="btn-main w-full py-5 rounded-2xl text-white font-extrabold text-xl shadow-xl flex justify-center items-center gap-3">
+        <span>🚀 Generar ZIP de Acreditaciones</span>
+        <div id="spinner" class="hidden animate-spin w-6 h-6 border-4 border-white/30 border-t-white rounded-full"></div>
+      </button>
+
+    </section>
+
+  </main>
+
+  <a href="./index.html" class="fixed bottom-6 left-6 z-50 bg-white/90 backdrop-blur px-5 py-3 rounded-full shadow-lg border border-zinc-200 text-sm font-bold text-slate-800 hover:scale-105 hover:shadow-xl transition-all flex items-center gap-2">
+    <span>←</span>❓ ¿Cómo usarlo? 
+  </a>
+
+  <a href="./tutorial.html" class="fixed bottom-6 right-6 z-50 bg-white/90 backdrop-blur px-5 py-3 rounded-full shadow-lg border border-zinc-200 text-sm font-bold text-slate-800 hover:scale-105 hover:shadow-xl transition-all flex items-center gap-2 group">
+     Volver al Inicio <span class="group-hover:translate-x-1 transition-transform">→</span>
+  </a>
+
+
+  <script>
+    let docxBuffer = null;
+    let csvData = [];
+
+    // --- Setup Uploader ---
+    function setupUploader(zoneId, inputId, type) {
+      const zone = document.getElementById(zoneId);
+      const input = document.getElementById(inputId);
+      const content = document.getElementById(type === 'docx' ? 'contentDocx' : 'contentCsv');
+
+      zone.addEventListener('click', () => input.click());
+
+      ['dragenter', 'dragover'].forEach(evt => {
+        zone.addEventListener(evt, (e) => { e.preventDefault(); zone.classList.add('drag-active'); });
+      });
+      ['dragleave', 'drop'].forEach(evt => {
+        zone.addEventListener(evt, (e) => { e.preventDefault(); zone.classList.remove('drag-active'); });
+      });
+
+      zone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if(files.length) handleFile(files[0], type, zone, content);
+      });
+
+      input.addEventListener('change', (e) => {
+        if(e.target.files.length) handleFile(e.target.files[0], type, zone, content);
+      });
+    }
+
+    function handleFile(file, type, zone, content) {
+      if(type === 'docx') {
+        if(!file.name.includes('.docx')) return alert("❌ Solo archivos .docx");
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          docxBuffer = e.target.result;
+          uiSuccess(zone, content, "📄 Plantilla Cargada", file.name);
+        };
+        reader.readAsBinaryString(file);
+      } else {
+        if(!file.name.includes('.csv')) return alert("❌ Solo archivos .csv");
+        Papa.parse(file, {
+          header: false, skipEmptyLines: true,
+          complete: (res) => {
+            csvData = res.data;
+            uiSuccess(zone, content, "📊 CSV Cargado", `${res.data.length} filas encontradas`);
+            fillSelects(res.data[0]);
+            document.getElementById('configSection').classList.remove('opacity-50', 'pointer-events-none', 'grayscale');
+          }
+        });
+      }
+    }
+
+    function uiSuccess(zone, content, title, subtitle) {
+      zone.classList.add('file-loaded');
+      content.innerHTML = `
+        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mb-2 mx-auto">✅</div>
+        <h3 class="font-bold text-slate-800">${title}</h3>
+        <p class="text-xs text-green-700 font-bold">${subtitle}</p>
+      `;
+    }
+
+    function fillSelects(row) {
+      const opts = row.map((col, i) => `<option value="${i}">Columna ${i+1}: ${col.substring(0,15)}...</option>`).join('');
+      document.getElementById('colName').innerHTML = opts;
+      document.getElementById('colDNI').innerHTML = opts;
+    }
+
+    setupUploader('dropDocx', 'inputDocx', 'docx');
+    setupUploader('dropCsv', 'inputCsv', 'csv');
+
+    // --- GENERACIÓN (Siempre ZIP individual) ---
+    document.getElementById('btnGenerate').addEventListener('click', async () => {
+      if(!docxBuffer) return alert("⚠️ Faltan archivos: Sube la Plantilla Word.");
+      if(!csvData.length) return alert("⚠️ Faltan archivos: Sube el CSV.");
+
+      const btn = document.getElementById('btnGenerate');
+      const spinner = document.getElementById('spinner');
+      const originalText = btn.querySelector('span').textContent;
+
+      btn.disabled = true;
+      btn.querySelector('span').textContent = "Procesando documentos...";
+      spinner.classList.remove('hidden');
+
+      const idxName = document.getElementById('colName').value;
+      const idxDNI = document.getElementById('colDNI').value;
+      const common = {
+        cat: document.getElementById('inCat').value || " ",
+        date: document.getElementById('inDate').value || " ",
+        tour: document.getElementById('inTour').value || " "
+      };
+
+      try {
+        const zip = new JSZip();
+
+        csvData.forEach((row, i) => {
+            const name = row[idxName];
+            const dni = row[idxDNI];
+            if(!name) return; 
+
+            const zipDoc = new PizZip(docxBuffer);
+            let xml = zipDoc.file("word/document.xml").asText();
+            const replace = (str, find, rep) => str.split(find).join(rep);
+            
+            xml = replace(xml, "_Nombre.Alumno.CSV_", name);
+            xml = replace(xml, "_DNI_", dni || "");
+            xml = replace(xml, "_Nombre.Catedratico_", common.cat);
+            xml = replace(xml, "_Fecha_", common.date);
+            xml = replace(xml, "_Torneo_", common.tour);
+
+            zipDoc.file("word/document.xml", xml);
+            
+            const out = zipDoc.generate({type:"blob", mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+            
+            // Nombre seguro para el archivo
+            const safeName = name.replace(/[^a-z0-9áéíóúñÁÉÍÓÚÑ ]/gi, '').trim().substring(0, 30) || `Doc_${i+1}`;
+            zip.file(`${safeName}.docx`, out);
+        });
+
+        const content = await zip.generateAsync({type:"blob"});
+        saveAs(content, "Acreditaciones_Individuales.zip");
+
+        btn.querySelector('span').textContent = "¡Descarga Lista!";
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.querySelector('span').textContent = originalText;
+            spinner.classList.add('hidden');
+        }, 2000);
+
+      } catch (error) {
+        console.error(error);
+        alert("Error: " + error.message);
+        btn.disabled = false;
+        spinner.classList.add('hidden');
+      }
+    });
+
+  </script>
+</body>
+</html>
