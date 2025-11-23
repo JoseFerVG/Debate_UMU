@@ -77,7 +77,7 @@
     
     <header class="text-center mb-12">
       <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
-        Generador de <span class="text-orange-500">Acreditaciones</span>
+        Generador de <span class="text-orange-500">Autorizaciones</span>
       </h1>
       <p class="text-lg text-slate-600 max-w-2xl mx-auto">
         Club de Debate UMU. Crea certificados individuales masivos en segundos.
@@ -303,7 +303,7 @@
         });
 
         const content = await zip.generateAsync({type:"blob"});
-        saveAs(content, "Acreditaciones_Individuales.zip");
+        saveAs(content, "Autorizaciones_Individuales.zip");
 
         btn.querySelector('span').textContent = "¡Descarga Lista!";
         setTimeout(() => {
