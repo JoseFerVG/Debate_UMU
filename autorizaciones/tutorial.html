@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Ayuda - Generador UMU</title>
+  <link rel="icon" href="img/logos/LogoClubBocatas.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    html { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
+    /* Estilos base */
+    .card { 
+      @apply w-full bg-white/90 backdrop-blur border border-zinc-200 rounded-3xl shadow-xl p-6 sm:p-8;
+    }
+    
+    .step-number {
+      @apply flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 text-white font-bold flex items-center justify-center text-lg shadow-md;
+    }
+
+    .tag-box {
+      @apply inline-block bg-zinc-100 border border-zinc-300 rounded px-2 py-1 text-sm font-mono text-orange-600 font-bold select-all;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-orange-100 via-white to-green-100 py-10 px-4 relative">
+
+  <header class="text-center mb-10">
+    <div class="flex justify-center mb-4">
+       <img src="img/logos/sinf.png" alt="Logo" class="h-24 w-auto object-contain opacity-80">
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-zinc-900">¿Cómo funciona esto?</h1>
+    <p class="mt-2 text-zinc-600">Guía rápida para generar acreditaciones sin romper nada.</p>
+  </header>
+
+  <main class="max-w-3xl mx-auto space-y-8 pb-24">
+
+    <section class="card">
+      <div class="flex gap-4">
+        <div class="step-number">1</div>
+        <div>
+          <h2 class="text-xl font-bold text-zinc-800 mb-2">Recoge los datos primero</h2>
+          <p class="text-zinc-600 leading-relaxed">
+            No puedes inventarte los nombres. Primero tienes que haber pasado un 
+            <strong>Google Form</strong> (o Microsoft Forms) a los alumnos pidiendo:
+          </p>
+          <ul class="list-disc list-inside mt-3 text-zinc-600 ml-2 space-y-1">
+            <li>Nombre Completo</li>
+            <li>DNI</li>
+          </ul>
+          <div class="mt-4 bg-blue-50 p-4 rounded-xl text-sm text-blue-800 border border-blue-100">
+            <strong>⚠️ Importante:</strong> Cuando tengas las respuestas en el Excel/Google Sheets, tienes que darle a 
+            <u>Archivo > Descargar > Valores separados por comas (.csv)</u>. Ese es el archivo que usaremos.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="flex gap-4">
+        <div class="step-number">2</div>
+        <div>
+          <h2 class="text-xl font-bold text-zinc-800 mb-2">Prepara tu Word</h2>
+          <p class="text-zinc-600 leading-relaxed mb-4">
+            Coge tu diploma o acreditación en Word. Donde quieras que salga el nombre o el DNI, escribe EXACTAMENTE estas palabras mágicas (puedes copiarlas):
+          </p>
+          
+          <div class="grid gap-3 bg-zinc-50 p-4 rounded-xl border border-zinc-200">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-zinc-500">Para el Nombre del alumno:</span>
+              <code class="tag-box">_Nombre.Alumno.CSV_</code>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-zinc-500">Para el DNI:</span>
+              <code class="tag-box">_DNI_</code>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-zinc-500">Para quien firma (Catedrático):</span>
+              <code class="tag-box">_Nombre.Catedratico_</code>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-zinc-500">Para la Fecha:</span>
+              <code class="tag-box">_Fecha_</code>
+            </div>
+             <div class="flex justify-between items-center">
+              <span class="text-sm text-zinc-500">Para el nombre del Torneo:</span>
+              <code class="tag-box">_Torneo_</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="flex gap-4">
+        <div class="step-number">3</div>
+        <div>
+          <h2 class="text-xl font-bold text-zinc-800 mb-2">Sube los archivos a esta web</h2>
+          <p class="text-zinc-600 leading-relaxed">
+            Vuelve al generador y arrastra los dos archivos:
+          </p>
+          <ol class="list-decimal list-inside mt-3 text-zinc-600 ml-2 space-y-2">
+            <li>Sube la <strong>Plantilla Word</strong> que acabas de editar.</li>
+            <li>Sube el <strong>CSV</strong> que descargaste del formulario.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="flex gap-4">
+        <div class="step-number">4</div>
+        <div>
+          <h2 class="text-xl font-bold text-zinc-800 mb-2">Dile quién es quién</h2>
+          <p class="text-zinc-600 leading-relaxed">
+            Cuando subas el CSV, la web te preguntará: 
+            <em>"¿En qué columna están los nombres?"</em> y <em>"¿En cuál están los DNIs?"</em>.
+          </p>
+          <p class="mt-2 text-zinc-600">
+            Solo tienes que seleccionar la columna correcta en la lista desplegable. Luego rellena los cuadros de texto de abajo (Nombre del Catedrático, Fecha, etc.) para que se pongan en todos los diplomas igual.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <a href="./acreditaciones.html" class="fixed bottom-6 right-6 z-50 bg-white/90 backdrop-blur px-5 py-3 rounded-full shadow-lg border border-zinc-200 text-sm font-bold text-zinc-800 hover:scale-105 hover:shadow-xl transition-all flex items-center gap-2 group">
+    🚀 Ir al Generador <span class="group-hover:translate-x-1 transition-transform">→</span>
+  </a>
+
+</body>
+</html>
