@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
-   <title>Generador de Autorizaciones</title>
+   <title>Generador de Justificantes</title>
   <link rel="icon" href="./../img/logos/LogoClubBocatas.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -77,10 +77,10 @@
     
     <header class="text-center mb-12">
       <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
-        Generador de <span class="text-orange-500">Autorizaciones</span>
+        Generador de <span class="text-orange-500">Justificantes</span>
       </h1>
       <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-        Club de Debate UMU. Crea certificados individuales masivos en segundos.
+        Herramienta para crear justificantes JFK
       </p>
     </header>
 
@@ -107,7 +107,7 @@
           <div id="contentCsv" class="pointer-events-none text-center">
             <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform">📊</div>
             <h3 class="font-bold text-lg text-slate-700">Listado de Datos (.csv)</h3>
-            <p class="text-sm text-slate-500 mt-2 mb-6">Archivo delimitado por comas sin cabecera</p>
+            <p class="text-sm text-slate-500 mt-2 mb-6">Lista con nombres y DNIs</p>
             <span class="px-5 py-2 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-600 shadow-sm group-hover:border-green-400 group-hover:text-green-500 transition">📂 Seleccionar archivo</span>
           </div>
         </div>
@@ -118,7 +118,7 @@
     <section id="configSection" class="mb-12 opacity-50 pointer-events-none transition-opacity duration-500 grayscale">
       <div class="flex items-center gap-3 mb-6">
         <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">2</span>
-        <h2 class="text-xl font-bold text-slate-900">Conecta los datos</h2>
+        <h2 class="text-xl font-bold text-slate-900">Elige los datos</h2>
       </div>
 
       <div class="bg-white/60 p-6 rounded-2xl border border-slate-200 grid md:grid-cols-2 gap-6 mb-6">
@@ -138,16 +138,16 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-           <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Nombre Catedratico</label>
-           <input type="text" id="inCat" placeholder="Ej: Dr. Martínez" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
+           <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Nombre del Catedratico</label>
+           <input type="text" id="inCat" placeholder="Ej: Dr. House" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
         </div>
         <div>
            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Fecha</label>
-           <input type="text" id="inDate" placeholder="Ej: 24 Noviembre" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
+           <input type="text" id="inDate" placeholder="Ej: 14 de Marzo" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
         </div>
         <div>
            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">Torneo</label>
-           <input type="text" id="inTour" placeholder="Ej: Torneo BP" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
+           <input type="text" id="inTour" placeholder="Ej: Torneo BP Mursia" class="w-full p-3 rounded-xl border border-slate-300 bg-white focus:border-orange-500 outline-none transition shadow-sm" />
         </div>
       </div>
     </section>
@@ -162,7 +162,7 @@
         <div class="text-2xl">📦</div>
         <div>
             <h3 class="font-bold text-slate-800">Formato de salida: ZIP de Words Individuales</h3>
-            <p class="text-sm text-slate-600 mt-1">Se generará un archivo comprimido (.zip) que contiene un documento Word (.docx) editable por cada persona del listado.</p>
+            <p class="text-sm text-slate-600 mt-1">Se generará un archivo comprimido (.zip) que contiene un documento Word (.docx) editable por cada persona del listado. Si quieres convertir todos de golpe a pdf usa IlovePDF que te lo hace muy bien</p>
         </div>
       </div>
 
@@ -303,7 +303,7 @@
         });
 
         const content = await zip.generateAsync({type:"blob"});
-        saveAs(content, "Autorizaciones_Individuales.zip");
+        saveAs(content, "Justificantes_Individuales.zip");
 
         btn.querySelector('span').textContent = "¡Descarga Lista!";
         setTimeout(() => {
