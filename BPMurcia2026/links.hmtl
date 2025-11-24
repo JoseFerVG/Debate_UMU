@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de Debate UMU</title>
+    <link rel="icon" href="img/logos/sinf.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
+    h1, h2, .frase { font-family: 'Anton', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-black">
+
+  <!-- HERO -->
+  <section class="flex flex-col items-center justify-center text-center px-6 py-16">
+    <h1 class="frase text-5xl sm:text-7xl font-extrabold uppercase leading-tight drop-shadow-lg">
+      XI BP <br>
+      <span class="bg-black text-pink-400 px-3">Murcia</span>
+    </h1>
+    
+
+    <!-- Botones -->
+    <div class="mt-12 space-y-4 w-full max-w-md">
+      <a href="https://forms.gle/95BciRRU9UGjvAjF6" rel="noopener"
+         class="block w-full bg-pink-500 text-white text-xl font-extrabold py-5 rounded-2xl shadow-lg hover:scale-105 transition">
+         📝 Formulario de Comidas 🍗
+      </a>
+      <a href="https://www.instagram.com/clubdedebateum/"  rel="noopener"
+         class="block w-full bg-yellow-300 text-black text-xl font-extrabold py-5 rounded-2xl shadow-lg hover:scale-105 transition">
+         📝 Formulario de Inscripción ✏️
+      </a>
+      <a href="canvaInfo.html"  rel="noopener"
+         class="block w-full bg-lime-400 text-black text-xl font-extrabold py-5 rounded-2xl shadow-lg hover:scale-105 transition">
+         📝 Examen para Jueces 👩🏾‍⚖️ 
+      </a>
+      
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-xs bg-black text-white w-full">
+    © <span id="year"></span> Club de Debate UMU · Hecho con ❤️ por el club
+  </footer>
+
+  <script>
+    // Paleta fosforita
+    const colores = [
+      "#fffb00", // amarillo fosforito
+      "#39ff14", // verde fosforito
+      //"#ff00ff", // magenta
+      //"#ff3131", // rojo neon
+      "#00f0ff"  // cian brillante
+    ];
+    // Escoger aleatorio al cargar
+    document.body.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
