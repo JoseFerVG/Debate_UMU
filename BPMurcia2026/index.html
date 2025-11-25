@@ -41,6 +41,7 @@
             background-size: 20px 20px;
         }
 
+        /* Estilo para links activos */
         .link-card:hover {
             background-color: #D9291C;
             color: white;
@@ -48,6 +49,14 @@
         }
         .link-card:hover .arrow-icon {
             transform: translateX(8px);
+        }
+
+        /* Estilo para links inactivos/cerrados */
+        .link-card-disabled {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+            color: #6b7280;
+            cursor: not-allowed; /* O pointer si quieres que se pueda clicar igual */
         }
         
         .adju-img {
@@ -58,7 +67,6 @@
             filter: grayscale(0%);
         }
 
-        /* Animación suave para el menú móvil */
         #mobile-menu {
             transition: all 0.3s ease-in-out;
         }
@@ -76,6 +84,7 @@
                 <a href="#registro-links" class="hover:text-murcia-red hover:underline decoration-4 underline-offset-4 transition-all">Inscripción</a>
                 <a href="#adjudicacion" class="hover:text-murcia-red hover:underline decoration-4 underline-offset-4 transition-all">Adjudicación</a>
                 <a href="#sedes" class="hover:text-murcia-red hover:underline decoration-4 underline-offset-4 transition-all">Sedes</a>
+                <a href="#tab" class="hover:text-murcia-red hover:underline decoration-4 underline-offset-4 transition-all">Tab</a>
             </div>
 
             <button id="menu-btn" class="md:hidden text-3xl text-murcia-dark focus:outline-none">
@@ -88,6 +97,7 @@
                 <a href="#adjudicacion" class="mobile-link py-3 border-b-2 border-transparent hover:border-murcia-red hover:text-murcia-red hover:bg-murcia-pastel transition-all">Adjudicación</a>
                 <a href="#sedes" class="mobile-link py-3 border-b-2 border-transparent hover:border-murcia-red hover:text-murcia-red hover:bg-murcia-pastel transition-all">Sedes</a>
                 <a href="#registro-links" class="mobile-link py-3 border-b-2 border-transparent hover:border-murcia-red hover:text-murcia-red hover:bg-murcia-pastel transition-all">Inscripción</a>
+                <a href="#tab" class="mobile-link py-3 border-b-2 border-transparent hover:border-murcia-red hover:text-murcia-red hover:bg-murcia-pastel transition-all">Tab</a>
             </div>
         </div>
     </nav>
@@ -108,15 +118,17 @@
         <span class="text-white font-display text-xl md:text-3xl uppercase tracking-widest">Inscripciones Abiertas</span>
     </div>
 
-        <section id="registro-links" class="py-16 md:py-24 px-6 md:px-12 bg-white">
+    <section id="registro-links" class="py-16 md:py-24 px-6 md:px-12 bg-white">
         <div class="max-w-4xl mx-auto text-center mb-12">
             <h2 class="font-display text-4xl md:text-7xl uppercase text-murcia-dark leading-none">Enlaces de <br><span class="text-murcia-red">Registro</span></h2>
             <p class="text-murcia-dark font-bold mt-6 uppercase tracking-widest bg-murcia-pastel inline-block px-4 py-2 text-xs md:text-base">Accede a los formularios oficiales</p>
         </div>
 
         <div class="max-w-3xl mx-auto flex flex-col gap-6">
-            <a href="LINK_A_TU_FORMULARIO_EQUIPOS" target="_blank" class="link-card block border-4 border-murcia-dark p-6 md:p-10 transition-all duration-300 bg-white group hover:shadow-[8px_8px_0px_0px_rgba(217,41,28,1)]">
-                <div class="flex justify-between items-center">
+            
+            <a href="LINK_EQUIPOS" target="_blank" class="link-card block border-4 border-murcia-dark p-6 md:p-10 transition-all duration-300 bg-white group hover:shadow-[8px_8px_0px_0px_rgba(217,41,28,1)] relative">
+                <div class="absolute top-4 right-4 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 uppercase tracking-widest border border-green-200">Abierto</div>
+                <div class="flex justify-between items-center mt-2 md:mt-0">
                     <div>
                         <h3 class="font-display text-xl md:text-3xl uppercase mb-2 group-hover:text-white">Inscripción de Equipos</h3>
                         <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-gray-600 group-hover:text-white/80">Para debatientes y sociedades</p>
@@ -125,8 +137,9 @@
                 </div>
             </a>
 
-            <a href="LINK_A_TU_FORMULARIO_JUECES" target="_blank" class="link-card block border-4 border-murcia-dark p-6 md:p-10 transition-all duration-300 bg-white group hover:shadow-[8px_8px_0px_0px_rgba(217,41,28,1)]">
-                <div class="flex justify-between items-center">
+            <a href="LINK_UECES" target="_blank" class="link-card block border-4 border-murcia-dark p-6 md:p-10 transition-all duration-300 bg-white group hover:shadow-[8px_8px_0px_0px_rgba(217,41,28,1)] relative">
+                <div class="absolute top-4 right-4 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 uppercase tracking-widest border border-green-200">Abierto</div>
+                <div class="flex justify-between items-center mt-2 md:mt-0">
                     <div>
                         <h3 class="font-display text-xl md:text-3xl uppercase mb-2 group-hover:text-white">Inscripción de Jueces</h3>
                         <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-gray-600 group-hover:text-white/80">Jueces independientes e invitados</p>
@@ -135,27 +148,27 @@
                 </div>
             </a>
 
-
-            <a href="LINK_A_TU_FORMULARIO_JUECES" target="_blank" class="link-card block border-4 border-murcia-dark p-6 md:p-10 transition-all duration-300 bg-white group hover:shadow-[8px_8px_0px_0px_rgba(217,41,28,1)]">
-                <div class="flex justify-between items-center">
+            <div class="link-card-disabled block border-4 border-gray-200 p-6 md:p-10 relative">
+                <div class="absolute top-4 right-4 bg-gray-200 text-gray-500 text-xs font-bold px-3 py-1 uppercase tracking-widest">Cerrado</div>
+                <div class="flex justify-between items-center mt-2 md:mt-0">
                     <div>
-                        <h3 class="font-display text-xl md:text-3xl uppercase mb-2 group-hover:text-white">Examen de Jueces</h3>
-                        <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-gray-600 group-hover:text-white/80">Solo para Jueces</p>
+                        <h3 class="font-display text-xl md:text-3xl uppercase mb-2 text-gray-400">Examen de Jueces</h3>
+                        <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-gray-400">Disponible próximamente</p>
                     </div>
-                    <i class="ph ph-arrow-up-right text-3xl md:text-4xl arrow-icon transition-transform group-hover:text-white"></i>
+                    <i class="ph ph-lock text-3xl md:text-4xl text-gray-300"></i>
                 </div>
-            </a>
+            </div>
 
-            
-            <a href="LINK_A_TU_FORMULARIO_JUECES" target="_blank" class="link-card block border-4 border-murcia-dark p-6 md:p-10 transition-all duration-300 bg-white group hover:shadow-[8px_8px_0px_0px_rgba(217,41,28,1)]">
-                <div class="flex justify-between items-center">
+            <div class="link-card-disabled block border-4 border-gray-200 p-6 md:p-10 relative">
+                <div class="absolute top-4 right-4 bg-gray-200 text-gray-500 text-xs font-bold px-3 py-1 uppercase tracking-widest">Próximamente</div>
+                <div class="flex justify-between items-center mt-2 md:mt-0">
                     <div>
-                        <h3 class="font-display text-xl md:text-3xl uppercase mb-2 group-hover:text-white">Formulario para la comida</h3>
-                        <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-gray-600 group-hover:text-white/80">Alergias y toda la pesca</p>
+                        <h3 class="font-display text-xl md:text-3xl uppercase mb-2 text-gray-400">Comida / Alergias</h3>
+                        <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-gray-400">Se abrirá 1 semana antes</p>
                     </div>
-                    <i class="ph ph-arrow-up-right text-3xl md:text-4xl arrow-icon transition-transform group-hover:text-white"></i>
+                    <i class="ph ph-clock text-3xl md:text-4xl text-gray-300"></i>
                 </div>
-            </a>
+            </div>
             
         </div>
     </section>
@@ -240,8 +253,23 @@
             <h2 class="font-display text-4xl md:text-8xl mb-12 uppercase text-stroke text-murcia-dark leading-none">Las <span class="text-murcia-red">Sedes</span></h2>
             
             <div class="flex flex-col border-2 border-murcia-dark bg-white">
-                <a href="https://maps.app.goo.gl/SKKHukJJmbiRza2v9" target="_blank" class="group flex flex-col md:flex-row items-center border-b-2 border-murcia-dark p-8 hover:bg-murcia-pastel transition-all duration-300">
+                
+                <a href="https://maps.app.goo.gl/C67243ot1Xn9EzWk9" target="_blank" class="group flex flex-col md:flex-row items-center border-b-2 border-murcia-dark p-8 hover:bg-murcia-pastel transition-all duration-300">
                     <div class="md:w-1/4 font-display text-6xl text-murcia-pastel-strong group-hover:text-murcia-red transition-colors">01</div>
+                    <div class="md:w-3/4 mt-4 md:mt-0">
+                        <h3 class="text-2xl md:text-3xl font-display uppercase mb-2">Salon de Grados de Derecho</h3>
+                        <p class="font-bold uppercase tracking-widest text-xs md:text-sm mb-4 opacity-75">Viernes | Inauguración</p>
+                        <div class="flex items-center gap-2 text-sm font-mono uppercase">
+                            <i class="ph ph-map-pin text-lg text-murcia-red"></i> Ver en Mapa
+                        </div>
+                    </div>
+                    <div class="hidden md:block text-4xl opacity-0 group-hover:opacity-100 text-murcia-red transition-all transform group-hover:translate-x-4">
+                        <i class="ph ph-arrow-right"></i>
+                    </div>
+                </a>
+
+                <a href="https://maps.app.goo.gl/SKKHukJJmbiRza2v9" target="_blank" class="group flex flex-col md:flex-row items-center border-b-2 border-murcia-dark p-8 hover:bg-murcia-pastel transition-all duration-300">
+                    <div class="md:w-1/4 font-display text-6xl text-murcia-pastel-strong group-hover:text-murcia-red transition-colors">02</div>
                     <div class="md:w-3/4 mt-4 md:mt-0">
                         <h3 class="text-2xl md:text-3xl font-display uppercase mb-2">Aulario de la Merced</h3>
                         <p class="font-bold uppercase tracking-widest text-xs md:text-sm mb-4 opacity-75">Viernes & Sabado | Fase General</p>
@@ -255,7 +283,7 @@
                 </a>
 
                 <a href="https://maps.app.goo.gl/hRT8d8FsbP311MJc7" target="_blank" class="group flex flex-col md:flex-row items-center p-8 hover:bg-murcia-pastel transition-all duration-300">
-                    <div class="md:w-1/4 font-display text-6xl text-murcia-pastel-strong group-hover:text-murcia-red transition-colors">02</div>
+                    <div class="md:w-1/4 font-display text-6xl text-murcia-pastel-strong group-hover:text-murcia-red transition-colors">03</div>
                     <div class="md:w-3/4 mt-4 md:mt-0">
                         <h3 class="text-2xl md:text-3xl font-display uppercase mb-2">Edificio Moneo</h3>
                         <p class="font-bold uppercase tracking-widest text-xs md:text-sm mb-4 opacity-75">Domingo | Semi & Gran Final</p>
@@ -265,6 +293,32 @@
                     </div>
                     <div class="hidden md:block text-4xl opacity-0 group-hover:opacity-100 text-murcia-red transition-all transform group-hover:translate-x-4">
                         <i class="ph ph-arrow-right"></i>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="tab" class="bg-murcia-dark text-white border-t-4 border-murcia-red">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="p-12 md:p-24 flex flex-col justify-center border-b-4 md:border-b-0 md:border-r-4 border-white/10">
+                <h2 class="font-display text-5xl md:text-8xl uppercase leading-none mb-6">
+                    TAB<br><span class="text-murcia-red">Online</span>
+                </h2>
+                <p class="font-mono text-gray-400 uppercase tracking-widest max-w-md">
+                    Sigue los resultados, mociones y enfrentamientos en tiempo real a través de Tabbycat.
+                </p>
+            </div>
+            
+            <div class="flex items-center justify-center p-12 md:p-24 bg-murcia-red/5">
+                <a href="LINK_A_TABBYCAT" target="_blank" class="group relative inline-block w-full max-w-md">
+                    <div class="absolute inset-0 bg-murcia-red translate-x-4 translate-y-4 transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                    <div class="relative bg-white border-4 border-white p-8 md:p-12 text-center transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                        <span class="block font-display text-3xl md:text-5xl text-murcia-dark uppercase mb-2 group-hover:text-murcia-red transition-colors">Ver Tab</span>
+                        <div class="flex justify-center text-murcia-dark text-4xl">
+                            <i class="ph ph-arrow-right"></i>
+                        </div>
                     </div>
                 </a>
             </div>
