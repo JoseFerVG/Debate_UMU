@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es" class="antialiased">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pomodoro UMU</title>
+  <link rel="icon" href="img/logos/LogoClubBocatas.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            // Paleta Club UMU semántica
+            brand: {
+              orange: '#f97316', // El naranja principal
+              green: '#22c55e',  // El verde del logo
+              darkBg: '#0c0a09', // Stone-950 (más cálido que el gris puro)
+            }
+          },
+          animation: {
+            'blob': 'blob 10s infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* --- ESTRUCTURA VISUAL --- */
+    body {
+      transition: background-color 0.6s ease, color 0.3s ease;
+      overflow: hidden; /* Evita scrollbars por los orbes de fondo */
+    }
+
+    /* Fondo Animado (Light Mode) */
+    .bg-gradient-mesh {
+      background: radial-gradient(at 0% 0%, rgba(254, 215, 170, 0.7) 0px, transparent 50%), 
+                  radial-gradient(at 100% 100%, rgba(187, 247, 208, 0.7) 0px, transparent 50%),
+                  radial-gradient(at 100% 0%, rgba(255, 255, 255, 1) 0px, transparent 50%);
+      background-color: #fff7ed; /* Orange-50 base */
+    }
+
+    /* Fondo Animado (Dark Mode) - Aquí está la clave de la homogeneidad */
+    .dark .bg-gradient-mesh {
+      background: radial-gradient(at 0% 0%, rgba(67, 20, 7, 0.6) 0px, transparent 60%), /* Dark Orange */
+                  radial-gradient(at 100% 100%, rgba(6, 78, 59, 0.5) 0px, transparent 60%), /* Dark Green */
+                  radial-gradient(at 50% 50%, rgba(24, 24, 27, 0) 0px, transparent 50%);
+      background-color: #0c0a09; /* Stone-950 base */
+    }
+
+    /* Cristal (Glassmorphism) */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    }
+
+    .dark .glass-card {
+      background: rgba(12, 10, 9, 0.7); /* Oscuro translúcido */
+      border: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil */
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    /* Transiciones universales */
+    * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    }
+    
+    /* Segmented Control (Tabs) */
+    .segment-bg {
+      background: rgba(0,0,0,0.05);
+    }
+    .dark .segment-bg {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    /* Tipografía Numérica */
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+
+<body class="h-screen w-screen flex flex-col items-center justify-center bg-gradient-mesh relative selection:bg-orange-500 selection:text-white">
+
+  <div class="absolute top-0 -left-4 w-72 h-72 bg-orange-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob dark:bg-orange-900 dark:mix-blend-normal"></div>
+  <div class="absolute top-0 -right-4 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000 dark:bg-green-900 dark:mix-blend-normal"></div>
+  <div class="absolute -bottom-8 left-20 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000 dark:bg-zinc-800 dark:mix-blend-normal"></div>
+
+  <button id="theme-toggle" class="absolute top-6 right-6 p-3 rounded-full glass-card hover:scale-110 active:scale-95 z-50 group">
+    <svg id="icon-sun" class="w-5 h-5 text-orange-500 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+    <svg id="icon-moon" class="w-5 h-5 text-slate-600 block dark:hidden group-hover:text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+  </button>
+
+  <a href="index.html" class="absolute top-6 left-6 flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-orange-600 dark:text-zinc-400 dark:hover:text-orange-400 z-50">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+    <span>Volver</span>
+  </a>
+
+  <main class="relative z-10 w-full max-w-md p-2 animate-fade-in">
+    
+    <div class="glass-card rounded-[2.5rem] p-8 sm:p-10 flex flex-col items-center shadow-2xl">
+      
+      <div id="status-badge" class="mb-8 px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-300 ring-1 ring-inset ring-orange-500/20">
+        Modo Enfoque
+      </div>
+
+      <div class="flex p-1.5 w-full bg-zinc-100 dark:bg-zinc-800/50 rounded-2xl mb-10 relative border border-zinc-200/50 dark:border-white/5">
+        <button onclick="setMode('pomodoro')" id="tab-pomodoro" class="flex-1 py-2.5 rounded-xl text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">Pomodoro</button>
+        <button onclick="setMode('short')" id="tab-short" class="flex-1 py-2.5 rounded-xl text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">Corto</button>
+        <button onclick="setMode('long')" id="tab-long" class="flex-1 py-2.5 rounded-xl text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">Largo</button>
+      </div>
+
+      <div class="relative mb-12 group cursor-default select-none">
+        <div class="text-9xl font-black text-zinc-800 dark:text-zinc-100 tracking-tighter tabular-nums leading-none drop-shadow-sm">
+          <span id="minutes">25</span><span class="text-zinc-300 dark:text-zinc-600 animate-pulse">:</span><span id="seconds">00</span>
+        </div>
+      </div>
+
+      <button id="btn-toggle" class="w-full py-5 rounded-2xl bg-zinc-900 text-white text-xl font-bold tracking-wide shadow-xl shadow-zinc-900/20 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all dark:bg-white dark:text-zinc-900 dark:shadow-white/10 mb-4">
+        Empezar
+      </button>
+
+      <button id="btn-reset" class="text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300 text-sm font-semibold tracking-wide uppercase transition-colors p-2">
+        Reiniciar
+      </button>
+
+    </div>
+    
+    <p class="text-center mt-6 text-xs font-medium text-zinc-500 dark:text-zinc-500/80">
+      CLUB DE DEBATE UMU
+    </p>
+
+  </main>
+
+  <script>
+    // Configuración del sistema
+    const MODES = {
+      pomodoro: { time: 25, label: 'Enfoque', color: 'orange' },
+      short: { time: 5, label: 'Descanso Corto', color: 'green' },
+      long: { time: 15, label: 'Descanso Largo', color: 'blue' }
+    };
+
+    let currentState = {
+      mode: 'pomodoro',
+      timeLeft: 25 * 60,
+      isRunning: false,
+      timerId: null
+    };
+
+    // Referencias DOM
+    const els = {
+      mins: document.getElementById('minutes'),
+      secs: document.getElementById('seconds'),
+      btnMain: document.getElementById('btn-toggle'),
+      btnReset: document.getElementById('btn-reset'),
+      badge: document.getElementById('status-badge'),
+      tabs: {
+        pomodoro: document.getElementById('tab-pomodoro'),
+        short: document.getElementById('tab-short'),
+        long: document.getElementById('tab-long')
+      }
+    };
+
+    // --- RENDERIZADO VISUAL ---
+    function render() {
+      const m = Math.floor(currentState.timeLeft / 60);
+      const s = currentState.timeLeft % 60;
+      
+      // Actualizar números
+      els.mins.textContent = m.toString().padStart(2, '0');
+      els.secs.textContent = s.toString().padStart(2, '0');
+      
+      // Actualizar título de la pestaña
+      document.title = currentState.isRunning 
+        ? `(${m}:${s.toString().padStart(2, '0')}) Debate Timer` 
+        : 'Pomodoro UMU';
+    }
+
+    function updateTabsUI(activeMode) {
+      // Estilos para la tab activa vs inactiva
+      const activeClass = "bg-white shadow-sm text-zinc-900 dark:bg-zinc-700 dark:text-white ring-1 ring-black/5 dark:ring-white/10";
+      const inactiveClass = "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200";
+
+      Object.keys(els.tabs).forEach(mode => {
+        const tab = els.tabs[mode];
+        // Limpiamos clases
+        tab.className = "flex-1 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ";
+        
+        if (mode === activeMode) {
+          tab.className += activeClass;
+        } else {
+          tab.className += inactiveClass;
+        }
+      });
+    }
+
+    function updateBadgeColor(mode) {
+      const config = MODES[mode];
+      // Mapeo de colores para el badge (Texto + Fondo + Anillo)
+      const themeColors = {
+        orange: 'bg-orange-100 text-orange-700 ring-orange-500/20 dark:bg-orange-500/10 dark:text-orange-300 dark:ring-orange-400/20',
+        green: 'bg-green-100 text-green-700 ring-green-500/20 dark:bg-green-500/10 dark:text-green-300 dark:ring-green-400/20',
+        blue: 'bg-blue-100 text-blue-700 ring-blue-500/20 dark:bg-blue-500/10 dark:text-blue-300 dark:ring-blue-400/20'
+      };
+      
+      els.badge.className = `mb-8 px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase ring-1 ring-inset transition-colors duration-500 ${themeColors[config.color]}`;
+      els.badge.textContent = config.label;
+    }
+
+    // --- LÓGICA DEL TIMER ---
+    function setMode(mode) {
+      // Detener si estaba corriendo
+      if(currentState.isRunning) toggleTimer();
+      
+      currentState.mode = mode;
+      currentState.timeLeft = MODES[mode].time * 60;
+      
+      updateTabsUI(mode);
+      updateBadgeColor(mode);
+      render();
+    }
+
+    function toggleTimer() {
+      if (currentState.isRunning) {
+        // PAUSAR
+        clearInterval(currentState.timerId);
+        currentState.isRunning = false;
+        els.btnMain.textContent = "Continuar";
+        els.btnMain.classList.remove('ring-4', 'ring-orange-200', 'dark:ring-orange-900');
+      } else {
+        // INICIAR
+        currentState.isRunning = true;
+        els.btnMain.textContent = "Pausar";
+        // Añadir efecto de foco al botón
+        els.btnMain.classList.add('ring-4', 'ring-orange-200', 'dark:ring-orange-900');
+
+        currentState.timerId = setInterval(() => {
+          if (currentState.timeLeft > 0) {
+            currentState.timeLeft--;
+            render();
+          } else {
+            finishTimer();
+          }
+        }, 1000);
+      }
+    }
+
+    function finishTimer() {
+      clearInterval(currentState.timerId);
+      currentState.isRunning = false;
+      els.btnMain.textContent = "¡Tiempo!";
+      alert("⏰ Ciclo completado. ¡Buen trabajo, JFK!");
+      currentState.timeLeft = MODES[currentState.mode].time * 60;
+      render();
+      els.btnMain.textContent = "Empezar";
+      els.btnMain.classList.remove('ring-4', 'ring-orange-200', 'dark:ring-orange-900');
+    }
+
+    function resetTimer() {
+      if(currentState.isRunning) toggleTimer();
+      currentState.timeLeft = MODES[currentState.mode].time * 60;
+      els.btnMain.textContent = "Empezar";
+      render();
+    }
+
+    // --- TEMA OSCURO (Persistencia) ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && sysDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      // Forzamos actualización de estilos del badge si cambia el tema
+      updateBadgeColor(currentState.mode);
+      updateTabsUI(currentState.mode);
+    });
+
+    // --- EVENTOS ---
+    els.btnMain.addEventListener('click', toggleTimer);
+    els.btnReset.addEventListener('click', resetTimer);
+
+    // Init
+    initTheme();
+    setMode('pomodoro');
+
+  </script>
+</body>
+</html>
