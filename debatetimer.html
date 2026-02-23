@@ -1,193 +1,580 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-    
- 
     <meta charset="UTF-8">
-       <!-- Google -->
-<meta itemprop="name" content="Debate UMU" />
-<meta itemprop="description" content="Temporizador/timer del club de debate de la Universidad de Murcia (UMU)" />
-<meta itemprop="image" content="https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/logos/sinf.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Debate UMU</title>
-    <link rel="icon" href="img/logos/logoCrono.png">
+    <title>Timer BP | Club de Debate UMU</title>
+    <link rel="icon" href="img/logos/LogoClubBocatas.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#FFD8B1',
+                            green: '#C1E1C1',
+                            dark: '#1e293b',
+                            light: '#f8fafc',
+                            alert: '#ef4444' // Rojo para alarmas
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-image: url('img/fondosCrono/fondoBlancoMuchos.jpg'); 
-            background-size: cover;
-            background-position: center;
+        body { 
+            overflow-x: hidden; 
+            user-select: none;
         }
-        .container {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
+        
+        /* Glassmorfismo de la web original */
+        .glass-card {
+            @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg rounded-3xl transition-all duration-300;
         }
-        .timer {
-            font-size: 4rem;
-            margin: 20px 0;
+        .glass-card:hover {
+            @apply bg-white/90 shadow-xl border-brand-orange/40;
         }
-        button, .custom-input {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #555;
-            color: white;
-            display: inline-block;
-            text-align: center;
+        .glass-panel {
+            @apply bg-white/80 backdrop-blur-2xl border border-white/50 shadow-2xl;
         }
-        button:hover, .custom-input:hover {
-            background-color: #444;
+        .text-gradient {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-slate-500;
         }
-        .custom-input {
-            width: auto;
-            padding: 10px 15px;
-            text-align: center;
+
+        /* Toggles */
+        .toggle-checkbox { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+        .toggle-track { position: relative; display: inline-block; width: 50px; height: 28px; background-color: #cbd5e1; border-radius: 9999px; transition: all 0.3s ease; }
+        .toggle-thumb { position: absolute; top: 2px; left: 2px; height: 24px; width: 24px; background-color: white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .toggle-checkbox:checked + .toggle-track { background-color: #C1E1C1; } /* Verde pastel activado */
+        .toggle-checkbox:checked + .toggle-track .toggle-thumb { transform: translateX(22px); }
+        
+        .dark .toggle-track { background-color: #475569; }
+        .dark .glass-card { @apply bg-slate-800/70 border-slate-700/60 text-slate-100; }
+        .dark .glass-panel { @apply bg-slate-900/90 border-slate-700/50 text-slate-100; }
+        .dark .text-gradient { @apply bg-gradient-to-r from-white to-slate-400; }
+
+        .digit-box { font-variant-numeric: tabular-nums; }
+        
+        /* Teclado numérico */
+        .btn-numpad {
+            @apply rounded-2xl bg-white/50 border border-slate-200 shadow-sm hover:bg-brand-orange/30 hover:shadow-md transition-all duration-200 text-2xl font-semibold text-slate-700;
         }
-        .cortesia {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .cortesia input {
-            transform: scale(1.5);
-        }
-        .courtesy-timer {
-            font-size: 2rem;
-            margin-top: 10px;
-            color: lightcoral;
+        .dark .btn-numpad {
+            @apply bg-slate-800/50 border-slate-700 text-slate-200 hover:bg-slate-700;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="timer" id="timer">00:00</div>
-        <button onclick="setCustomTime(7)">7 minutos</button>
-        <button onclick="setCustomTime(5)">5 minutos</button>
-        <input type="number" id="customTime" class="custom-input" placeholder="Minutos">
-        <button onclick="startCustomTimer()">Iniciar</button>
-        <button id="pauseResumeBtn" onclick="togglePause()">Pausar/Reanudar</button>
-        <div class="courtesy-timer" id="courtesy-timer"></div>
-    </div>
-    <div class="cortesia">
-        <label for="courtesy-checkbox">Cortesía</label>
-        <input type="checkbox" id="courtesy-checkbox">
+<body id="mainBody" class="min-h-screen bg-slate-50 text-slate-800 font-sans relative flex flex-col transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100 selection:bg-brand-orange selection:text-brand-dark">
+
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-orange/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob dark:opacity-30"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-green/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000 dark:opacity-30"></div>
+        <div class="absolute -bottom-8 left-1/3 w-96 h-96 bg-brand-orange/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000 dark:opacity-30"></div>
     </div>
 
-    <audio id="alert-sound" src="campana.mp3"></audio> 
-    
+    <header class="relative z-20 flex justify-between items-center p-6 bg-white/40 backdrop-blur-md border-b border-white/50 dark:bg-slate-900/50 dark:border-slate-800 shrink-0">
+        <div class="flex items-center gap-4">
+            <img src="img/logos/sinf.png" alt="Logo UMU" class="h-12 w-auto drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/100x50/FFD8B1/1e293b?text=UMU'">
+            <h1 class="text-xl font-bold tracking-tight text-gradient hidden sm:block">Debate Timer</h1>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <span id="bpBadge" class="hidden px-3 py-1 bg-brand-green/80 text-brand-dark text-xs font-bold rounded-full uppercase tracking-wider shadow-sm backdrop-blur-sm animate-pulse-slow">
+                Modo BP
+            </span>
+            <button onclick="toggleFullScreen()" class="text-2xl p-2 rounded-full hover:bg-white/50 dark:hover:bg-slate-800 transition-colors" title="Pantalla Completa">
+                <i id="fsIcon" class="ph-bold ph-arrows-out"></i>
+            </button>
+            <button id="menuToggleBtn" class="text-3xl p-2 rounded-full hover:bg-white/50 dark:hover:bg-slate-800 transition-colors">
+                <i class="ph-bold ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4 z-10 relative w-full max-w-5xl mx-auto">
+        
+        <div class="w-full text-center mb-8 relative group flex justify-center">
+            <div class="glass-card p-10 md:p-16 relative overflow-hidden min-w-[300px] md:min-w-[600px] flex justify-center items-center flex-col border-t-4 border-t-brand-orange">
+                
+                <div id="modeLabel" class="hidden absolute top-4 right-6 font-mono text-xs text-slate-400 tracking-widest uppercase font-bold">CRONÓMETRO</div>
+
+                <h1 id="display" class="text-[15vw] md:text-[11rem] leading-none tracking-tight font-extrabold text-gradient digit-box select-none relative z-10">
+                    <span id="hVal">00</span><span class="text-brand-orange/80 pb-4 inline-block align-top text-[0.8em]">:</span><span id="mVal">00</span><span class="text-brand-orange/80 pb-4 inline-block align-top text-[0.8em]">:</span><span id="sVal">00</span>
+                </h1>
+
+                <div id="courtesyOverlay" class="hidden absolute inset-0 z-50 bg-brand-alert/90 backdrop-blur-md flex flex-col items-center justify-center rounded-3xl transition-opacity duration-300">
+                    <div class="text-white font-serif italic text-3xl md:text-5xl mb-4">Tiempo de cortesía</div>
+                    <div id="courtesyBigCount" class="text-white font-bold text-[8rem] md:text-[10rem] leading-none drop-shadow-lg">15</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="setupPanel" class="w-full max-w-sm mb-8">
+            <div class="grid grid-cols-3 gap-3">
+                <button onclick="addNumber(1)" class="btn-numpad py-4">1</button>
+                <button onclick="addNumber(2)" class="btn-numpad py-4">2</button>
+                <button onclick="addNumber(3)" class="btn-numpad py-4">3</button>
+                <button onclick="addNumber(4)" class="btn-numpad py-4">4</button>
+                <button onclick="addNumber(5)" class="btn-numpad py-4">5</button>
+                <button onclick="addNumber(6)" class="btn-numpad py-4">6</button>
+                <button onclick="addNumber(7)" class="btn-numpad py-4">7</button>
+                <button onclick="addNumber(8)" class="btn-numpad py-4">8</button>
+                <button onclick="addNumber(9)" class="btn-numpad py-4">9</button>
+                <button onclick="clearInput()" class="btn-numpad py-4 text-sm uppercase tracking-widest text-slate-500 hover:text-brand-alert hover:bg-red-50 dark:hover:bg-red-900/20">Borrar</button>
+                <button onclick="addNumber(0)" class="btn-numpad py-4">0</button>
+                <button onclick="setTimer()" class="btn-numpad py-4 bg-brand-dark text-white hover:bg-slate-800 dark:bg-brand-orange dark:text-brand-dark dark:hover:bg-orange-200 text-sm uppercase tracking-widest">SET</button>
+            </div>
+        </div>
+
+        <div id="timerControls" class="w-full max-w-md hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button id="startStopBtn" onclick="toggleStartStop()" class="glass-card bg-brand-green/80 hover:bg-brand-green text-brand-dark font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-md">
+                <i class="ph-fill ph-play text-2xl" id="playIcon"></i>
+                <span id="btnText">Empezar</span>
+            </button>
+
+            <button onclick="resetTimer()" class="glass-card bg-white/50 hover:bg-white/80 text-slate-700 dark:bg-slate-800/50 dark:text-slate-200 font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-sm">
+                <i class="ph-bold ph-arrow-counter-clockwise text-2xl"></i>
+                <span>Reset</span>
+            </button>
+        </div>
+
+        <button id="changeTimeBtn" onclick="changeTime()" class="hidden mt-8 px-6 py-2 rounded-full bg-white/40 backdrop-blur-md text-sm font-semibold uppercase tracking-wider text-slate-600 hover:bg-white/70 hover:text-slate-900 dark:bg-slate-800/40 dark:text-slate-300 dark:hover:bg-slate-800 transition-all flex items-center gap-2 border border-white/50 shadow-sm">
+            <i class="ph-bold ph-pencil-simple"></i> Cambiar Tiempo
+        </button>
+
+    </main>
+
+    <div id="optionsModal" class="fixed inset-0 bg-slate-900/40 z-50 hidden flex justify-end transition-opacity duration-300 backdrop-blur-sm">
+        <div class="glass-panel w-full md:w-[450px] h-full p-8 flex flex-col overflow-y-auto">
+            
+            <div class="flex justify-between items-center mb-8 border-b border-slate-200/50 dark:border-slate-700/50 pb-6">
+                <h2 class="font-serif text-3xl font-bold text-slate-800 dark:text-white">Ajustes</h2>
+                <button id="menuCloseBtn" class="text-3xl text-slate-400 hover:text-brand-alert transition-transform hover:rotate-90 rounded-full p-1">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+
+            <div class="mb-8 p-5 rounded-2xl bg-brand-green/20 border border-brand-green/30">
+                <div class="flex items-center gap-3 mb-4">
+                    <i class="ph-fill ph-gavel text-2xl text-brand-dark dark:text-brand-green"></i>
+                    <h3 class="font-bold text-lg uppercase tracking-wider text-brand-dark dark:text-white">Competición</h3>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex flex-col">
+                        <span class="font-bold text-slate-800 dark:text-slate-200">Modo BP (Parlamento Británico)</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1">7 min fijos. Avisos en min 1, 6, 7 y 7:15.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="bpModeToggle" class="toggle-checkbox">
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-4 text-slate-500 dark:text-slate-400">
+                    <i class="ph-fill ph-gear-six text-xl"></i>
+                    <h3 class="font-bold uppercase tracking-wider text-sm">Funcionamiento</h3>
+                </div>
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 mb-3 border border-white/40 dark:border-slate-700">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-slate-700 dark:text-slate-200">Modo Cronómetro</span>
+                        <span class="text-xs text-slate-500">Cuenta hacia arriba</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="stopwatchToggle" class="toggle-checkbox">
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-4 text-slate-500 dark:text-slate-400">
+                    <i class="ph-fill ph-paint-brush-broad text-xl"></i>
+                    <h3 class="font-bold uppercase tracking-wider text-sm">Visual</h3>
+                </div>
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 border border-white/40 dark:border-slate-700">
+                    <span class="font-semibold text-slate-700 dark:text-slate-200">Modo Oscuro</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="darkModeToggle" class="toggle-checkbox">
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-4 text-slate-500 dark:text-slate-400">
+                    <i class="ph-fill ph-speaker-high text-xl"></i>
+                    <h3 class="font-bold uppercase tracking-wider text-sm">Audio & Alarma</h3>
+                </div>
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 mb-3 border border-white/40 dark:border-slate-700">
+                    <span class="font-semibold text-slate-700 dark:text-slate-200">Silenciar</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="muteToggle" class="toggle-checkbox">
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                    </label>
+                </div>
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 mb-4 border border-white/40 dark:border-slate-700" id="courtesyContainer">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-slate-700 dark:text-slate-200">Tiempo de Cortesía</span>
+                        <span class="text-xs text-brand-alert font-medium mt-1">15s al finalizar</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="courtesyToggle" class="toggle-checkbox" checked>
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                    </label>
+                </div>
+                
+                <button onclick="testAudio()" class="w-full py-3 rounded-xl bg-slate-200/50 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 font-semibold text-sm hover:bg-slate-300/50 dark:hover:bg-slate-600/50 transition-colors flex justify-center items-center gap-2">
+                    <i class="ph-bold ph-play-circle text-lg"></i> Probar Sonido
+                </button>
+                <audio id="alarmAudio" src="audio/alarma.mp3" preload="auto"></audio>
+            </div>
+            
+            <div class="mt-auto pt-6 text-center text-xs text-slate-400 font-medium border-t border-slate-200/50 dark:border-slate-700/50">
+                Hub Central | Club de Debate UMU
+            </div>
+        </div>
+    </div>
+
     <script>
-        let countdown;
-        let courtesyCountdown;
-        let isPaused = false;
-        let pauseTime = 0;
-        let originalEndTime;
+        // DOM Elements
+        const hVal = document.getElementById('hVal');
+        const mVal = document.getElementById('mVal');
+        const sVal = document.getElementById('sVal');
+        const setupPanel = document.getElementById('setupPanel');
+        const timerControls = document.getElementById('timerControls');
+        const changeTimeBtn = document.getElementById('changeTimeBtn');
+        const startStopBtn = document.getElementById('startStopBtn');
+        const btnText = document.getElementById('btnText');
+        const playIcon = document.getElementById('playIcon');
+        const courtesyOverlay = document.getElementById('courtesyOverlay');
+        const courtesyBigCount = document.getElementById('courtesyBigCount');
+        const modeLabel = document.getElementById('modeLabel');
+        const alarmAudio = document.getElementById('alarmAudio');
+        const bpBadge = document.getElementById('bpBadge');
+        const courtesyContainer = document.getElementById('courtesyContainer');
+        
+        // Toggles
+        const optionsModal = document.getElementById('optionsModal');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const muteToggle = document.getElementById('muteToggle');
+        const courtesyToggle = document.getElementById('courtesyToggle');
+        const stopwatchToggle = document.getElementById('stopwatchToggle');
+        const bpModeToggle = document.getElementById('bpModeToggle');
 
-        function setCustomTime(minutes) {
-            document.getElementById("customTime").value = minutes;
-        }
+        // State Variables
+        let isMuted = false;
+        let isCourtesyMode = true;
+        let isStopwatchMode = false;
+        let isBPMode = false;
+        let isRunning = false;
+        let timerInterval;
+        let courtesyInterval;
+        
+        let inputBuffer = "";
+        let totalSeconds = 0;
+        let initialSeconds = 0; 
+        
+        // --- MENU & SETTINGS ---
+        document.getElementById('menuToggleBtn').addEventListener('click', () => optionsModal.classList.remove('hidden'));
+        document.getElementById('menuCloseBtn').addEventListener('click', () => optionsModal.classList.add('hidden'));
+        
+        darkModeToggle.addEventListener('change', (e) => document.documentElement.classList.toggle('dark', e.target.checked));
+        muteToggle.addEventListener('change', (e) => isMuted = e.target.checked);
+        courtesyToggle.addEventListener('change', (e) => isCourtesyMode = e.target.checked);
 
-        function startCustomTimer() {
-            const customMinutes = document.getElementById("customTime").value;
-            if (customMinutes > 0) {
-                startTimer(customMinutes * 60);
+        stopwatchToggle.addEventListener('change', (e) => {
+            if (isBPMode && e.target.checked) {
+                // Prevenir Cronómetro si BP está activo
+                e.target.checked = false;
+                alert("Desactiva el Modo BP para usar el Cronómetro libre.");
+                return;
+            }
+            isStopwatchMode = e.target.checked;
+            fullReset();
+            
+            if (isStopwatchMode) {
+                setupPanel.classList.add('hidden');
+                timerControls.classList.remove('hidden');
+                changeTimeBtn.classList.add('hidden');
+                modeLabel.classList.remove('hidden');
+                totalSeconds = 0;
+                updateDisplay(0);
             } else {
-                alert("Por favor, introduce un tiempo válido.");
+                setupPanel.classList.remove('hidden');
+                timerControls.classList.add('hidden');
+                changeTimeBtn.classList.add('hidden');
+                modeLabel.classList.add('hidden');
+                inputBuffer = "";
+                updateDisplayFromBuffer();
+            }
+        });
+
+        // --- MODO BP LOGIC ---
+        bpModeToggle.addEventListener('change', (e) => {
+            isBPMode = e.target.checked;
+            fullReset();
+
+            if (isBPMode) {
+                // Forzar ajustes BP
+                stopwatchToggle.checked = false;
+                isStopwatchMode = false;
+                courtesyToggle.checked = true;
+                isCourtesyMode = true;
+                courtesyContainer.classList.add('opacity-50', 'pointer-events-none'); // Bloquear toggle cortesía
+                
+                bpBadge.classList.remove('hidden');
+                setupPanel.classList.add('hidden');
+                changeTimeBtn.classList.add('hidden');
+                timerControls.classList.remove('hidden');
+                
+                // Configurar 7 minutos
+                totalSeconds = 7 * 60;
+                initialSeconds = totalSeconds;
+                updateDisplay(totalSeconds);
+            } else {
+                bpBadge.classList.add('hidden');
+                courtesyContainer.classList.remove('opacity-50', 'pointer-events-none');
+                
+                setupPanel.classList.remove('hidden');
+                timerControls.classList.add('hidden');
+                inputBuffer = "";
+                updateDisplayFromBuffer();
+            }
+        });
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.getElementById('fsIcon').classList.replace('ph-arrows-out', 'ph-arrows-in');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                    document.getElementById('fsIcon').classList.replace('ph-arrows-in', 'ph-arrows-out');
+                }
             }
         }
 
-        function startTimer(seconds) {
-            clearInterval(countdown);
-            const timerDisplay = document.getElementById("timer");
-            const courtesyTimerDisplay = document.getElementById("courtesy-timer");
-            const currentTime = Date.now();
-            originalEndTime = currentTime + seconds * 1000;
+        // Función para reproducir el timbre X veces
+        function playBell(times) {
+            if (isMuted || times <= 0) return;
+            
+            alarmAudio.currentTime = 0;
+            alarmAudio.play().catch(e => console.log("Audio block", e));
+            
+            if (times > 1) {
+                alarmAudio.onended = function() {
+                    alarmAudio.onended = null; // Quitar listener para evitar loops raros
+                    setTimeout(() => playBell(times - 1), 200); // Pausa breve entre toques
+                };
+            }
+        }
 
-            timerDisplay.textContent = "00:00";
-            courtesyTimerDisplay.textContent = "";
-            isPaused = false;
-            pauseTime = 0;
+        function testAudio() { playBell(1); }
 
-            updateButtonText('Pausar');
+        // --- LOGIC: NUMPAD ---
+        function updateDisplayFromBuffer() {
+            let padded = inputBuffer.padStart(6, '0');
+            hVal.innerText = padded.slice(0, 2);
+            mVal.innerText = padded.slice(2, 4);
+            sVal.innerText = padded.slice(4, 6);
+        }
 
-            countdown = setInterval(() => {
-                if (!isPaused) {
-                    let currentTime = Date.now();
-                    let timeLeft = Math.round((originalEndTime - currentTime) / 1000);
-                    if (timeLeft < 0) {
-                        clearInterval(countdown);
-                        timerDisplay.textContent = "¡Tiempo terminado!";
-                        playSound();
-                        checkCourtesy();
-                        return;
+        function addNumber(num) {
+            if (inputBuffer.length < 6) {
+                if (inputBuffer.length === 0 && num === 0) return;
+                inputBuffer += num;
+                updateDisplayFromBuffer();
+            }
+        }
+
+        function clearInput() {
+            inputBuffer = "";
+            updateDisplayFromBuffer();
+        }
+
+        // --- LOGIC: TIMER ---
+        function setTimer() {
+            if (inputBuffer.length === 0) return;
+            let padded = inputBuffer.padStart(6, '0');
+            let h = parseInt(padded.slice(0, 2));
+            let m = parseInt(padded.slice(2, 4));
+            let s = parseInt(padded.slice(4, 6));
+
+            totalSeconds = (h * 3600) + (m * 60) + s;
+            initialSeconds = totalSeconds;
+
+            if (totalSeconds > 0) {
+                setupPanel.classList.add('hidden');
+                timerControls.classList.remove('hidden');
+                changeTimeBtn.classList.remove('hidden');
+            }
+        }
+
+        function changeTime() {
+            if(isBPMode) return; // En modo BP no se puede cambiar
+            stopInternalTimer();
+            cleanupAlarmState();
+            timerControls.classList.add('hidden');
+            changeTimeBtn.classList.add('hidden');
+            setupPanel.classList.remove('hidden');
+            inputBuffer = ""; 
+            updateDisplayFromBuffer();
+        }
+
+        function toggleStartStop() {
+            if (isRunning) {
+                // PAUSE
+                clearInterval(timerInterval);
+                isRunning = false;
+                
+                btnText.innerText = "Reanudar";
+                playIcon.classList.replace('ph-pause', 'ph-play');
+                startStopBtn.classList.replace('bg-brand-orange', 'bg-brand-green/80');
+                startStopBtn.classList.replace('text-white', 'text-brand-dark');
+                
+                if (courtesyInterval) clearInterval(courtesyInterval);
+                alarmAudio.pause();
+                
+            } else {
+                // START
+                isRunning = true;
+                
+                btnText.innerText = "Pausar";
+                playIcon.classList.replace('ph-play', 'ph-pause');
+                startStopBtn.classList.replace('bg-brand-green/80', 'bg-brand-orange');
+                startStopBtn.classList.replace('text-brand-dark', 'text-white');
+
+                timerInterval = setInterval(() => {
+                    if (isStopwatchMode) {
+                        totalSeconds++;
+                        updateDisplay(totalSeconds);
+                    } else {
+                        // Avisos BP Mode (Comprueba segundos restantes)
+                        if (isBPMode) {
+                            if (totalSeconds === 361) playBell(1); // Entrando al minuto 1 (quedan 6m)
+                            if (totalSeconds === 61) playBell(1);  // Entrando al minuto 6 (queda 1m)
+                            if (totalSeconds === 1) playBell(2);   // Entrando al minuto 7 (0m)
+                        }
+
+                        if (totalSeconds > 0) {
+                            totalSeconds--;
+                            updateDisplay(totalSeconds);
+                        } else {
+                            // FIN DE TIEMPO
+                            clearInterval(timerInterval);
+                            triggerAlarmLogic();
+                        }
                     }
-                    displayTime(timeLeft, timerDisplay);
-                }
-            }, 1000);
-        }
-
-        function displayTime(seconds, display) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            const formattedTime = `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
-            display.textContent = formattedTime;
-        }
-
-        function playSound() {
-            const alertSound = document.getElementById("alert-sound");
-            alertSound.play();
-        }
-
-        function checkCourtesy() {
-            const courtesyCheckbox = document.getElementById("courtesy-checkbox");
-            if (courtesyCheckbox.checked) {
-                startCourtesyTimer();
+                }, 1000);
             }
         }
 
-        function startCourtesyTimer() {
-            clearInterval(courtesyCountdown);
-            const courtesyTimerDisplay = document.getElementById("courtesy-timer");
-            let seconds = 15;
+        function resetTimer() {
+            stopInternalTimer();
+            cleanupAlarmState();
 
-            courtesyCountdown = setInterval(() => {
-                if (seconds <= 0) {
-                    clearInterval(courtesyCountdown);
-                    courtesyTimerDisplay.textContent = "¡Cortesía terminada!";
-                    playSound();
-                    return;
-                }
-                displayTime(seconds, courtesyTimerDisplay);
-                seconds--;
-            }, 1000);
-        }
+            btnText.innerText = "Empezar";
+            playIcon.classList.replace('ph-pause', 'ph-play');
+            startStopBtn.classList.remove('bg-brand-orange', 'text-white');
+            startStopBtn.classList.add('bg-brand-green/80', 'text-brand-dark');
 
-        function togglePause() {
-            isPaused = !isPaused;
-            if (isPaused) {
-                pauseTime = Date.now();
-                updateButtonText('Reanudar');
+            if (isStopwatchMode) {
+                totalSeconds = 0;
+                updateDisplay(0);
             } else {
-                originalEndTime += (Date.now() - pauseTime);
-                updateButtonText('Pausar');
+                totalSeconds = initialSeconds;
+                updateDisplay(initialSeconds);
             }
         }
+        
+        function stopInternalTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+        }
 
-        function updateButtonText(text) {
-            document.getElementById('pauseResumeBtn').textContent = text;
+        function cleanupAlarmState() {
+            clearInterval(courtesyInterval);
+            courtesyOverlay.classList.add('hidden');
+            alarmAudio.pause();
+            alarmAudio.currentTime = 0;
+            alarmAudio.loop = false;
+        }
+
+        function fullReset() {
+            stopInternalTimer();
+            cleanupAlarmState();
+            btnText.innerText = "Empezar";
+            playIcon.classList.replace('ph-pause', 'ph-play');
+            startStopBtn.classList.remove('bg-brand-orange', 'text-white');
+            startStopBtn.classList.add('bg-brand-green/80', 'text-brand-dark');
+        }
+
+        function updateDisplay(secondsTotal) {
+            const h = Math.floor(secondsTotal / 3600);
+            const m = Math.floor((secondsTotal % 3600) / 60);
+            const s = secondsTotal % 60;
+            hVal.innerText = String(h).padStart(2, '0');
+            mVal.innerText = String(m).padStart(2, '0');
+            sVal.innerText = String(s).padStart(2, '0');
+        }
+
+        // --- ALARMA & CORTESÍA ---
+        function triggerAlarmLogic() {
+            if (isCourtesyMode) {
+                let cTime = 15;
+                courtesyOverlay.classList.remove('hidden');
+                courtesyBigCount.innerText = cTime;
+
+                courtesyInterval = setInterval(() => {
+                    cTime--;
+                    courtesyBigCount.innerText = cTime;
+                    
+                    if (cTime <= 0) {
+                        clearInterval(courtesyInterval);
+                        // Suena constante tras los 15s
+                        if (!isMuted) {
+                            alarmAudio.loop = true;
+                            alarmAudio.play().catch(e => console.log(e));
+                        }
+                    }
+                }, 1000);
+            } else {
+                // Si no hay cortesía, suena directo
+                if (!isMuted) {
+                    alarmAudio.loop = true;
+                    alarmAudio.play().catch(e => console.log(e));
+                }
+            }
         }
     </script>
 </body>
