@@ -1,47 +1,48 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
-  <title>Club de Debate UMU</title>
+  <title>Hub Central | Club de Debate UMU</title>
   <link rel="icon" href="img/logos/LogoClubBocatas.png">
   
-  <meta name="description" content="Formamos en argumentación, oratoria y debate. Construimos pensamiento crítico. ¡Únete al Club de Debate UMU!" />
-  <meta property="og:title" content="Club de Debate UMU — Landing" />
-  <meta property="og:description" content="Formamos en argumentación, oratoria y debate. Construimos pensamiento crítico." />
+  <meta name="description" content="Argumentación, oratoria y pensamiento crítico al más alto nivel. Únete a la élite del debate en la Universidad de Murcia." />
+  <meta property="og:title" content="Hub Central | Club de Debate UMU" />
+  <meta property="og:description" content="Argumentación, oratoria y pensamiento crítico al más alto nivel. Únete al Club." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://dummyimage.com/1200x630/ffffff/000000.png&text=Club+de+Debate+UMU" />
-  <meta name="theme-color" content="#b00020" />
+  <meta name="theme-color" content="#FFD8B1" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
           },
           colors: {
-            umu: {
-              DEFAULT: '#b00020',
-              light: '#d93855',
-              dark: '#850018',
-              50: '#fdf2f4',
+            brand: {
+              orange: '#FFD8B1', // Naranja pastel
+              green: '#C1E1C1',  // Verde pastel
+              dark: '#1e293b',   // Pizarra oscuro para legibilidad
+              light: '#f8fafc',
             }
           },
           animation: {
-            'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'blob': 'blob 7s infinite',
           },
           keyframes: {
-            fadeInUp: {
-              '0%': { opacity: '0', transform: 'translateY(24px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
             }
           }
         }
@@ -50,173 +51,161 @@
   </script>
 
   <style>
-    body {
-      background-color: #fafafa;
-      /* Patrón de cuadrícula sutil para un toque técnico/académico */
-      background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
-                        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
-      background-size: 40px 40px;
+    /* Utilidades de Glassmorfismo y Hover */
+    .glass-card {
+      @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg rounded-3xl transition-all duration-300;
     }
-
-    /* Ocultar scrollbar pero permitir scroll */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    .glass-card:hover {
+      @apply bg-white/90 shadow-xl -translate-y-1 border-brand-orange/40;
     }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .text-gradient {
+      @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-slate-500;
     }
-
-    .bento-card {
-      @apply relative overflow-hidden rounded-3xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] flex flex-col justify-center border border-slate-100/80 backdrop-blur-sm;
-    }
-
-    .delay-100 { animation-delay: 100ms; }
-    .delay-200 { animation-delay: 200ms; }
-    .delay-300 { animation-delay: 300ms; }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 antialiased font-sans flex flex-col items-center pt-16 pb-12 px-4 sm:px-6 relative">
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans relative overflow-x-hidden selection:bg-brand-orange selection:text-brand-dark">
 
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-umu/5 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-orange/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-green/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-8 left-1/3 w-96 h-96 bg-brand-orange/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+  </div>
 
-  <header class="w-full max-w-3xl text-center mb-12 animate-fade-in-up">
-    <div class="flex justify-center mb-8">
-      <div class="relative group">
-        <div class="absolute inset-0 bg-umu/20 blur-2xl rounded-full scale-110 group-hover:bg-umu/30 transition-all duration-500"></div>
-        <img src="img/logos/sinf.png" alt="Logo Club de Debate UMU" class="h-28 w-auto sm:h-36 relative z-10 drop-shadow-lg transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://dummyimage.com/150x150/b00020/ffffff.png&text=UMU'">
-      </div>
-    </div>
-    <h1 class="text-4xl sm:text-6xl font-serif font-semibold tracking-tight text-slate-900 mb-5">
-      Club de Debate UMU
-    </h1>
-    <p class="text-base sm:text-lg text-slate-500 max-w-lg mx-auto leading-relaxed">
-      Formamos en argumentación, oratoria y debate. <br class="hidden sm:block">
-      <span class="font-semibold text-umu">Construimos pensamiento crítico.</span>
-    </p>
-  </header>
-
-  <main class="w-full max-w-3xl animate-fade-in-up delay-100 mb-20">
+  <div class="relative z-10 max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
     
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[100px]">
+    <header class="text-center mb-12 animate-fade-in-up">
+      <div class="inline-block p-4 rounded-full bg-white/60 backdrop-blur-md shadow-sm mb-6 border border-white/80">
+        <img src="img/logos/sinf.png" alt="Logo Club de Debate UMU" class="h-24 w-auto drop-shadow-sm transition-transform hover:scale-105 duration-300">
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 text-gradient">
+        Club de Debate UMU
+      </h1>
+    </header>
+
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
       
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=6M9ZpklY8EcyklKb" target="_blank" rel="noopener" class="bento-card col-span-2 md:col-span-4 bg-umu text-white shadow-lg shadow-umu/20 hover:shadow-umu/40 p-6 flex-row items-center justify-between group">
-        <div class="flex items-center gap-4">
-          <span class="text-3xl bg-white/20 p-3 rounded-2xl">📝</span>
-          <div class="text-left">
-            <h2 class="text-xl font-bold tracking-wide">Inscripción Oficial</h2>
-            <p class="text-umu-50 text-sm opacity-90">Únete al club este cuatrimestre</p>
-          </div>
-        </div>
-        <span class="text-2xl transform transition-transform group-hover:translate-x-2">→</span>
-      </a>
-
-      <a href="https://www.instagram.com/clubdedebateum/" target="_blank" rel="noopener" class="bento-card col-span-2 md:col-span-2 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500 text-white shadow-md p-6">
-        <div class="flex items-center gap-3">
-          <span class="text-2xl">📸</span>
-          <span class="font-semibold text-lg">Instagram UMU</span>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/bpmurcia2026/" target="_blank" rel="noopener" class="bento-card col-span-1 md:col-span-1 bg-slate-900 text-white shadow-md p-4 items-center text-center">
-        <span class="text-2xl mb-1">⚔️</span>
-        <span class="font-medium text-sm">IG BP Murcia</span>
-      </a>
-
-      <a href="./BPMurcia2026/" class="bento-card col-span-1 md:col-span-1 bg-white text-slate-800 shadow-sm hover:border-slate-300 p-4 items-center text-center">
-        <span class="text-2xl mb-1">💪</span>
-        <span class="font-medium text-sm">BP Murcia</span>
-      </a>
-
-      <a href="./debatetimer" class="bento-card col-span-1 bg-white text-slate-800 shadow-sm hover:border-slate-300 p-4 items-center text-center">
-        <span class="text-2xl mb-1 text-slate-600">⌛</span>
-        <span class="font-medium text-sm">Timer</span>
-      </a>
-      
-      <a href="./pomodoro" class="bento-card col-span-1 bg-white text-slate-800 shadow-sm hover:border-slate-300 p-4 items-center text-center">
-        <span class="text-2xl mb-1 text-slate-600">🍅</span>
-        <span class="font-medium text-sm">Pomodoro</span>
-      </a>
-
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=6M9ZpklY8EcyklKb" target="_blank" rel="noopener" class="bento-card col-span-2 bg-[#00C4CC] text-white shadow-md p-6 flex-row items-center gap-3">
-        <span class="text-2xl">🌐</span>
-        <span class="font-semibold text-lg">Canva Info</span>
-      </a>
-
-      <a href="./Debate%2027eb439202868056884ac24fc867d4dc" class="bento-card col-span-2 md:col-span-4 bg-white border-2 border-slate-200 text-slate-800 shadow-sm hover:border-slate-800 p-6 flex-row items-center justify-between group">
-        <div class="flex items-center gap-4">
-          <span class="text-2xl text-slate-700">📓</span>
-          <div class="text-left">
-            <h2 class="text-lg font-bold">Mis Apuntes de Debate</h2>
-            <p class="text-slate-500 text-sm">Base de conocimiento y estructura</p>
-          </div>
-        </div>
-        <span class="text-slate-400 transform transition-transform group-hover:translate-x-2">→</span>
-      </a>
-
-      <a href="./acreditaciones" class="bento-card col-span-1 md:col-span-2 bg-slate-50 text-slate-700 shadow-sm border border-slate-200 p-4 items-center text-center">
-        <span class="text-xl mb-1">🎓</span>
-        <span class="font-medium text-sm">Acreditaciones</span>
-      </a>
-      
-      <a href="./autorizaciones" class="bento-card col-span-1 md:col-span-2 bg-slate-50 text-slate-700 shadow-sm border border-slate-200 p-4 items-center text-center">
-        <span class="text-xl mb-1">⚖️</span>
-        <span class="font-medium text-sm">Justificantes</span>
-      </a>
-
-    </div>
-  </main>
-
-  <section class="w-full max-w-4xl animate-fade-in-up delay-200 mb-16">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl font-serif font-semibold text-slate-900">Voces del Club</h2>
-      <div class="w-12 h-1 bg-umu mx-auto mt-4 rounded-full"></div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative flex flex-col justify-between hover:shadow-lg transition-shadow">
-        <p class="text-slate-700 font-serif italic text-lg leading-relaxed mb-6">"El Club de Debate me ayudó a perder el miedo a hablar en público."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-umu/10 flex items-center justify-center text-umu font-bold text-sm">A</div>
+      <a href="https://youtu.be/dQw4w9WgXcQ?si=6M9ZpklY8EcyklKb" target="_blank" rel="noopener" class="md:col-span-2 group relative overflow-hidden rounded-3xl p-8 sm:p-10 shadow-xl transition-transform duration-300 hover:scale-[1.02] border border-white/50">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-orange via-orange-100 to-brand-green opacity-95"></div>
+        <div class="relative z-10 flex flex-col justify-between h-full text-brand-dark">
           <div>
-            <p class="text-sm font-bold text-slate-900">Ana</p>
-            <p class="text-xs text-slate-500 uppercase tracking-wider">Derecho</p>
+            <h2 class="text-3xl font-extrabold mb-2 group-hover:text-slate-700 transition-colors">Da el paso definitivo.</h2>
+            <p class="text-slate-700 text-lg max-w-md font-medium">Rellena el formulario de inscripción y transforma tu forma de entender el mundo.</p>
           </div>
+          <div class="mt-8 flex items-center text-brand-dark font-bold text-lg bg-white/40 w-fit px-6 py-3 rounded-full backdrop-blur-md shadow-sm group-hover:bg-white/60 transition-all border border-white/50">
+            Inscribirse ahora <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="flex flex-col gap-6 md:col-span-1">
+        <a href="https://www.instagram.com/clubdedebateum/" target="_blank" rel="noopener" class="glass-card flex items-center p-6 group">
+          <div class="text-4xl mr-4 group-hover:scale-110 transition-transform">📸</div>
+          <div>
+            <h3 class="font-bold text-slate-800">Instagram Oficial</h3>
+            <p class="text-sm text-slate-500">Nuestro día a día</p>
+          </div>
+        </a>
+        <a href="https://youtu.be/dQw4w9WgXcQ?si=6M9ZpklY8EcyklKb" target="_blank" rel="noopener" class="glass-card flex items-center p-6 group">
+          <div class="text-4xl mr-4 group-hover:scale-110 transition-transform">🌐</div>
+          <div>
+            <h3 class="font-bold text-slate-800">Dossier Informativo</h3>
+            <p class="text-sm text-slate-500">Presentación en Canva</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="glass-card md:col-span-2 p-8 border-t-4 border-t-brand-orange">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-brand-orange"></span> Circuito Competitivo (BP)
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="https://debateumu.github.io/BPMurcia/2026/" class="p-4 rounded-2xl bg-white/50 hover:bg-brand-orange/20 transition-colors border border-slate-200 flex items-center justify-between group">
+            <span class="font-semibold text-slate-700">Web BP Murcia 2026</span>
+            <span class="text-xl group-hover:translate-x-1 transition-transform">💪</span>
+          </a>
+          <a href="https://www.instagram.com/bpmurcia2026/" class="p-4 rounded-2xl bg-white/50 hover:bg-brand-orange/20 transition-colors border border-slate-200 flex items-center justify-between group">
+            <span class="font-semibold text-slate-700">Instagram del Torneo</span>
+            <span class="text-xl group-hover:translate-x-1 transition-transform">⚔️</span>
+          </a>
+          <a href="./Debate%2027eb439202868056884ac24fc867d4dc" class="p-4 rounded-2xl bg-white/50 hover:bg-brand-green/30 transition-colors border border-slate-200 flex items-center justify-between group">
+            <span class="font-semibold text-slate-700">Apuntes de JFK</span>
+            <span class="text-xl group-hover:translate-x-1 transition-transform">📓</span>
+          </a>
         </div>
       </div>
 
-      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative flex flex-col justify-between hover:shadow-lg transition-shadow">
-        <p class="text-slate-700 font-serif italic text-lg leading-relaxed mb-6">"He hecho amistades increíbles y me ha permitido viajar representando a la UMU por España."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white font-bold text-sm">J</div>
-          <div>
-            <p class="text-sm font-bold text-slate-900">José Fernando</p>
-            <p class="text-xs text-slate-500 uppercase tracking-wider">Ing. Informática</p>
-          </div>
-        </div>
+      <div class="glass-card md:col-span-1 p-8 border-t-4 border-t-brand-green">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-brand-green"></span> Herramientas
+        </h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="./debatetimer" class="flex items-center text-slate-600 hover:text-slate-900 transition-colors py-2 font-medium group">
+              <span class="mr-3 opacity-70 group-hover:scale-110 transition-transform">⌛</span> Debate Timer
+            </a>
+          </li>
+          <li>
+            <a href="./pomodoro" class="flex items-center text-slate-600 hover:text-slate-900 transition-colors py-2 font-medium group">
+              <span class="mr-3 opacity-70 group-hover:scale-110 transition-transform">🍅</span> Pomodoro
+            </a>
+          </li>
+          <li>
+            <a href="./acreditaciones" class="flex items-center text-slate-600 hover:text-slate-900 transition-colors py-2 font-medium group">
+              <span class="mr-3 opacity-70 group-hover:scale-110 transition-transform">🎓</span> Acreditaciones
+            </a>
+          </li>
+          <li>
+            <a href="./autorizaciones" class="flex items-center text-slate-600 hover:text-slate-900 transition-colors py-2 font-medium group">
+              <span class="mr-3 opacity-70 group-hover:scale-110 transition-transform">⚖️</span> Justificantes
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <div class="bg-umu text-white p-8 rounded-3xl shadow-md relative md:col-span-3 lg:col-span-1 flex flex-col justify-between hover:shadow-lg transition-shadow">
-        <p class="font-serif italic text-base leading-relaxed mb-6 opacity-95">"Ha sido un antes y después en mi vida, un nuevo nacimiento racional, lleno de colores y sabores nuevos. Sentía ríos de felicidad recorrer mis brazos... la ilusión provocada al subirme a la tarima y expresar mis ideas."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">R</div>
-          <div>
-            <p class="text-sm font-bold">Rodío</p>
-            <p class="text-xs text-umu-50 uppercase tracking-wider">Derecho & ADE</p>
+    </main>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-center mb-10 text-slate-800">El impacto en nuestras voces</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        
+        <div class="glass-card p-6 relative">
+          <div class="text-5xl text-brand-green absolute top-2 right-4 font-serif opacity-40">"</div>
+          <p class="text-slate-600 italic relative z-10 font-medium">El Club de Debate me ayudó a perder el miedo a hablar en público.</p>
+          <div class="mt-4 pt-4 border-t border-slate-200/60">
+            <p class="font-bold text-slate-800 text-sm">Ana</p>
+            <p class="text-xs text-slate-500">Derecho</p>
           </div>
         </div>
+
+        <div class="glass-card p-6 relative">
+          <div class="text-5xl text-brand-orange absolute top-2 right-4 font-serif opacity-40">"</div>
+          <p class="text-slate-600 italic relative z-10 font-medium">He hecho amistades increíbles y me ha permitido viajar representando a la UMU por España.</p>
+          <div class="mt-4 pt-4 border-t border-slate-200/60">
+            <p class="font-bold text-slate-800 text-sm">José Fernando</p>
+            <p class="text-xs text-slate-500">Ingeniería Informática</p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 md:col-span-3 lg:col-span-1 relative">
+          <div class="text-5xl text-brand-green absolute top-2 right-4 font-serif opacity-40">"</div>
+          <p class="text-slate-600 italic text-sm relative z-10 leading-relaxed font-medium">Ha sido un antes y un después en mi vida, un nuevo nacimiento, un nacimiento racional, lleno de colores y sabores nuevos, más potente que la mejor droga de diseño... sentí ríos de felicidad recorrer mis brazos. Pensé que me estaba dando un 'jari', pero los debatientes aseguraron mi integridad física. Todo era el éxtasis de subirme a la tarima y expresar mis ideas.</p>
+          <div class="mt-4 pt-4 border-t border-slate-200/60">
+            <p class="font-bold text-slate-800 text-sm">Rocío</p>
+            <p class="text-xs text-slate-500">Derecho & ADE</p>
+          </div>
+        </div>
+
       </div>
+    </section>
 
-    </div>
-  </section>
+    <footer class="text-center py-8 border-t border-slate-200/60">
+      <p class="text-sm text-slate-500 font-medium">
+        © <span id="year"></span> Club de Debate UMU. <br class="sm:hidden">
+      
+      </p>
+    </footer>
 
-  <footer class="w-full text-center animate-fade-in-up delay-300 border-t border-slate-200 pt-8 mt-4">
-    <p class="text-sm text-slate-500 font-medium">
-      © <span id="year"></span> Club de Debate UMU
-    </p>
-    <p class="text-xs text-slate-400 mt-2 tracking-wide uppercase">Cuestiona · Argumenta · Vence</p>
-  </footer>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
