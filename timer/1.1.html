@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15' Prep Time | BP Timer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { brand: { orange: '#FFD8B1', green: '#C1E1C1', dark: '#1e293b', light: '#f8fafc' } }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { user-select: none; -webkit-tap-highlight-color: transparent; }
+        .glass-panel { @apply bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-3xl transition-all duration-300 dark:bg-slate-800/80 dark:border-slate-700/60; }
+        .text-gradient { @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-500 dark:from-white dark:to-slate-400; }
+        
+        /* Progress Circle */
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.2s linear;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Toggle */
+        .toggle-track { @apply relative inline-flex h-8 w-16 items-center rounded-full bg-slate-300 dark:bg-slate-600 transition-colors cursor-pointer; }
+        .toggle-thumb { @apply inline-block h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ease-in-out; }
+        input:checked + .toggle-track { @apply bg-brand-dark dark:bg-brand-orange; }
+        input:checked + .toggle-track .toggle-thumb { transform: translateX(34px); }
+        
+        /* Timeline Stepper */
+        .stepper-item { @apply flex-1 relative text-center text-xs font-semibold text-slate-400 transition-colors; }
+        .stepper-item::before { content: ''; @apply absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-700 -z-10 -translate-y-1/2; }
+        .stepper-item:first-child::before { width: 50%; left: 50%; }
+        .stepper-item:last-child::before { width: 50%; right: 50%; left: auto; }
+        .stepper-item.active { @apply text-brand-dark dark:text-brand-orange; }
+        .stepper-dot { @apply w-4 h-4 mx-auto bg-slate-200 dark:bg-slate-700 rounded-full border-2 border-white dark:border-slate-900 transition-colors shadow-sm; }
+        .stepper-item.active .stepper-dot { @apply bg-brand-dark dark:bg-brand-orange scale-125; }
+        .stepper-item.past .stepper-dot { @apply bg-brand-green border-brand-green; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
+
+    <header class="flex justify-between items-center p-5 md:px-10 glass-panel !rounded-none !border-x-0 !border-t-0 z-20 sticky top-0">
+        <div class="font-serif italic font-bold text-xl md:text-2xl tracking-tight text-gradient">Prep Time 15'</div>
+        
+        <div class="flex items-center gap-6">
+            <label class="flex items-center gap-3 cursor-pointer group">
+                <span id="labelAltas" class="text-sm font-bold uppercase tracking-wider text-brand-dark dark:text-white transition-colors">Altas</span>
+                <div class="relative">
+                    <input type="checkbox" id="modeToggle" class="sr-only" onchange="switchMode()">
+                    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                </div>
+                <span id="labelBajas" class="text-sm font-bold uppercase tracking-wider text-slate-400 transition-colors">Bajas</span>
+            </label>
+            <button onclick="document.documentElement.classList.toggle('dark')" class="text-2xl p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <i class="ph-bold ph-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col lg:flex-row items-center justify-center p-4 md:p-8 gap-8 max-w-7xl mx-auto w-full">
+        
+        <div class="flex-shrink-0 relative w-[320px] h-[320px] md:w-[400px] md:h-[400px] flex items-center justify-center">
+            <svg class="absolute inset-0 w-full h-full drop-shadow-lg" viewBox="0 0 100 100">
+                <circle class="text-slate-200 dark:text-slate-700 stroke-current" stroke-width="4" cx="50" cy="50" r="46" fill="transparent"></circle>
+                <circle id="progressRing" class="text-brand-dark dark:text-brand-orange stroke-current progress-ring__circle" stroke-width="4" stroke-linecap="round" cx="50" cy="50" r="46" fill="transparent"></circle>
+            </svg>
+            
+            <div class="relative z-10 flex flex-col items-center justify-center text-center mt-4">
+                <div id="nextPhaseHint" class="text-xs uppercase tracking-widest font-semibold text-slate-500 mb-2 h-4"></div>
+                <h1 id="timeDisplay" class="text-[5.5rem] md:text-[7rem] leading-none font-extrabold tracking-tighter text-gradient tabular-nums">
+                    15:00
+                </h1>
+                
+                <div class="flex gap-4 mt-6">
+                    <button id="startStopBtn" onclick="toggleTimer()" class="w-16 h-16 rounded-full bg-brand-green hover:bg-[#a8d3a8] text-brand-dark flex items-center justify-center text-3xl shadow-lg active:scale-95 transition-all">
+                        <i class="ph-fill ph-play" id="playIcon"></i>
+                    </button>
+                    <button onclick="resetTimer()" class="w-16 h-16 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-2xl shadow-sm active:scale-95 transition-all">
+                        <i class="ph-bold ph-arrow-counter-clockwise"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 w-full max-w-2xl flex flex-col gap-6">
+            
+            <div id="stepperContainer" class="flex justify-between items-end w-full px-2 h-12">
+                </div>
+
+            <div class="glass-panel p-6 md:p-10 w-full min-h-[350px] flex flex-col">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="px-3 py-1 bg-brand-dark dark:bg-brand-orange text-white dark:text-brand-dark text-xs font-bold rounded-full uppercase tracking-widest shadow-sm">Fase Actual</div>
+                    <span id="phaseTimeLimit" class="text-sm font-mono font-semibold text-slate-500"></span>
+                </div>
+                
+                <h2 id="phaseTitle" class="text-3xl md:text-4xl font-serif italic font-bold text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-slate-700 pb-4">
+                    Preparación
+                </h2>
+                
+                <ul id="taskList" class="space-y-4 text-slate-700 dark:text-slate-300 text-base md:text-lg flex-grow">
+                    </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- DATA ESTRUCTURADA ---
+        const PLAN_ALTAS = [
+            { 
+                start: 15*60, end: 12*60, name: "Análisis Previo", timeStr: "3 mins",
+                tasks: [
+                    "Trabajo individual.",
+                    "¿Qué tipo de moción es y qué requiere?",
+                    "Analizar cómo se gana o con qué 'Bala de Plata' se gana.",
+                    "Decidir la métrica.",
+                    "Analizar Actores y sus Intereses.",
+                    "Hacer lluvia de ideas de argumentos."
+                ]
+            },
+            { 
+                start: 12*60, end: 10*60, name: "Ser Estratega", timeStr: "2 mins",
+                tasks: [
+                    "Puesta en común del análisis previo.",
+                    "Plantear estrategia a seguir.",
+                    "Cuál será el encuadre a hacer.",
+                    "Qué argumentos se usarán."
+                ]
+            },
+            { 
+                start: 10*60, end: 4*60, name: "Argumentar", timeStr: "6 mins",
+                tasks: [
+                    "Construir argumentos.",
+                    "Profundidad: No dejes escenarios sin tratar (3 ¿por qué? o implicaciones).",
+                    "Plausibilidad: Demostrar que pasará con certeza.",
+                    "Impacto: Demostrar beneficio real y claro frente a la contraparte."
+                ]
+            },
+            { 
+                start: 4*60, end: 1*60, name: "Pulir Caso", timeStr: "3 mins",
+                tasks: [
+                    "Buscar huecos lógicos.",
+                    "Comprobar que hemos tratado todos los casos posibles.",
+                    "Blindar el caso adelantándote al contrario."
+                ]
+            },
+            { 
+                start: 1*60, end: 0, name: "Organizar el Caso", timeStr: "1 min",
+                tasks: [
+                    "Ordenar los argumentos y el encuadre.",
+                    "Estructurar de la mejor manera posible para el discurso."
+                ]
+            }
+        ];
+
+        const PLAN_BAJAS = [
+            { 
+                start: 15*60, end: 10*60, name: "Análisis Previo", timeStr: "5 mins",
+                tasks: [
+                    "Trabajo individual.",
+                    "¿Qué tipo de moción es, Bala de Plata y métrica?",
+                    "Analizar Actores y sus Intereses.",
+                    "Hacer lluvia de ideas de argumentos.",
+                    "Analizar temas menos intuitivos para crear extensión no derivativa."
+                ]
+            },
+            { 
+                start: 10*60, end: 5*60, name: "Argumentar", timeStr: "5 mins",
+                tasks: [
+                    "Puesta en común del análisis previo.",
+                    "Construir y trabajar a fondo los argumentos (Crucial en Bajas).",
+                    "Profundidad: Implicaciones lógicas.",
+                    "Plausibilidad y certeza.",
+                    "Impacto: Beneficio real y claro."
+                ]
+            },
+            { 
+                start: 5*60, end: 0, name: "Ser El Oráculo", timeStr: "5 mins",
+                tasks: [
+                    "Predecir el debate (Cámaras Altas).",
+                    "Construir en relación a dicha predicción.",
+                    "Plantear estrategia, encuadre y argumentos."
+                ]
+            }
+        ];
+
+        // --- SISTEMA DE AUDIO NATIVO (Web Audio API) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playNativeBell(times) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            let playCount = 0;
+            function beep() {
+                if (playCount >= times) return;
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime); // Tono A5
+                osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+                
+                gainNode.gain.setValueAtTime(0.8, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+                
+                playCount++;
+                setTimeout(beep, 600);
+            }
+            beep();
+        }
+
+        // --- WAKE LOCK API (Previene que la pantalla se apague) ---
+        let wakeLock = null;
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                }
+            } catch (err) { console.warn('Wake Lock error:', err); }
+        }
+        function releaseWakeLock() {
+            if (wakeLock !== null) {
+                wakeLock.release().then(() => wakeLock = null);
+            }
+        }
+
+        // --- ESTADO Y LÓGICA ---
+        const TOTAL_SECONDS = 15 * 60;
+        let isRunning = false;
+        let currentMode = 'altas';
+        let timeRemaining = TOTAL_SECONDS;
+        let currentPhaseIndex = -1;
+        let animationFrameId = null;
+        let lastTimestamp = 0;
+        
+        // Elementos DOM
+        const timeDisplay = document.getElementById('timeDisplay');
+        const phaseTitle = document.getElementById('phaseTitle');
+        const taskList = document.getElementById('taskList');
+        const phaseTimeLimit = document.getElementById('phaseTimeLimit');
+        const progressRing = document.getElementById('progressRing');
+        const stepperContainer = document.getElementById('stepperContainer');
+        const playIcon = document.getElementById('playIcon');
+        const nextPhaseHint = document.getElementById('nextPhaseHint');
+        const modeToggle = document.getElementById('modeToggle');
+        
+        // Configurar SVG Ring
+        const radius = progressRing.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressRing.style.strokeDashoffset = 0;
+
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100) * circumference;
+            progressRing.style.strokeDashoffset = offset;
+        }
+
+        function getActivePlan() { return currentMode === 'altas' ? PLAN_ALTAS : PLAN_BAJAS; }
+
+        function renderStepper() {
+            const plan = getActivePlan();
+            stepperContainer.innerHTML = plan.map((phase, index) => `
+                <div class="stepper-item" id="step-${index}">
+                    <div class="mb-1 hidden md:block">${phase.name}</div>
+                    <div class="stepper-dot"></div>
+                </div>
+            `).join('');
+        }
+
+        function updateUI() {
+            // Tiempo Texto
+            const m = Math.floor(timeRemaining / 60);
+            const s = Math.floor(timeRemaining % 60);
+            timeDisplay.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            
+            // Anillo
+            const percent = (timeRemaining / TOTAL_SECONDS) * 100;
+            setProgress(percent);
+
+            // Fase
+            const plan = getActivePlan();
+            let newPhaseIndex = plan.findIndex(p => timeRemaining <= p.start && timeRemaining > p.end);
+            if (timeRemaining === 0) newPhaseIndex = plan.length - 1;
+
+            if (newPhaseIndex !== -1 && newPhaseIndex !== currentPhaseIndex) {
+                if (currentPhaseIndex !== -1 && timeRemaining > 0) playNativeBell(1);
+                
+                currentPhaseIndex = newPhaseIndex;
+                const phase = plan[currentPhaseIndex];
+                
+                phaseTitle.innerText = phase.name;
+                phaseTimeLimit.innerText = phase.timeStr;
+                
+                taskList.innerHTML = phase.tasks.map(t => `
+                    <li class="flex items-start gap-3">
+                        <i class="ph-bold ph-caret-right text-brand-orange mt-1"></i>
+                        <span>${t}</span>
+                    </li>
+                `).join('');
+
+                // Siguiente fase hint
+                if (currentPhaseIndex < plan.length - 1) {
+                    nextPhaseHint.innerText = `Siguiente: ${plan[currentPhaseIndex + 1].name}`;
+                } else {
+                    nextPhaseHint.innerText = "Última fase";
+                }
+
+                // Actualizar Stepper
+                plan.forEach((_, idx) => {
+                    const stepEl = document.getElementById(`step-${idx}`);
+                    if (!stepEl) return;
+                    stepEl.classList.remove('active', 'past');
+                    if (idx < currentPhaseIndex) stepEl.classList.add('past');
+                    if (idx === currentPhaseIndex) stepEl.classList.add('active');
+                });
+            }
+        }
+
+        function step(timestamp) {
+            if (!isRunning) return;
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            
+            const delta = (timestamp - lastTimestamp) / 1000;
+            lastTimestamp = timestamp;
+            
+            timeRemaining -= delta;
+            
+            if (timeRemaining <= 0) {
+                timeRemaining = 0;
+                isRunning = false;
+                updateUI();
+                playNativeBell(5);
+                playIcon.classList.replace('ph-pause', 'ph-stop');
+                releaseWakeLock();
+                return;
+            }
+            
+            updateUI();
+            animationFrameId = requestAnimationFrame(step);
+        }
+
+        function toggleTimer() {
+            if (audioCtx.state === 'suspended') audioCtx.resume(); // Necesario para iOS/Chrome policies
+            
+            if (isRunning) {
+                isRunning = false;
+                cancelAnimationFrame(animationFrameId);
+                lastTimestamp = 0;
+                playIcon.classList.replace('ph-pause', 'ph-play');
+                releaseWakeLock();
+            } else {
+                if (timeRemaining <= 0) return;
+                isRunning = true;
+                requestWakeLock();
+                playIcon.classList.replace('ph-play', 'ph-pause');
+                animationFrameId = requestAnimationFrame(step);
+            }
+        }
+
+        function resetTimer() {
+            isRunning = false;
+            cancelAnimationFrame(animationFrameId);
+            lastTimestamp = 0;
+            timeRemaining = TOTAL_SECONDS;
+            currentPhaseIndex = -1;
+            
+            playIcon.classList.remove('ph-pause', 'ph-stop');
+            playIcon.classList.add('ph-play');
+            
+            releaseWakeLock();
+            renderStepper();
+            updateUI();
+        }
+
+        function switchMode() {
+            currentMode = modeToggle.checked ? 'bajas' : 'altas';
+            document.getElementById('labelAltas').classList.toggle('text-brand-dark', currentMode === 'altas');
+            document.getElementById('labelAltas').classList.toggle('dark:text-white', currentMode === 'altas');
+            document.getElementById('labelAltas').classList.toggle('text-slate-400', currentMode !== 'altas');
+            
+            document.getElementById('labelBajas').classList.toggle('text-brand-dark', currentMode === 'bajas');
+            document.getElementById('labelBajas').classList.toggle('dark:text-white', currentMode === 'bajas');
+            document.getElementById('labelBajas').classList.toggle('text-slate-400', currentMode !== 'bajas');
+            
+            resetTimer();
+        }
+
+        // Init
+        renderStepper();
+        updateUI();
+    </script>
+</body>
+</html>
