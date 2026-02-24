@@ -4,7 +4,7 @@ Estas son todas las pags relacionadas con mi proyecto para el club
 
 1.  [**Link de la pag principal**](https://josefervg.github.io/Debate_UMU/)
 
-2.  [**Link del Timer**](https://josefervg.github.io/Debate_UMU/debatetimer)
+2.  [**Link del Timer**](https://josefervg.github.io/Debate_UMU/timer)
 
 3.  [**Link de la Herramienta para hacer Acreditaciones**](https://josefervg.github.io/Debate_UMU/acreditaciones)
 
