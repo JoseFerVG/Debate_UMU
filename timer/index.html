@@ -29,7 +29,7 @@
                             green: '#C1E1C1',
                             dark: '#1e293b',
                             light: '#f8fafc',
-                            alert: '#ef4444' // Rojo para alarmas
+                            alert: '#ef4444'
                         }
                     },
                     animation: {
@@ -55,7 +55,6 @@
             user-select: none;
         }
         
-        /* Glassmorfismo de la web original */
         .glass-card {
             @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg rounded-3xl transition-all duration-300;
         }
@@ -69,11 +68,10 @@
             @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-slate-500;
         }
 
-        /* Toggles */
         .toggle-checkbox { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
         .toggle-track { position: relative; display: inline-block; width: 50px; height: 28px; background-color: #cbd5e1; border-radius: 9999px; transition: all 0.3s ease; }
         .toggle-thumb { position: absolute; top: 2px; left: 2px; height: 24px; width: 24px; background-color: white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .toggle-checkbox:checked + .toggle-track { background-color: #C1E1C1; } /* Verde pastel activado */
+        .toggle-checkbox:checked + .toggle-track { background-color: #C1E1C1; }
         .toggle-checkbox:checked + .toggle-track .toggle-thumb { transform: translateX(22px); }
         
         .dark .toggle-track { background-color: #475569; }
@@ -83,7 +81,6 @@
 
         .digit-box { font-variant-numeric: tabular-nums; }
         
-        /* Teclado numérico */
         .btn-numpad {
             @apply rounded-2xl bg-white/50 border border-slate-200 shadow-sm hover:bg-brand-orange/30 hover:shadow-md transition-all duration-200 text-2xl font-semibold text-slate-700;
         }
@@ -121,9 +118,27 @@
 
     <main class="flex-grow flex flex-col items-center justify-center p-4 z-10 relative w-full max-w-5xl mx-auto">
         
-        <div class="w-full text-center mb-8 relative group flex justify-center">
-            <div class="glass-card p-10 md:p-16 relative overflow-hidden min-w-[300px] md:min-w-[600px] flex justify-center items-center flex-col border-t-4 border-t-brand-orange">
+        <div class="w-full text-center mb-8 relative group flex justify-center mt-16 sm:mt-0">
+            <div class="glass-card p-10 md:p-16 pt-20 relative overflow-hidden min-w-[300px] md:min-w-[600px] flex justify-center items-center flex-col border-t-4 border-t-brand-orange transition-all duration-300">
                 
+                <div id="prepTimerContainer" class="hidden absolute top-6 left-1/2 -translate-x-1/2 z-50 cursor-pointer group transition-all duration-500 ease-in-out hover:scale-105" onclick="togglePrepTimer()" title="Clic para iniciar / Clic para reiniciar">
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-600/50 shadow-sm hover:shadow-md rounded-full px-5 py-2 flex items-center gap-3 transition-colors duration-300">
+                        
+                        <div class="relative w-5 h-5 flex items-center justify-center">
+                            <svg class="w-5 h-5 transform -rotate-90 absolute inset-0">
+                                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" class="text-slate-300 dark:text-slate-600" />
+                                <circle id="prepProgress" cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="50.26" stroke-dashoffset="0" class="text-brand-orange transition-all duration-1000 ease-linear" stroke-linecap="round" />
+                            </svg>
+                            <i id="prepIcon" class="ph-fill ph-play text-slate-400 group-hover:text-brand-orange text-[10px] transition-colors z-10"></i>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-[11px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-brand-dark dark:group-hover:text-white transition-colors duration-200">Prep</span>
+                            <span id="prepDisplay" class="font-mono text-xl font-extrabold text-slate-700 dark:text-slate-200 tracking-tight transition-colors duration-200">01:00</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="modeLabel" class="hidden absolute top-4 right-6 font-mono text-xs text-slate-400 tracking-widest uppercase font-bold">CRONÓMETRO</div>
 
                 <h1 id="display" class="text-[15vw] md:text-[11rem] leading-none tracking-tight font-extrabold text-gradient digit-box select-none relative z-10">
@@ -155,12 +170,12 @@
         </div>
 
         <div id="timerControls" class="w-full max-w-md hidden grid grid-cols-1 md:grid-cols-2 gap-4">
-            <button id="startStopBtn" onclick="toggleStartStop()" class="glass-card bg-brand-green/80 hover:bg-brand-green text-brand-dark font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-md">
+            <button id="startStopBtn" onclick="toggleStartStop()" class="glass-card bg-brand-green/80 hover:bg-brand-green text-brand-dark font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-md transition-all duration-300">
                 <i class="ph-fill ph-play text-2xl" id="playIcon"></i>
                 <span id="btnText">Empezar</span>
             </button>
 
-            <button onclick="resetTimer()" class="glass-card bg-white/50 hover:bg-white/80 text-slate-700 dark:bg-slate-800/50 dark:text-slate-200 font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-sm">
+            <button onclick="resetTimer()" class="glass-card bg-white/50 hover:bg-white/80 text-slate-700 dark:bg-slate-800/50 dark:text-slate-200 font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-sm transition-all duration-300">
                 <i class="ph-bold ph-arrow-counter-clockwise text-2xl"></i>
                 <span>Reset</span>
             </button>
@@ -283,6 +298,13 @@
         const bpBadge = document.getElementById('bpBadge');
         const courtesyContainer = document.getElementById('courtesyContainer');
         
+        // Prep Timer Elements
+        const prepTimerContainer = document.getElementById('prepTimerContainer');
+        const prepDisplay = document.getElementById('prepDisplay');
+        const prepProgress = document.getElementById('prepProgress');
+        const prepIcon = document.getElementById('prepIcon');
+        const ringCircumference = 50.26; // 2 * pi * r (r=8)
+        
         // Toggles
         const optionsModal = document.getElementById('optionsModal');
         const darkModeToggle = document.getElementById('darkModeToggle');
@@ -303,6 +325,11 @@
         let inputBuffer = "";
         let totalSeconds = 0;
         let initialSeconds = 0; 
+
+        // Variables Mini Timer de Preparación
+        let prepInterval;
+        let isPrepRunning = false;
+        let prepTotalSeconds = 60;
         
         // --- MENU & SETTINGS ---
         document.getElementById('menuToggleBtn').addEventListener('click', () => optionsModal.classList.remove('hidden'));
@@ -314,7 +341,6 @@
 
         stopwatchToggle.addEventListener('change', (e) => {
             if (isBPMode && e.target.checked) {
-                // Prevenir Cronómetro si BP está activo
                 e.target.checked = false;
                 alert("Desactiva el Modo BP para usar el Cronómetro libre.");
                 return;
@@ -345,25 +371,37 @@
             fullReset();
 
             if (isBPMode) {
-                // Forzar ajustes BP
                 stopwatchToggle.checked = false;
                 isStopwatchMode = false;
                 courtesyToggle.checked = true;
                 isCourtesyMode = true;
-                courtesyContainer.classList.add('opacity-50', 'pointer-events-none'); // Bloquear toggle cortesía
+                courtesyContainer.classList.add('opacity-50', 'pointer-events-none');
                 
                 bpBadge.classList.remove('hidden');
                 setupPanel.classList.add('hidden');
                 changeTimeBtn.classList.add('hidden');
                 timerControls.classList.remove('hidden');
                 
-                // Configurar 7 minutos
+                // Muestra Timer de Prep asegurándose de limpiar clases de ocultación
+                prepTimerContainer.classList.remove('hidden', 'opacity-0', '-translate-y-4', 'pointer-events-none'); 
+                
                 totalSeconds = 7 * 60;
                 initialSeconds = totalSeconds;
                 updateDisplay(totalSeconds);
             } else {
                 bpBadge.classList.add('hidden');
                 courtesyContainer.classList.remove('opacity-50', 'pointer-events-none');
+                prepTimerContainer.classList.add('hidden'); // Oculta Timer de Prep
+                
+                // Reiniciar el prep timer si estaba corriendo al quitar BP mode
+                if(isPrepRunning) {
+                    clearInterval(prepInterval);
+                    isPrepRunning = false;
+                    prepTotalSeconds = 60;
+                    prepDisplay.innerText = "01:00";
+                    prepDisplay.classList.remove('text-brand-alert', 'animate-pulse');
+                    prepProgress.style.strokeDashoffset = 0;
+                }
                 
                 setupPanel.classList.remove('hidden');
                 timerControls.classList.add('hidden');
@@ -384,7 +422,6 @@
             }
         }
 
-        // Función para reproducir el timbre X veces
         function playBell(times) {
             if (isMuted || times <= 0) return;
             
@@ -393,8 +430,8 @@
             
             if (times > 1) {
                 alarmAudio.onended = function() {
-                    alarmAudio.onended = null; // Quitar listener para evitar loops raros
-                    setTimeout(() => playBell(times - 1), 200); // Pausa breve entre toques
+                    alarmAudio.onended = null;
+                    setTimeout(() => playBell(times - 1), 200);
                 };
             }
         }
@@ -422,7 +459,7 @@
             updateDisplayFromBuffer();
         }
 
-        // --- LOGIC: TIMER ---
+        // --- LOGIC: TIMER PRINCIPAL ---
         function setTimer() {
             if (inputBuffer.length === 0) return;
             let padded = inputBuffer.padStart(6, '0');
@@ -441,7 +478,7 @@
         }
 
         function changeTime() {
-            if(isBPMode) return; // En modo BP no se puede cambiar
+            if(isBPMode) return;
             stopInternalTimer();
             cleanupAlarmState();
             timerControls.classList.add('hidden');
@@ -469,6 +506,11 @@
                 // START
                 isRunning = true;
                 
+                // Ocultar el Prep Timer con una transición limpia y deslizada
+                if (isBPMode) {
+                    prepTimerContainer.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+                }
+                
                 btnText.innerText = "Pausar";
                 playIcon.classList.replace('ph-play', 'ph-pause');
                 startStopBtn.classList.replace('bg-brand-green/80', 'bg-brand-orange');
@@ -479,18 +521,16 @@
                         totalSeconds++;
                         updateDisplay(totalSeconds);
                     } else {
-                        // Avisos BP Mode (Comprueba segundos restantes)
                         if (isBPMode) {
-                            if (totalSeconds === 361) playBell(1); // Entrando al minuto 1 (quedan 6m)
-                            if (totalSeconds === 61) playBell(1);  // Entrando al minuto 6 (queda 1m)
-                            if (totalSeconds === 1) playBell(2);   // Entrando al minuto 7 (0m)
+                            if (totalSeconds === 361) playBell(1); // Min 1
+                            if (totalSeconds === 61) playBell(1);  // Min 6
+                            if (totalSeconds === 1) playBell(2);   // Min 7
                         }
 
                         if (totalSeconds > 0) {
                             totalSeconds--;
                             updateDisplay(totalSeconds);
                         } else {
-                            // FIN DE TIEMPO
                             clearInterval(timerInterval);
                             triggerAlarmLogic();
                         }
@@ -507,6 +547,21 @@
             playIcon.classList.replace('ph-pause', 'ph-play');
             startStopBtn.classList.remove('bg-brand-orange', 'text-white');
             startStopBtn.classList.add('bg-brand-green/80', 'text-brand-dark');
+
+            // Mostrar el Prep Timer al reiniciar y resetearlo a 01:00
+            if (isBPMode) {
+                prepTimerContainer.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+                if(isPrepRunning) {
+                    clearInterval(prepInterval);
+                    isPrepRunning = false;
+                }
+                prepTotalSeconds = 60;
+                prepDisplay.innerText = "01:00";
+                prepDisplay.classList.remove('text-brand-alert', 'animate-pulse');
+                prepProgress.classList.replace('text-brand-alert', 'text-brand-orange');
+                prepProgress.style.strokeDashoffset = 0;
+                prepIcon.classList.replace('ph-pause', 'ph-play');
+            }
 
             if (isStopwatchMode) {
                 totalSeconds = 0;
@@ -561,7 +616,6 @@
                     
                     if (cTime <= 0) {
                         clearInterval(courtesyInterval);
-                        // Suena constante tras los 15s
                         if (!isMuted) {
                             alarmAudio.loop = true;
                             alarmAudio.play().catch(e => console.log(e));
@@ -569,13 +623,71 @@
                     }
                 }, 1000);
             } else {
-                // Si no hay cortesía, suena directo
                 if (!isMuted) {
                     alarmAudio.loop = true;
                     alarmAudio.play().catch(e => console.log(e));
                 }
             }
         }
+
+        // --- LÓGICA: MINI TIMER PREPARACIÓN (CÁPSULA) ---
+        function togglePrepTimer() {
+            if (isPrepRunning) {
+                // Detener y resetear
+                clearInterval(prepInterval);
+                isPrepRunning = false;
+                prepTotalSeconds = 60;
+                prepDisplay.innerText = "01:00";
+                prepDisplay.classList.remove('text-brand-alert', 'animate-pulse');
+                prepProgress.classList.replace('text-brand-alert', 'text-brand-orange');
+                prepProgress.style.strokeDashoffset = 0;
+                prepIcon.classList.replace('ph-pause', 'ph-play');
+            } else {
+                // Iniciar
+                isPrepRunning = true;
+                prepDisplay.classList.remove('text-brand-alert', 'animate-pulse');
+                prepProgress.classList.replace('text-brand-alert', 'text-brand-orange');
+                prepIcon.classList.replace('ph-play', 'ph-pause');
+                
+                prepInterval = setInterval(() => {
+                    prepTotalSeconds--;
+                    let m = Math.floor(prepTotalSeconds / 60);
+                    let s = prepTotalSeconds % 60;
+                    prepDisplay.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                    
+                    // Lógica del anillo SVG (se vacía hacia atrás)
+                    let offset = ringCircumference - (prepTotalSeconds / 60) * ringCircumference;
+                    prepProgress.style.strokeDashoffset = offset;
+                    
+                    if (prepTotalSeconds <= 10) {
+                        prepDisplay.classList.add('text-brand-alert');
+                        prepProgress.classList.replace('text-brand-orange', 'text-brand-alert');
+                    }
+                    
+                    if (prepTotalSeconds <= 0) {
+                        clearInterval(prepInterval);
+                        isPrepRunning = false;
+                        prepDisplay.classList.add('animate-pulse');
+                        prepIcon.classList.replace('ph-pause', 'ph-play');
+                        playBell(1); 
+                    }
+                }, 1000);
+            }
+        }
+
+        // --- LÓGICA: ATAJOS DE TECLADO ---
+        document.addEventListener('keydown', (e) => {
+            const activeTag = document.activeElement.tagName;
+            
+            // Si la barra espaciadora es pulsada y no estamos dentro de un input
+            if (e.code === 'Space' && activeTag !== 'INPUT' && activeTag !== 'BUTTON') {
+                if (!timerControls.classList.contains('hidden') && optionsModal.classList.contains('hidden')) {
+                    e.preventDefault(); 
+                    toggleStartStop();
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
