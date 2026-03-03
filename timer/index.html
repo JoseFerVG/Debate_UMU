@@ -509,6 +509,18 @@
                 // Ocultar el Prep Timer con una transición limpia y deslizada
                 if (isBPMode) {
                     prepTimerContainer.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+                    
+                    // --- FIX IMPLEMENTADO: Detener y purgar el tiempo de preparación en segundo plano ---
+                    if (isPrepRunning) {
+                        clearInterval(prepInterval);
+                        isPrepRunning = false;
+                        prepTotalSeconds = 60;
+                        prepDisplay.innerText = "01:00";
+                        prepDisplay.classList.remove('text-brand-alert', 'animate-pulse');
+                        prepProgress.classList.replace('text-brand-alert', 'text-brand-orange');
+                        prepProgress.style.strokeDashoffset = 0;
+                        prepIcon.classList.replace('ph-pause', 'ph-play');
+                    }
                 }
                 
                 btnText.innerText = "Pausar";
@@ -675,7 +687,7 @@
             }
         }
 
-        // --- LÓGICA: ATAJOS DE TECLADO ---
+        // ---ATAJOS DE TECLADO ---
         document.addEventListener('keydown', (e) => {
             const activeTag = document.activeElement.tagName;
             
