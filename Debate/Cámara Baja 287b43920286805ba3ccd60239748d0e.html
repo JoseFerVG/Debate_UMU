@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cámara Baja</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="287b4392-0286-805b-a3cc-d60239748d0e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🥵</span></div><h1 class="page-title" dir="auto">Cámara Baja</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="287b4392-0286-803d-b7e5-f0af7903331d" class="">1. <strong>Extender y refutar</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-80fe-96b9-d9938b2fe7a0" class="">Como cámara baja, tu rol principal es <strong>extender</strong> el caso y <strong>refutar</strong> a la oposición. ¿Qué cuenta como extensión?</p></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8035-9add-cb15e614e667" class="bulleted-list"><li style="list-style-type:disc">Argumentos nuevos</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-808a-9e31-c9629d16cbf3" class="bulleted-list"><li style="list-style-type:disc">Nuevos análisis de argumentos previos</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-801d-a6b7-dcebabf7cadf" class="bulleted-list"><li style="list-style-type:disc">Nuevos impactos o ejemplos</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8091-a6cd-c072d32399bc" class="bulleted-list"><li style="list-style-type:disc">Nuevas refutaciones de argumentos ya refutados</li></ul></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-8080-a68e-fa1beb9a457d" class="">2. <strong>Extensiones derivativas vs. nuevas</strong></h3></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-803a-9832-cd059261e27d" class="bulleted-list"><li style="list-style-type:disc"><strong>Derivativas</strong>: Profundizan en lo ya dicho. No son malas si aportan relevancia.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8082-be7e-d635105ebb06" class="bulleted-list"><li style="list-style-type:disc"><strong>Nuevas</strong>: Creativas, originales, pero más arriesgadas. Solo úsalas si puedes explicarlas bien y son relevantes.</li></ul></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-804a-bf57-ea22b568f8f6" class="">3. <strong>Framing estratégico</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-8001-a846-c7e120232ed2" class="">Reencuadra argumentos para hacerlos más urgentes o relevantes. Ejemplo: si tu alta habla de remesas en América Latina, tú puedes hablar de remesas entre Europa y África para mostrar un contexto más crítico.</p></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-8019-9bd2-dc238a1d267c" class="">4. <strong>Impactos relevantes</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-8093-b20c-e480a0233560" class="">No basta con argumentar: <strong>impacta</strong>. Explica por qué lo que dices importa. Si tu alta no lo hizo, tú puedes hacerlo y ganar mérito.</p></div><div style="display:contents" dir="auto"><hr id="287b4392-0286-806f-acef-d45b5dc2a600"/></div><div style="display:contents" dir="auto"><h2 id="287b4392-0286-8063-94e8-c3f28584102e" class="">📝 Consejos para preparar un buen debate</h2></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-8073-bf2a-ef0e0a44b281" class="">1. <strong>Prep time fluido</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-8062-b28c-e01f9bc6f4b1" class="">Evita estructuras rígidas. Conversa con tu compañero, haz lluvia de ideas, explora ángulos creativos.</p></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-80a9-9a57-c3ddcac307ca" class="">2. <strong>Análisis de actores</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-80a9-94b7-c7602d0d872d" class="">Haz una lista de todos los actores involucrados en la moción. ¿Quiénes son los más afectados? ¿Quién toma decisiones? Usa esto para construir extensiones sólidas.</p></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-8084-b6bf-d1b77b1e8dfc" class="">3. <strong>Pensar a largo plazo</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-80c8-a58c-ea6a08e1df81" class="">Explora las consecuencias futuras de los argumentos. Esto te da profundidad y relevancia.</p></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-8030-b9b4-e3272a0cdd50" class="">4. <strong>Inspiración creativa</strong></h3></div><div style="display:contents" dir="auto"><p id="287b4392-0286-806d-972f-f4ab3e78a96d" class="">No temas usar ejemplos de películas, libros o cultura pop (como <em>Lilo &amp; Stitch</em> o <em>Star Wars</em>) para entender y explicar emociones complejas. Solo asegúrate de extraer la lógica, no solo la referencia.</p></div><div style="display:contents" dir="auto"><hr id="287b4392-0286-803a-a883-e97dde0c8b85"/></div><div style="display:contents" dir="auto"><h2 id="287b4392-0286-800c-9c43-c62d423c0f83" class="">❌ Errores comunes que se deben evitar</h2></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80f3-a89a-d2a0ce44d3ff" class="bulleted-list"><li style="list-style-type:disc"><strong>Meter material nuevo en el látigo</strong>: No se toma en cuenta. Mejor usa el tiempo para reforzar lo ya dicho.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80d5-8090-f8bca98287b3" class="bulleted-list"><li style="list-style-type:disc"><strong>Refutar a tu propia cámara alta</strong>: Es acuchillamiento. No lo hagas. Mejor demuestra que tu contenido es más relevante.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8042-b12e-da45fc951922" class="bulleted-list"><li style="list-style-type:disc"><strong>Ignorar el caso de la cámara alta contraria</strong>: Aunque cambies la métrica, debes responder a lo que ya se dijo.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80e9-b3a1-fe460b1db4c1" class="bulleted-list"><li style="list-style-type:disc"><strong>Agrupar a la oposición</strong>: Son dos equipos distintos. Haz comparativas separadas.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80f3-990d-f372e8f004ad" class="bulleted-list"><li style="list-style-type:disc"><strong>No definir quién hace qué</strong>: El látigo debe saber qué comparativas le tocan y el extensionista debe confirmar la extensión.</li></ul></div><div style="display:contents" dir="auto"><hr id="287b4392-0286-80a6-bcaa-d29fdf27fcca"/></div><div style="display:contents" dir="auto"><h2 id="287b4392-0286-8023-b8fa-d80617bb3f02" class="">📚 Ejemplos prácticos</h2></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-8006-a6b7-d6a297ddc4e2" class="">🍰 Pastel de zanahoria vs. chocolate</h3></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8038-b014-d63b9e1cab50" class="bulleted-list"><li style="list-style-type:disc">Alta dice: “El pastel de zanahoria tiene adornos adorables”.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-805f-aedb-d51feed2b24b" class="bulleted-list"><li style="list-style-type:disc">Tú como látigo dices: “Tus invitados lo subirán a Instagram”. → <strong>No es nuevo</strong>, se deduce.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8056-8720-dce071a6eec5" class="bulleted-list"><li style="list-style-type:disc">Pero si dices: “Los adornos son de mantequilla orgánica, más saludable” → <strong>Sí es nuevo</strong>, no se deduce.</li></ul></div><div style="display:contents" dir="auto"><h3 id="287b4392-0286-80bd-9678-cc4ba9526bbf" class="">👗 Alta moda andrógina</h3></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8012-a6d0-d0ae1e056e3b" class="bulleted-list"><li style="list-style-type:disc">Alta habla de estándares de belleza.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80ed-a63d-cdc72ef111dc" class="bulleted-list"><li style="list-style-type:disc">Tú como baja traes una extensión sobre colonialismo y cómo la moda occidental impuso géneros. → Creativo, relevante, y bien estructurado.</li></ul></div><div style="display:contents" dir="auto"><hr id="287b4392-0286-80ee-8ac3-f3b212f1c5d3"/></div><div style="display:contents" dir="auto"><h2 id="287b4392-0286-8098-8bb5-c1f6cd45e139" class="">🤝 Trabajo en equipo</h2></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80fa-86b1-ec24e48b695c" class="bulleted-list"><li style="list-style-type:disc"><strong>Extensionista</strong>: Prioriza la extensión. Confirma con tu látigo qué vas a decir.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80c3-854b-fc9833784fbc" class="bulleted-list"><li style="list-style-type:disc"><strong>Látigo</strong>: Refuta a la cámara baja contraria primero. Reconstruye la extensión si quedó floja. Haz comparativas claras.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80fc-848f-c90f62a17b55" class="bulleted-list"><li style="list-style-type:disc"><strong>Ambos</strong>: Definan quién hace qué comparativa. Balanceen el tiempo entre extensiones.</li></ul></div><div style="display:contents" dir="auto"><hr id="287b4392-0286-8069-aa94-e2d06f4ffba2"/></div><div style="display:contents" dir="auto"><h2 id="287b4392-0286-80e4-a393-e8992cb6cc43" class="">🧭 Comparativas: cómo ganar el debate</h2></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8054-929c-c213f2fc3fa0" class="bulleted-list"><li style="list-style-type:disc">No es lo mismo que refutar. Comparar es decir: “Mi caso es más relevante que el suyo”.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8073-be44-c60d037ab808" class="bulleted-list"><li style="list-style-type:disc">Usa frases como:<div style="display:contents" dir="auto"><ul id="287b4392-0286-80a7-8878-c607accb6e06" class="bulleted-list"><li style="list-style-type:circle">“Aunque su argumento sea cierto, el mío tiene más impacto”.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-8031-a394-d39f38a29da2" class="bulleted-list"><li style="list-style-type:circle">“Mi caso aborda el escenario más justo”.</li></ul></div><div style="display:contents" dir="auto"><ul id="287b4392-0286-80b3-a289-d9ac9443ea15" class="bulleted-list"><li style="list-style-type:circle">“Mi argumento sostiene el de mi alta, por lo tanto el mérito es mío”.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h1 id="292b4392-0286-804e-b4ad-e3351a1bb017" class="">Clase Carmen</h1></div><div style="display:contents" dir="auto"><h2 id="292b4392-0286-809f-a29b-c9e3423b95ad" class="">Que hacer en el preptime</h2></div><div style="display:contents" dir="auto"><h3 id="292b4392-0286-808d-85a2-d8aea32541d7" class="">Strat Anti Tierra Quemada</h3></div><div style="display:contents" dir="auto"><ul id="292b4392-0286-8032-bf09-e44ca5594c1d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Entras a sala sin nada apuntado simplemente habiendo hecho una lluvia de ideas</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="292b4392-0286-8093-97a4-df56a30aa258" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Tienes que marcarte triplazo de que va a pasar y pensar que huecos se abren para llenarlos</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="292b4392-0286-80c4-8e5e-e3ed2ae1f722" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Tienes que analizar tu alta como si fueras opo para ver mejor puntos flacos </span><div class="indented"></div></li></ul></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
