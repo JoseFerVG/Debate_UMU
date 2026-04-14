@@ -13,9 +13,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.37.2/docxtemplater.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -70,19 +69,6 @@
       transform: translateY(-2px);
     }
     .btn-main:active { transform: scale(0.98); }
-
-    .format-btn {
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .format-btn:hover { transform: translateY(-1px); }
-    .format-btn.active {
-      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
-      color: white !important;
-      box-shadow: 0 6px 16px -3px rgba(249, 115, 22, 0.45);
-      border-color: transparent !important;
-    }
-    .format-btn.active span { color: white !important; }
   </style>
 </head>
 <body class="min-h-screen py-10 px-4 text-slate-800 flex justify-center items-start bg-gradient-to-r from-orange-100 via-white to-green-100 relative">
@@ -172,24 +158,12 @@
         <h2 class="text-xl font-bold text-slate-900">Descargar documentos</h2>
       </div>
 
-      <div class="bg-orange-50 border border-orange-100 p-5 rounded-2xl mb-6">
-        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">📦 Formato de salida</p>
-        <div class="grid grid-cols-2 gap-3 mb-4">
-          <button id="btnFormatDocx" onclick="setFormat('docx')" class="format-btn active py-4 rounded-xl font-bold text-sm flex flex-col items-center justify-center gap-1 border-2 border-orange-200 bg-white">
-            <span class="text-2xl">📄</span>
-            <span>Word (.docx)</span>
-            <span class="text-[10px] font-medium opacity-70">Editable</span>
-          </button>
-          <button id="btnFormatPdf" onclick="setFormat('pdf')" class="format-btn py-4 rounded-xl font-bold text-sm flex flex-col items-center justify-center gap-1 border-2 border-slate-200 bg-white/60 text-slate-500">
-            <span class="text-2xl">📕</span>
-            <span>PDF (.pdf)</span>
-            <span class="text-[10px] font-medium opacity-70">Listo para enviar</span>
-          </button>
+      <div class="bg-orange-50 border border-orange-100 p-4 rounded-2xl flex items-start gap-3 mb-6">
+        <div class="text-2xl">📦</div>
+        <div>
+            <h3 class="font-bold text-slate-800">Formato de salida: ZIP de Words Individuales</h3>
+            <p class="text-sm text-slate-600 mt-1">Se generará un archivo comprimido (.zip) que contiene un documento Word (.docx) editable por cada persona del listado. Si quieres convertir todos de golpe a pdf usa IlovePDF que te lo hace muy bien</p>
         </div>
-        <p id="formatDesc" class="text-sm text-slate-600 flex items-start gap-2">
-          <span>💡</span>
-          <span>Se generará un ZIP con un documento Word editable por cada persona del listado.</span>
-        </p>
       </div>
 
       <button id="btnGenerate" class="btn-main w-full py-5 rounded-2xl text-white font-extrabold text-xl shadow-xl flex justify-center items-center gap-3">
@@ -213,25 +187,6 @@
   <script>
     let docxBuffer = null;
     let csvData = [];
-    let outputFormat = 'docx';
-
-    function setFormat(fmt) {
-      outputFormat = fmt;
-      const btnDocx = document.getElementById('btnFormatDocx');
-      const btnPdf = document.getElementById('btnFormatPdf');
-      const desc = document.getElementById('formatDesc');
-
-      btnDocx.classList.toggle('active', fmt === 'docx');
-      btnDocx.classList.toggle('text-slate-500', fmt !== 'docx');
-      btnPdf.classList.toggle('active', fmt === 'pdf');
-      btnPdf.classList.toggle('text-slate-500', fmt !== 'pdf');
-
-      if (fmt === 'docx') {
-        desc.innerHTML = '<span>💡</span><span>Se generará un ZIP con un documento Word editable por cada persona del listado.</span>';
-      } else {
-        desc.innerHTML = '<span>💡</span><span>Se generará un ZIP con un PDF por cada persona. Ideal para enviar directamente.</span>';
-      }
-    }
 
     // --- Setup Uploader ---
     function setupUploader(zoneId, inputId, type) {
@@ -266,7 +221,7 @@
           docxBuffer = e.target.result;
           uiSuccess(zone, content, "📄 Plantilla Cargada", file.name);
         };
-        reader.readAsBinaryString(file);
+        reader.readAsArrayBuffer(file);
       } else {
         if(!file.name.includes('.csv')) return alert("❌ Solo archivos .csv");
         Papa.parse(file, {
@@ -299,7 +254,7 @@
     setupUploader('dropDocx', 'inputDocx', 'docx');
     setupUploader('dropCsv', 'inputCsv', 'csv');
 
-    // --- GENERACIÓN (ZIP con formato seleccionado) ---
+    // --- GENERACIÓN (Siempre ZIP individual) ---
     document.getElementById('btnGenerate').addEventListener('click', async () => {
       if(!docxBuffer) return alert("⚠️ Faltan archivos: Sube la Plantilla Word.");
       if(!csvData.length) return alert("⚠️ Faltan archivos: Sube el CSV.");
@@ -321,78 +276,34 @@
       };
 
       try {
-        const finalZip = new PizZip();
-        const validRows = csvData.filter(row => row[idxName] && row[idxName].trim() !== '');
+        const zip = new JSZip();
 
-        for (let i = 0; i < validRows.length; i++) {
-          const row = validRows[i];
-          const name = row[idxName].trim();
-          const dni = row[idxDNI] ? row[idxDNI].trim() : "";
+        csvData.forEach((row, i) => {
+            const name = row[idxName];
+            const dni = row[idxDNI];
+            if(!name) return; 
 
-          const zipDoc = new PizZip(docxBuffer);
-          let xml = zipDoc.file("word/document.xml").asText();
-          const replaceAll = (str, find, rep) => str.split(find).join(rep);
-
-          xml = replaceAll(xml, "_Nombre.Alumno.CSV_", name);
-          xml = replaceAll(xml, "_DNI_", dni || "");
-          xml = replaceAll(xml, "_Organizador_", common.cat);
-          xml = replaceAll(xml, "_Fecha_", common.date);
-          xml = replaceAll(xml, "_Torneo_", common.tour);
-
-          zipDoc.file("word/document.xml", xml);
-
-          const safeName = name.replace(/[^a-z0-9áéíóúñÁÉÍÓÚÑ ]/gi, '').trim().substring(0, 30) || `Doc_${i+1}`;
-
-          if (outputFormat === 'pdf') {
-            btn.querySelector('span').textContent = `Generando PDF ${i + 1}/${validRows.length}...`;
-
-            // ArrayBuffer for mammoth
-            const modifiedBuf = zipDoc.generate({ type: 'arraybuffer' });
-            const mammothResult = await mammoth.convertToHtml({ arrayBuffer: modifiedBuf });
-
-            // HTML content strictly formatted
-            const htmlContent = `
-              <div style="font-family: serif; font-size: 12pt; line-height: 1.6; color: #000; padding: 25px; width: 170mm; margin: 0 auto; background: white;">
-                ${mammothResult.value}
-              </div>
-            `;
-
-            const opt = {
-              margin:       15,
-              filename:     `${safeName}.pdf`,
-              image:        { type: 'jpeg', quality: 0.98 },
-              html2canvas:  { scale: 2, useCORS: true, logging: false },
-              jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            const pdfBlob = await html2pdf().set(opt).from(htmlContent).output('blob');
+            const zipDoc = new PizZip(docxBuffer);
+            let xml = zipDoc.file("word/document.xml").asText();
+            const replace = (str, find, rep) => str.split(find).join(rep);
             
-            let arrayBufferFallback;
-            if (pdfBlob.arrayBuffer) {
-              arrayBufferFallback = await pdfBlob.arrayBuffer();
-            } else {
-              arrayBufferFallback = await new Promise((resolve) => {
-                const fr = new FileReader();
-                fr.onload = () => resolve(fr.result);
-                fr.readAsArrayBuffer(pdfBlob);
-              });
-            }
-            
-            finalZip.file(`${safeName}.pdf`, arrayBufferFallback);
-          } else {
-            // DOCX form
-            const outArr = zipDoc.generate({ type: 'arraybuffer' });
-            finalZip.file(`${safeName}.docx`, outArr);
-          }
-        }
+            xml = replace(xml, "_Nombre.Alumno.CSV_", name);
+            xml = replace(xml, "_DNI_", dni || "");
+            xml = replace(xml, "_Organizador_", common.cat);
+            xml = replace(xml, "_Fecha_", common.date);
+            xml = replace(xml, "_Torneo_", common.tour);
 
-        btn.querySelector('span').textContent = "Comprimiendo ZIP...";
-        
-        // Timeout para que la interfaz se actualice antes del JS thread freezing
-        await new Promise(r => setTimeout(r, 50));
-        
-        const contentBlob = finalZip.generate({ type: 'blob', mimeType: 'application/zip' });
-        saveAs(contentBlob, `Justificantes_${outputFormat.toUpperCase()}.zip`);
+            zipDoc.file("word/document.xml", xml);
+            
+            const out = zipDoc.generate({type:"blob", mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+            
+            // Nombre seguro para el archivo
+            const safeName = name.replace(/[^a-z0-9áéíóúñÁÉÍÓÚÑ ]/gi, '').trim().substring(0, 30) || `Doc_${i+1}`;
+            zip.file(`${safeName}.docx`, out);
+        });
+
+        const content = await zip.generateAsync({type:"blob"});
+        saveAs(content, "Justificantes_Individuales.zip");
 
         btn.querySelector('span').textContent = "¡Descarga Lista!";
         setTimeout(() => {
