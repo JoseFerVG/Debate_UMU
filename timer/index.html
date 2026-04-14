@@ -584,8 +584,8 @@
                 timerRAF = null;
                 // lastTickTime queda guardado
             } else {
-                // La pestaña vuelve: recalculamos el delta real
-                lastTickTime = Date.now();
+                // La pestaña vuelve: NO reseteamos lastTickTime para que
+                // timerTick() calcule todo el tiempo transcurrido en segundo plano
                 timerTick();
             }
         });
