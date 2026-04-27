@@ -224,6 +224,8 @@ d
       const selTipo = tipoSelect.value;
       
       const filtered = allMotions.filter(m => {
+        if (m.___COMENTARIO___) return false;
+        
         if (selTorneo && m.torneo !== selTorneo) return false;
         
         const currentEdStr = m.edicion && m.edicion !== "-1" ? m.edicion : "";
@@ -287,7 +289,7 @@ d
       .then(data => {
         allMotions = data;
         
-        // Poblar Torneos
+        // Poblar Torneos ignorando comentarios
         const torneos = [...new Set(data.map(m => m.torneo).filter(e => e))];
         torneos.sort().forEach(t => {
           const option = document.createElement('option');
