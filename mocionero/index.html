@@ -1,1 +1,512 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mocionero | Buscador de Mociones de Debate</title>
+  <meta name="description" content="Encuentra las mejores mociones de debate parlamentario británico. Buscador avanzado y mociones aleatorias." />
 
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#FFD8B1',
+              green: '#C1E1C1',
+              dark: '#1e293b',
+              light: '#f8fafc',
+              accent: '#f97316'
+            }
+          },
+          animation: { 
+            'blob': 'blob 7s infinite',
+            'fade-in-up': 'fadeInUp 0.5s ease-out forwards'
+          },
+          keyframes: {
+            blob: {
+              '0%':   { transform: 'translate(0px,0px) scale(1)' },
+              '33%':  { transform: 'translate(30px,-50px) scale(1.1)' },
+              '66%':  { transform: 'translate(-20px,20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px,0px) scale(1)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Estilos base y utilidades -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-card {
+        @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg rounded-3xl transition-all duration-300;
+      }
+      .glass-card:hover {
+        @apply bg-white/90 shadow-xl -translate-y-1 border-brand-orange/40;
+      }
+      .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-slate-500;
+      }
+      .btn-primary {
+        @apply flex justify-center items-center gap-2 bg-gradient-to-r from-brand-orange to-orange-300 text-brand-dark font-bold px-6 py-3 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 border border-white/50;
+      }
+    }
+    
+    /* Animación de entrada en cascada para los resultados */
+    .motion-card {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans relative overflow-x-hidden selection:bg-brand-orange selection:text-brand-dark">
+
+  <!-- Fondos dinámicos y orgánicos -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/4 w-[30rem] h-[30rem] bg-brand-orange/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+    <div class="absolute top-0 right-1/4 w-[30rem] h-[30rem] bg-brand-green/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style="animation-delay: 2s"></div>
+    <div class="absolute -bottom-8 left-1/3 w-[30rem] h-[30rem] bg-brand-orange/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style="animation-delay: 4s"></div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+    
+    <!-- HEADER -->
+    <header class="text-center mb-16 animate-fade-in-up">
+      <div class="inline-flex items-center justify-center p-5 rounded-[2.5rem] bg-white/60 backdrop-blur-md shadow-sm mb-8 border border-white/80">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-brand-accent drop-shadow-sm transition-transform hover:rotate-12 duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
+      <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6 text-gradient drop-shadow-sm">
+        Mocionero
+      </h1>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
+        El buscador definitivo de mociones para Parlamentario Británico. <br class="hidden sm:block"/>
+        Inspírate, prepárate y domina el atril.
+      </p>
+    </header>
+
+    <!-- SEARCH & CONTROLS -->
+    <section class="max-w-4xl mx-auto w-full mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
+      <div class="glass-card p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-center">
+        
+        <div class="relative w-full flex-grow">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="h-6 w-6 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            id="searchInput"
+            class="block w-full pl-12 pr-4 py-4 bg-white/50 border border-slate-200 rounded-2xl text-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 focus:bg-white transition-all shadow-inner" 
+            placeholder="Busca por tema, torneo, palabras clave..."
+          />
+        </div>
+        
+        <button id="randomBtn" class="btn-primary w-full sm:w-auto shrink-0 py-4 px-8 text-lg">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+          Aleatoria
+        </button>
+
+      </div>
+
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full animate-fade-in-up" style="animation-delay: 0.15s">
+        <div class="relative w-full">
+          <select id="torneoSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+            <option value="">Todos los torneos</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </div>
+        </div>
+        <div class="relative w-full">
+          <select id="edicionSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+            <option value="">Todas las ediciones</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </div>
+        </div>
+        <div class="relative w-full">
+          <select id="tematicaSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+            <option value="">Todas las temáticas</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </div>
+        </div>
+        <div class="relative w-full">
+          <select id="tipoSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+            <option value="">Todos los tipos</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-4 flex flex-wrap items-center justify-between px-2 text-sm font-medium text-slate-500">
+        <span id="resultsCount">Cargando mociones...</span>
+      </div>
+    </section>
+
+
+
+    <!-- RESULTS GRID -->
+    <main class="flex-grow">
+      <div id="motionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 pb-12">
+        <!-- Las tarjetas se insertarán aquí por JS -->
+      </div>
+      
+      <div id="noResults" class="hidden flex-col items-center justify-center py-20 text-center animate-fade-in-up">
+        <div class="bg-white/60 p-6 rounded-full shadow-sm border border-white/80 mb-6">
+          <svg class="h-16 w-16 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-slate-700 mb-2">No encontramos nada</h3>
+        <p class="text-slate-500">Intenta con otros términos o genera una moción aleatoria.</p>
+      </div>
+    </main>
+    
+    <!-- MODAL DE MOCIÓN -->
+    <div id="motionModal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+      <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer" onclick="closeModal()"></div>
+      <div class="relative w-full max-w-4xl glass-card bg-white p-6 sm:p-10 max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 shadow-2xl">
+        <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div id="modalContent" class="mt-2 relative z-0"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allMotions = [];
+    window.currentFilteredMotions = [];
+    const motionsGrid = document.getElementById('motionsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const torneoSelect = document.getElementById('torneoSelect');
+    const edicionSelect = document.getElementById('edicionSelect');
+    const tematicaSelect = document.getElementById('tematicaSelect');
+    const tipoSelect = document.getElementById('tipoSelect');
+    const randomBtn = document.getElementById('randomBtn');
+    const resultsCount = document.getElementById('resultsCount');
+    const noResults = document.getElementById('noResults');
+
+    function filterMotions() {
+      const query = searchInput.value.toLowerCase().trim();
+      const selTorneo = torneoSelect.value;
+      const selEdicion = edicionSelect.value;
+      const selTematica = tematicaSelect.value;
+      const selTipo = tipoSelect.value;
+      
+      const filtered = allMotions.filter(m => {
+        if (selTorneo && m.torneo !== selTorneo) return false;
+        
+        const currentEdStr = m.edicion && m.edicion !== "-1" ? m.edicion : "";
+        const editionName = [m.torneo, m.año, currentEdStr].filter(Boolean).join(' ');
+        if (selEdicion && editionName !== selEdicion) return false;
+        
+        const mTematica = m.Tematica || 'Sin clasificar';
+        if (selTematica && mTematica !== selTematica) return false;
+        
+        const mTipo = m['Tipo de Mocion'] || 'Sin clasificar';
+        if (selTipo && mTipo !== selTipo) return false;
+        
+        if (!query) return true;
+        
+        return (m.mocion && m.mocion.toLowerCase().includes(query)) ||
+               (m.infoslide && m.infoslide.toLowerCase().includes(query)) ||
+               (m.torneo && m.torneo.toLowerCase().includes(query)) ||
+               (m.ronda && m.ronda.toLowerCase().includes(query)) ||
+               (m.titulo && m.titulo.toLowerCase().includes(query));
+      });
+      window.currentFilteredMotions = filtered;
+      renderMotions(filtered);
+      return filtered;
+    }
+
+    function setQuickFilter(text) {
+      // Limpiar selects para usar busqueda rapida
+      torneoSelect.value = "";
+      edicionSelect.value = "";
+      tematicaSelect.value = "";
+      tipoSelect.value = "";
+      searchInput.value = text;
+      filterMotions();
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateEdicionOptions() {
+      const selTorneo = torneoSelect.value;
+      const dataForEditions = selTorneo ? allMotions.filter(m => m.torneo === selTorneo) : allMotions;
+      
+      const editions = [...new Set(dataForEditions.map(m => {
+        const edStr = m.edicion && m.edicion !== "-1" ? m.edicion : "";
+        return [m.torneo, m.año, edStr].filter(Boolean).join(' ');
+      }).filter(e => e))];
+      
+      edicionSelect.innerHTML = '<option value="">Todas las ediciones</option>';
+      editions.sort().forEach(edition => {
+        const option = document.createElement('option');
+        option.value = edition;
+        option.textContent = edition;
+        edicionSelect.appendChild(option);
+      });
+    }
+
+    resultsCount.innerHTML = `<span class="animate-pulse text-brand-accent">Buscando archivos en /mociones...</span>`;
+
+    // Cargar el listado de la carpeta "mociones/" (requiere que el servidor permita Directory Listing)
+    fetch('mociones/')
+      .then(response => {
+        if (!response.ok) throw new Error('No se pudo acceder a la carpeta mociones/. Asegúrate de que tu servidor permite listar directorios.');
+        return response.text();
+      })
+      .then(async html => {
+        // Extraer los nombres de archivo .json del HTML generado por el servidor
+        const regex = /href="([^"]+\.json)"/ig;
+        const jsonFiles = [];
+        let match;
+        while ((match = regex.exec(html)) !== null) {
+          // Extraemos solo el nombre del archivo, por si el servidor incluye rutas completas
+          const fileName = match[1].split('/').pop();
+          if (!jsonFiles.includes(fileName)) jsonFiles.push(fileName);
+        }
+
+        if (jsonFiles.length === 0) {
+          throw new Error('La carpeta mociones/ está vacía o el servidor no permite listar sus archivos.');
+        }
+
+        resultsCount.innerHTML = `<span class="animate-pulse text-brand-accent">Cargando ${jsonFiles.length} mociones...</span>`;
+
+        // Descargar todos los JSON individuales
+        const fetchPromises = jsonFiles.map(fileName => 
+          fetch(`mociones/${fileName}`).then(r => r.json())
+        );
+        const data = await Promise.all(fetchPromises);
+
+        allMotions = data;
+        
+        // Poblar Torneos
+        const torneos = [...new Set(data.map(m => m.torneo).filter(e => e))];
+        torneos.sort().forEach(t => {
+          const option = document.createElement('option');
+          option.value = t;
+          option.textContent = t;
+          torneoSelect.appendChild(option);
+        });
+
+        // Poblar Ediciones inicialmente
+        updateEdicionOptions();
+
+        // Poblado de select de temáticas y tipos
+        const tematicas = [...new Set(data.map(m => m.Tematica || 'Sin clasificar').filter(e => e))];
+        tematicas.sort().forEach(t => {
+          const option = document.createElement('option');
+          option.value = t;
+          option.textContent = t;
+          tematicaSelect.appendChild(option);
+        });
+
+        const tipos = [...new Set(data.map(m => m['Tipo de Mocion'] || 'Sin clasificar').filter(e => e))];
+        tipos.sort().forEach(t => {
+          const option = document.createElement('option');
+          option.value = t;
+          option.textContent = t;
+          tipoSelect.appendChild(option);
+        });
+
+        filterMotions();
+      })
+      .catch(error => {
+        console.error(error);
+        resultsCount.innerHTML = `<span class="text-red-500 font-bold">Error:</span> ${error.message}`;
+      });
+
+    // Función para renderizar tarjetas
+    function renderMotions(motions) {
+      motionsGrid.innerHTML = '';
+      
+      if (motions.length === 0) {
+        noResults.classList.remove('hidden');
+        noResults.classList.add('flex');
+        resultsCount.textContent = '0 mociones encontradas';
+        return;
+      }
+      
+      noResults.classList.add('hidden');
+      noResults.classList.remove('flex');
+      resultsCount.textContent = `${motions.length} moción${motions.length !== 1 ? 'es' : ''} encontrada${motions.length !== 1 ? 's' : ''}`;
+
+      motions.forEach((m, index) => {
+        const card = document.createElement('article');
+        card.className = 'motion-card glass-card p-8 flex flex-col h-full relative group cursor-pointer';
+        card.onclick = () => openModal(index);
+        // Animación en cascada suave
+        card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.05}s forwards`;
+
+        // Procesar info extra
+        const currentEdStr = m.edicion && m.edicion !== "-1" ? m.edicion : "";
+        const badges = [];
+        
+        if (m.torneo) badges.push(`<span class="bg-brand-dark text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-700 transition z-10" onclick="event.stopPropagation(); setQuickFilter('${m.torneo}')">${m.torneo}</span>`);
+        
+        let subTorneo = [];
+        if (m.año) subTorneo.push(m.año);
+        if (currentEdStr) subTorneo.push(`Ed. ${currentEdStr}`);
+        if (subTorneo.length > 0) badges.push(`<span class="bg-brand-dark/10 text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${subTorneo.join(' - ')}</span>`);
+        
+        if (m.ronda) badges.push(`<span class="bg-brand-orange text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-orange-300 transition z-10" onclick="event.stopPropagation(); setQuickFilter('${m.ronda}')">${m.ronda}</span>`);
+
+        const infoSlideHtml = m.infoslide ? `
+          <div class="mb-5 bg-white/50 rounded-2xl p-4 border border-white shadow-inner text-sm text-slate-600 leading-relaxed font-medium">
+            <span class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Infoslide</span>
+            ${m.infoslide.replace(/\n/g, '<br>')}
+          </div>
+        ` : '';
+
+        card.innerHTML = `
+          <!-- Elemento decorativo hover -->
+          <div class="absolute -inset-0.5 bg-gradient-to-br from-brand-orange to-brand-green rounded-3xl opacity-0 group-hover:opacity-20 transition duration-500 pointer-events-none"></div>
+          
+          <div class="relative flex flex-col h-full z-10">
+            <header class="flex flex-wrap gap-2 mb-5">
+              ${badges.join('')}
+            </header>
+            
+            ${infoSlideHtml}
+
+            <div class="flex-grow flex flex-col justify-center">
+              <h2 class="text-2xl sm:text-3xl font-serif font-bold text-brand-dark leading-tight mb-4">
+                ${m.mocion}
+              </h2>
+            </div>
+            
+            <footer class="mt-6 pt-5 border-t border-slate-200/60 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-400 uppercase tracking-wide">
+              ${m.Tematica ? `<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full ${m.Tematica === 'Sin clasificar' ? 'bg-slate-300' : 'bg-brand-green'}"></span>${m.Tematica}</span>` : ''}
+              ${m['Tipo de Mocion'] ? `<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full ${m['Tipo de Mocion'] === 'Sin clasificar' ? 'bg-slate-300' : 'bg-brand-orange'}"></span>${m['Tipo de Mocion']}</span>` : ''}
+              ${m.titulo && m.titulo !== m.mocion ? `<span class="text-slate-300">#${m.titulo}</span>` : ''}
+            </footer>
+          </div>
+        `;
+
+        motionsGrid.appendChild(card);
+      });
+    }
+
+    // Eventos de filtro
+    searchInput.addEventListener('input', filterMotions);
+    torneoSelect.addEventListener('change', () => { updateEdicionOptions(); filterMotions(); });
+    edicionSelect.addEventListener('change', filterMotions);
+    tematicaSelect.addEventListener('change', filterMotions);
+    tipoSelect.addEventListener('change', filterMotions);
+
+    // Funcionalidad del modal
+    function openModal(index) {
+      const m = window.currentFilteredMotions[index];
+      if(!m) return;
+      const modal = document.getElementById('motionModal');
+      const content = document.getElementById('modalContent');
+      
+      const currentEdStr = m.edicion && m.edicion !== "-1" ? m.edicion : "";
+      const badges = [];
+      if (m.torneo) badges.push(`<span class="bg-brand-dark text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${m.torneo}</span>`);
+      let subTorneo = [];
+      if (m.año) subTorneo.push(m.año);
+      if (currentEdStr) subTorneo.push(`Ed. ${currentEdStr}`);
+      if (subTorneo.length > 0) badges.push(`<span class="bg-brand-dark/10 text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${subTorneo.join(' - ')}</span>`);
+      if (m.ronda) badges.push(`<span class="bg-brand-orange text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${m.ronda}</span>`);
+      
+      const infoSlideHtml = m.infoslide ? `
+        <div class="mb-6 bg-slate-50 rounded-2xl p-6 border border-slate-200 text-slate-700 leading-relaxed font-medium">
+          <span class="block text-sm font-bold uppercase tracking-wider text-brand-accent mb-2">Infoslide</span>
+          ${m.infoslide.replace(/\n/g, '<br>')}
+        </div>
+      ` : '';
+
+      content.innerHTML = `
+        <header class="flex flex-wrap gap-2 mb-8 mt-4">
+          ${badges.join('')}
+        </header>
+        
+        ${infoSlideHtml}
+
+        <div class="my-8">
+          <h2 class="text-3xl sm:text-5xl font-serif font-bold text-brand-dark leading-tight">
+            ${m.mocion}
+          </h2>
+        </div>
+        
+        <footer class="mt-8 pt-6 border-t border-slate-200/60 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-semibold text-slate-500 uppercase tracking-wide">
+          ${m.Tematica ? `<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full ${m.Tematica === 'Sin clasificar' ? 'bg-slate-300' : 'bg-brand-green'}"></span>${m.Tematica}</span>` : ''}
+          ${m['Tipo de Mocion'] ? `<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full ${m['Tipo de Mocion'] === 'Sin clasificar' ? 'bg-slate-300' : 'bg-brand-orange'}"></span>${m['Tipo de Mocion']}</span>` : ''}
+          ${m.titulo && m.titulo !== m.mocion ? `<span class="text-slate-400 font-normal">#${m.titulo}</span>` : ''}
+        </footer>
+      `;
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      // trigger transition
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('.glass-card').classList.remove('scale-95');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('motionModal');
+      modal.classList.add('opacity-0');
+      modal.querySelector('.glass-card').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    // Funcionalidad de moción aleatoria
+    randomBtn.addEventListener('click', () => {
+      const currentFiltered = filterMotions();
+      if (currentFiltered.length === 0) return;
+      
+      // Añadir pequeña animación al botón
+      randomBtn.classList.add('scale-95');
+      setTimeout(() => randomBtn.classList.remove('scale-95'), 150);
+
+      const randomIndex = Math.floor(Math.random() * currentFiltered.length);
+      const randomMotion = currentFiltered[randomIndex];
+      
+      // Mostramos solo esa moción (pero mantenemos el valor del filtro visual)
+      renderMotions([randomMotion]);
+      
+      // Scroll suave hacia los resultados
+      motionsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+</body>
+</html>
