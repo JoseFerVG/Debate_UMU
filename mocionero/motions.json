@@ -81,72 +81,7 @@
         "Tematica": "Sin clasificar",
         "Tipo de Mocion": "Sin clasificar"
     },
-    {
-        "torneo": "BP Complu",
-        "año": "2026",
-        "edicion": "VI",
-        "ronda": "Ronda 1",
-        "titulo": "Educación",
-        "infoslide": "La educación formal es el sistema educativo institucionalizado, jerarquizado y estructurado, que abarca desde la educación infantil hasta la universidad.",
-        "mocion": "EC lamenta la narrativa de que la educación formal es indispensable para empoderar a jóvenes vulnerables",
-        "Tematica": "Sin clasificar",
-        "Tipo de Mocion": "Sin clasificar"
-    },
-    {
-        "torneo": "BP Complu",
-        "año": "2026",
-        "edicion": "VI",
-        "ronda": "Ronda 2",
-        "titulo": "Irán",
-        "infoslide": "El programa nuclear iraní se ha estado desarrollando desde la década de 1950 bajo el reinado del Shah. Si bien se interrumpió poco después, el Cuerpo de la Guardia Revolucionaria Islámica (IRGC) lo reactivó tras la Revolución de 1979 con el objetivo de diversificar sus fuentes de energía. En los últimos años, el programa se ha expandido de forma intermitente para incluir instalaciones de refinamiento y grandes reservas de uranio enriquecido.",
-        "mocion": "EC lamenta que Irán no haya desarrollado sus propias armas nucleares",
-        "Tematica": "Sin clasificar",
-        "Tipo de Mocion": "Sin clasificar"
-    },
-    {
-        "torneo": "BP Complu",
-        "año": "2026",
-        "edicion": "VI",
-        "ronda": "Ronda 3",
-        "titulo": "manosfera",
-        "infoslide": "La \"manosfera\" es el constructo empleado para englobar unas subculturas online, en ascenso durante los últimos 15 años, que enfatizan intereses y necesidades masculinas desde una perspectiva generalmente contraria al feminismo. Los miembros que la componen son hombres solitarios, jóvenes o de mediana edad. Entre estos grupos, destacan:\n- La comunidad incel (celibato involuntario), autodefinidos como incapaces para establecer relaciones sexuales o románticas.\n- ⁠Los ‘pick up artists’ (artistas de ligue), centrados en divulgar tácticas de seducción.\n- ⁠El movimiento 'por los derechos de los hombres', que aboga por la protección legal y social del género masculino.\n\n\nA efectos de este debate, existen dos estrategias de oposición a la manosfera.\nLa primera considera que son víctimas de un ecosistema sociocultural que condiciona su comportamiento; por ende, el diálogo, la empatía o el estudio de sus circunstancias deben ser promovidos.\nPor la contraparte, la segunda defiende que son culpables de sus actos, por lo que deben ser combatidos mediante métodos que pueden incluir la censura, ridiculización o persecución legal.",
-        "mocion": "EC prefiere que el combate contra la manosfera priorice la estrategia de víctimas sobre la de culpables",
-        "Tematica": "Sin clasificar",
-        "Tipo de Mocion": "Sin clasificar"
-    },
-    {
-        "torneo": "BP Complu",
-        "año": "2026",
-        "edicion": "VI",
-        "ronda": "Ronda 4",
-        "titulo": "Todo",
-        "infoslide": "En un día de inspiración irrepetible en la historia de la humanidad, se ha descubierto la Ley del Todo: una serie de ecuaciones perfectas que, empleando costos computacionales significativos, permiten predecir con total certeza todos los fenómenos de las ciencias, tanto naturales como sociales, haciendo la investigación científica trivial.\nA grandes escalas de complejidad (p.e., en las ciencias sociales), la Ley sólo proporciona predicciones probabilísticas. Así, el futuro de una civilización o la evolución psicológica completa de un individuo pueden predecirse con probabilidades y a grandes rasgos (como en la meteorología).",
-        "mocion": "EC prefiere que la Ley del Todo se haga pública a que se destruya",
-        "Tematica": "Sin clasificar",
-        "Tipo de Mocion": "Sin clasificar"
-    },
-    {
-        "torneo": "BP Complu",
-        "año": "2026",
-        "edicion": "VI",
-        "ronda": "Ronda 5",
-        "titulo": "Centroizquierda",
-        "infoslide": "A efectos de este debate, por \"partidos de centroizquierda\" nos referiremos a los partidos socialdemócratas clásicos de Europa, que en muchos Estados han jugado un papel político muy relevante desde la segunda mitad del siglo XX. Ejemplos pueden ser el SPD en Alemania o el Partido Socialista en Francia.",
-        "mocion": "ECCQ está en los intereses de los partidos de centroizquierda en la Unión Europea un acercamiento a la religión cristiana",
-        "Tematica": "Sin clasificar",
-        "Tipo de Mocion": "Sin clasificar"
-    },
-    {
-        "torneo": "BP Complu",
-        "año": "2026",
-        "edicion": "VI",
-        "ronda": "Semifinal",
-        "titulo": "Deseo",
-        "infoslide": "A efectos de este debate, existen dos formas de concebir el origen del deseo, entendido como la fuerza motivacional que mueve a las personas hacia aquello que consideran apetecible o placentero:\nEl deseo como «flujo» lo interpreta como una fuerza en sí misma, esencial en todas las personas. Se entiende como una energía creadora e inmanente a cada individuo, la cual lleva al Ser Humano a crecer y vivir su naturaleza. Por tanto, el deseo debe ser explorado con libertad para alcanzar una vida plena acorde al potencial humano.\nEl deseo como «carencia» entiende que el Ser Humano está, por naturaleza, psicológicamente incompleto. El deseo es la expresión de dicha falta, y busca encontrar en el mundo externo una plenitud que nunca será alcanzada, ya que nada puede colmar ese vacío que nos constituye. La meta de las personas debe ser aprender a vivir sanamente con la carencia, aceptando que guiarse por los impulsos del deseo deriva en frustración.",
-        "mocion": "EC prefiere un mundo en el que el deseo se conciba predominantemente como un flujo, en lugar de como una carencia",
-        "Tematica": "Sin clasificar",
-        "Tipo de Mocion": "Sin clasificar"
-    },
+
     {
         "___COMENTARIO___": "=================================================================",
         "___TITULO___": "TORNEO: BP MURCIA | Edición: XI | Año: 2026",
