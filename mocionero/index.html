@@ -104,7 +104,7 @@
         Inspírate, prepárate y domina el atril.
       </p>
     </header>
-
+d
     <!-- SEARCH & CONTROLS -->
     <section class="max-w-4xl mx-auto w-full mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
       <div class="glass-card p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-center">
@@ -278,37 +278,13 @@
       });
     }
 
-    resultsCount.innerHTML = `<span class="animate-pulse text-brand-accent">Buscando archivos en /mociones...</span>`;
-
-    // Cargar el listado de la carpeta "mociones/" (requiere que el servidor permita Directory Listing)
-    fetch('mociones/')
+    // Cargar los datos
+    fetch('motions.json')
       .then(response => {
-        if (!response.ok) throw new Error('No se pudo acceder a la carpeta mociones/. Asegúrate de que tu servidor permite listar directorios.');
-        return response.text();
+        if (!response.ok) throw new Error('No se pudo cargar motions.json');
+        return response.json();
       })
-      .then(async html => {
-        // Extraer los nombres de archivo .json del HTML generado por el servidor
-        const regex = /href="([^"]+\.json)"/ig;
-        const jsonFiles = [];
-        let match;
-        while ((match = regex.exec(html)) !== null) {
-          // Extraemos solo el nombre del archivo, por si el servidor incluye rutas completas
-          const fileName = match[1].split('/').pop();
-          if (!jsonFiles.includes(fileName)) jsonFiles.push(fileName);
-        }
-
-        if (jsonFiles.length === 0) {
-          throw new Error('La carpeta mociones/ está vacía o el servidor no permite listar sus archivos.');
-        }
-
-        resultsCount.innerHTML = `<span class="animate-pulse text-brand-accent">Cargando ${jsonFiles.length} mociones...</span>`;
-
-        // Descargar todos los JSON individuales
-        const fetchPromises = jsonFiles.map(fileName => 
-          fetch(`mociones/${fileName}`).then(r => r.json())
-        );
-        const data = await Promise.all(fetchPromises);
-
+      .then(data => {
         allMotions = data;
         
         // Poblar Torneos
@@ -344,7 +320,7 @@
       })
       .catch(error => {
         console.error(error);
-        resultsCount.innerHTML = `<span class="text-red-500 font-bold">Error:</span> ${error.message}`;
+        resultsCount.textContent = 'Error al cargar las mociones. Asegúrate de que motions.json exista.';
       });
 
     // Función para renderizar tarjetas
