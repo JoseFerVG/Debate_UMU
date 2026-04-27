@@ -104,7 +104,7 @@
         Inspírate, prepárate y domina el atril.
       </p>
     </header>
-d
+
     <!-- SEARCH & CONTROLS -->
     <section class="max-w-4xl mx-auto w-full mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
       <div class="glass-card p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-center">
@@ -206,6 +206,7 @@ d
   <script>
     let allMotions = [];
     window.currentFilteredMotions = [];
+    let displayedCount = 20;
     const motionsGrid = document.getElementById('motionsGrid');
     const searchInput = document.getElementById('searchInput');
     const torneoSelect = document.getElementById('torneoSelect');
@@ -247,7 +248,9 @@ d
                (m.titulo && m.titulo.toLowerCase().includes(query));
       });
       window.currentFilteredMotions = filtered;
-      renderMotions(filtered);
+      displayedCount = 20;
+      renderMotions(filtered.slice(0, displayedCount));
+      updateLoadMoreBtn();
       return filtered;
     }
 
@@ -326,24 +329,28 @@ d
       });
 
     // Función para renderizar tarjetas
-    function renderMotions(motions) {
-      motionsGrid.innerHTML = '';
+    function renderMotions(motions, append = false) {
+      if (!append) motionsGrid.innerHTML = '';
       
-      if (motions.length === 0) {
+      if (motions.length === 0 && !append) {
         noResults.classList.remove('hidden');
         noResults.classList.add('flex');
         resultsCount.textContent = '0 mociones encontradas';
         return;
       }
       
-      noResults.classList.add('hidden');
-      noResults.classList.remove('flex');
-      resultsCount.textContent = `${motions.length} moción${motions.length !== 1 ? 'es' : ''} encontrada${motions.length !== 1 ? 's' : ''}`;
+      if (!append) {
+        noResults.classList.add('hidden');
+        noResults.classList.remove('flex');
+        const total = window.currentFilteredMotions ? window.currentFilteredMotions.length : motions.length;
+        resultsCount.textContent = `${total} moción${total !== 1 ? 'es' : ''} encontrada${total !== 1 ? 's' : ''}`;
+      }
 
       motions.forEach((m, index) => {
+        const absoluteIndex = append ? (displayedCount - motions.length) + index : index;
         const card = document.createElement('article');
         card.className = 'motion-card glass-card p-8 flex flex-col h-full relative group cursor-pointer';
-        card.onclick = () => openModal(index);
+        card.onclick = () => openModal(absoluteIndex);
         // Animación en cascada suave
         card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.05}s forwards`;
 
@@ -392,8 +399,33 @@ d
           </div>
         `;
 
-        motionsGrid.appendChild(card);
+         motionsGrid.appendChild(card);
       });
+    }
+
+    function updateLoadMoreBtn() {
+      let btnContainer = document.getElementById('loadMoreBtnContainer');
+      const totalLength = window.currentFilteredMotions.length;
+      if (totalLength > displayedCount) {
+        if (!btnContainer) {
+          btnContainer = document.createElement('div');
+          btnContainer.id = 'loadMoreBtnContainer';
+          btnContainer.className = 'w-full flex justify-center mt-8 mb-4';
+          btnContainer.innerHTML = `<button onclick="loadMore()" class="btn-primary px-10 py-3 bg-white text-brand-dark border border-slate-200 hover:bg-slate-50 transition-all shadow-sm">Mostrar más</button>`;
+          document.querySelector('main').appendChild(btnContainer);
+        }
+        btnContainer.style.display = 'flex';
+      } else {
+        if (btnContainer) btnContainer.style.display = 'none';
+      }
+    }
+
+    function loadMore() {
+      const start = displayedCount;
+      displayedCount += 16;
+      const nextBatch = window.currentFilteredMotions.slice(start, displayedCount);
+      renderMotions(nextBatch, true);
+      updateLoadMoreBtn();
     }
 
     // Eventos de filtro
@@ -481,6 +513,8 @@ d
       
       // Mostramos solo esa moción (pero mantenemos el valor del filtro visual)
       renderMotions([randomMotion]);
+      let btn = document.getElementById('loadMoreBtnContainer');
+      if (btn) btn.style.display = 'none';
       
       // Scroll suave hacia los resultados
       motionsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
