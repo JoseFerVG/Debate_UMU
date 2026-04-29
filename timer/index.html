@@ -322,7 +322,10 @@
         let timerRAF;
         let lastTickTime = null;
         let accumulatedMs = 0;
-        let courtesyInterval;
+        let inCourtesyPhase = false;
+        let courtesySeconds = 15;
+        let isFinished = false;
+        let bellTimeout = null;
         
         let inputBuffer = "";
         let totalSeconds = 0;
@@ -390,6 +393,7 @@
                 
                 totalSeconds = 7 * 60;
                 initialSeconds = totalSeconds;
+                isFinished = false;
                 updateDisplay(totalSeconds);
             } else {
                 bpBadge.classList.add('hidden');
@@ -434,7 +438,7 @@
             if (times > 1) {
                 alarmAudio.onended = function() {
                     alarmAudio.onended = null;
-                    setTimeout(() => playBell(times - 1), 200);
+                    bellTimeout = setTimeout(() => playBell(times - 1), 200);
                 };
             }
         }
@@ -472,6 +476,9 @@
 
             totalSeconds = (h * 3600) + (m * 60) + s;
             initialSeconds = totalSeconds;
+            isFinished = false;
+            inCourtesyPhase = false;
+            courtesySeconds = 15;
 
             if (totalSeconds > 0) {
                 setupPanel.classList.add('hidden');
@@ -484,11 +491,26 @@
             if(isBPMode) return;
             stopInternalTimer();
             cleanupAlarmState();
+            isFinished = false;
             timerControls.classList.add('hidden');
             changeTimeBtn.classList.add('hidden');
             setupPanel.classList.remove('hidden');
             inputBuffer = ""; 
             updateDisplayFromBuffer();
+        }
+
+        function updateStartStopButton(isPlaying) {
+            if (isPlaying) {
+                btnText.innerText = "Pausar";
+                playIcon.classList.replace('ph-play', 'ph-pause');
+                startStopBtn.classList.replace('bg-brand-green/80', 'bg-brand-orange');
+                startStopBtn.classList.replace('text-brand-dark', 'text-white');
+            } else {
+                btnText.innerText = "Empezar";
+                playIcon.classList.replace('ph-pause', 'ph-play');
+                startStopBtn.classList.replace('bg-brand-orange', 'bg-brand-green/80');
+                startStopBtn.classList.replace('text-white', 'text-brand-dark');
+            }
         }
 
         function toggleStartStop() {
@@ -505,11 +527,12 @@
                 startStopBtn.classList.replace('bg-brand-orange', 'bg-brand-green/80');
                 startStopBtn.classList.replace('text-white', 'text-brand-dark');
                 
-                if (courtesyInterval) clearInterval(courtesyInterval);
                 alarmAudio.pause();
                 
             } else {
                 // START
+                if (isFinished) return;
+                
                 isRunning = true;
                 
                 // Ocultar el Prep Timer con una transición limpia y deslizada
@@ -529,10 +552,7 @@
                     }
                 }
                 
-                btnText.innerText = "Pausar";
-                playIcon.classList.replace('ph-play', 'ph-pause');
-                startStopBtn.classList.replace('bg-brand-green/80', 'bg-brand-orange');
-                startStopBtn.classList.replace('text-brand-dark', 'text-white');
+                updateStartStopButton(true);
 
                 lastTickTime = Date.now();
                 accumulatedMs = 0;
@@ -554,19 +574,43 @@
                     totalSeconds++;
                     updateDisplay(totalSeconds);
                 } else {
-                    if (isBPMode) {
+                    if (isBPMode && !inCourtesyPhase) {
                         if (totalSeconds === 361) playBell(1); // Min 1
                         if (totalSeconds === 61) playBell(1);  // Min 6
                         if (totalSeconds === 1) playBell(2);   // Min 7
                     }
 
-                    if (totalSeconds > 0) {
-                        totalSeconds--;
-                        updateDisplay(totalSeconds);
+                    if (inCourtesyPhase) {
+                        if (courtesySeconds > 0) {
+                            courtesySeconds--;
+                            courtesyBigCount.innerText = courtesySeconds;
+                        } else {
+                            isRunning = false;
+                            isFinished = true;
+                            inCourtesyPhase = false;
+                            updateStartStopButton(false);
+                            courtesyOverlay.classList.add('hidden');
+                            playBell(3);
+                            return;
+                        }
                     } else {
-                        isRunning = false;
-                        triggerAlarmLogic();
-                        return;
+                        if (totalSeconds > 0) {
+                            totalSeconds--;
+                            updateDisplay(totalSeconds);
+                        } else {
+                            if (isCourtesyMode) {
+                                inCourtesyPhase = true;
+                                courtesySeconds = 15;
+                                courtesyOverlay.classList.remove('hidden');
+                                courtesyBigCount.innerText = courtesySeconds;
+                            } else {
+                                isRunning = false;
+                                isFinished = true;
+                                updateStartStopButton(false);
+                                playBell(3);
+                                return;
+                            }
+                        }
                     }
                 }
             }
@@ -593,11 +637,9 @@
         function resetTimer() {
             stopInternalTimer();
             cleanupAlarmState();
+            isFinished = false;
 
-            btnText.innerText = "Empezar";
-            playIcon.classList.replace('ph-pause', 'ph-play');
-            startStopBtn.classList.remove('bg-brand-orange', 'text-white');
-            startStopBtn.classList.add('bg-brand-green/80', 'text-brand-dark');
+            updateStartStopButton(false);
 
             // Mostrar el Prep Timer al reiniciar y resetearlo a 01:00
             if (isBPMode) {
@@ -633,20 +675,24 @@
         }
 
         function cleanupAlarmState() {
-            clearInterval(courtesyInterval);
+            inCourtesyPhase = false;
+            courtesySeconds = 15;
             courtesyOverlay.classList.add('hidden');
             alarmAudio.pause();
             alarmAudio.currentTime = 0;
             alarmAudio.loop = false;
+            alarmAudio.onended = null;
+            if (bellTimeout) {
+                clearTimeout(bellTimeout);
+                bellTimeout = null;
+            }
         }
 
         function fullReset() {
             stopInternalTimer();
             cleanupAlarmState();
-            btnText.innerText = "Empezar";
-            playIcon.classList.replace('ph-pause', 'ph-play');
-            startStopBtn.classList.remove('bg-brand-orange', 'text-white');
-            startStopBtn.classList.add('bg-brand-green/80', 'text-brand-dark');
+            isFinished = false;
+            updateStartStopButton(false);
         }
 
         function updateDisplay(secondsTotal) {
@@ -662,33 +708,6 @@
                 const timeStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
                 const mode = isStopwatchMode ? '⏱' : '⏳';
                 document.title = `${mode} ${timeStr} | Debate Timer`;
-            }
-        }
-
-        // --- ALARMA & CORTESÍA ---
-        function triggerAlarmLogic() {
-            if (isCourtesyMode) {
-                let cTime = 15;
-                courtesyOverlay.classList.remove('hidden');
-                courtesyBigCount.innerText = cTime;
-
-                courtesyInterval = setInterval(() => {
-                    cTime--;
-                    courtesyBigCount.innerText = cTime;
-                    
-                    if (cTime <= 0) {
-                        clearInterval(courtesyInterval);
-                        if (!isMuted) {
-                            alarmAudio.loop = true;
-                            alarmAudio.play().catch(e => console.log(e));
-                        }
-                    }
-                }, 1000);
-            } else {
-                if (!isMuted) {
-                    alarmAudio.loop = true;
-                    alarmAudio.play().catch(e => console.log(e));
-                }
             }
         }
 
