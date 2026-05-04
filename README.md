@@ -14,5 +14,7 @@ Estas son todas las pags relacionadas con mi proyecto para el club
 
 6.  [**Link de la pag para crear autorizaciones**](https://josefervg.github.io/Debate_UMU/autorizaciones)
 
+7.  [**Link del Mocionero**](https://josefervg.github.io/Debate_UMU/mocionero)
+
 
 ---
