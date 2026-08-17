@@ -27,8 +27,11 @@
         }
       </style>
       <div style="flex:1;min-width:260px;line-height:1.4;">
-        <span style="font-weight:700;display:inline-flex;align-items:center;gap:0.35rem;color:#0f172a;">
-          <span>🔒</span> Privacidad y Almacenamiento Técnico
+        <span style="font-weight:700;display:inline-flex;align-items:center;gap:0.4rem;color:#0f172a;">
+          <svg style="width:14px;height:14px;color:#16a34a;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+          </svg>
+          Privacidad y Almacenamiento Técnico
         </span>
         <p style="margin:0.25rem 0 0 0;color:#64748b;font-size:0.75rem;">
           Este sitio web utiliza almacenamiento local técnico (sin cookies comerciales ni rastreo publicitario) y procesa tus documentos 100% en tu navegador.

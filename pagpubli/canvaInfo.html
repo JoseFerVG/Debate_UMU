@@ -2,41 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Club de Debate UMU</title>
-  <link rel="icon" href="../img/logos/sinf.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
-    h1, h2, .frase { font-family: 'Anton', sans-serif; }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dossier y Galería Informativa | Club de Debate UMU</title>
+  <meta name="description" content="Galería de imágenes, actividades formativas y presentación del Club de Debate de la Universidad de Murcia." />
+  <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/pagpubli/canvaInfo.html" />
+  <link rel="icon" href="../img/logos/LogoClubBocatas.png" />
 
-    /* Fallback robusto para 16:9 si por alguna razón aspect-video no existe */
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .frase { font-family: 'Montserrat', sans-serif; }
+    .fade-in { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.99); }
+      to   { opacity: 1; transform: scale(1); }
+    }
     .my-aspect-video {
-      /* prefer native aspect-ratio */
-      aspect-ratio: 16 / 9;
-      /* fallback antiguo (padding trick) */
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 9 / 16 * 100% */
+      padding-top: 56.25%;
       overflow: hidden;
-      background: #000;
+      background: #111;
     }
-    /* Cuando el navegador soporta aspect-ratio, la padding-top sobra; forzamos la posición absoluta de la imagen */
-    .my-aspect-video img {
+    .my-aspect-video > * {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      inset: 0;
     }
-
-    /* Transiciones de entrada */
-    .fade-in { transition: opacity .4s ease; opacity: 1; }
-    .fade-out { opacity: 0; }
-
-    /* Dots */
     .dot { width:10px; height:10px; border-radius:9999px; background:#222; opacity:.5; }
     .dot.active { opacity:1; transform:scale(1.15); }
   </style>
@@ -44,7 +42,7 @@
 <body class="min-h-screen flex flex-col justify-between text-black">
 
   <!-- HERO -->
-  <section class="flex flex-col items-center justify-center text-center px-6 py-16">
+  <section class="flex flex-col items-center justify-center text-center px-6 py-12">
     <h1 class="frase text-5xl sm:text-7xl font-extrabold uppercase leading-tight drop-shadow-lg">
       ¿Quieres que tus <br>
       <span class="bg-black text-pink-400 px-3">ideas hagan ruido?</span>
@@ -57,7 +55,12 @@
 
   <!-- GALERÍA / CARRUSEL -->
   <section class="px-6 py-4 text-center">
-    <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-6 drop-shadow-lg">📸 Info del Club</h2>
+    <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-6 drop-shadow-lg flex items-center justify-center gap-3">
+      <svg class="w-10 h-10 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+      </svg>
+      Galería del Club
+    </h2>
 
     <div class="relative max-w-4xl mx-auto">
       <!-- Contenedor 16:9 -->
@@ -69,18 +72,22 @@
 
         <img id="carousel-img"
              src=""
-             alt="Foto del Club"
+             alt="Foto del Club de Debate UMU"
              class="w-full h-full object-cover transition-all duration-500 fade-in" />
       </div>
 
       <!-- Botones de navegación -->
-      <button id="prevBtn" type="button"
-              class="absolute top-1/2 left-3 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
-        ◀
+      <button id="prevBtn" type="button" aria-label="Foto anterior"
+              class="absolute top-1/2 left-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full transition flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+        </svg>
       </button>
-      <button id="nextBtn" type="button"
-              class="absolute top-1/2 right-3 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
-        ▶
+      <button id="nextBtn" type="button" aria-label="Siguiente foto"
+              class="absolute top-1/2 right-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full transition flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+        </svg>
       </button>
 
       <!-- Dots -->
@@ -89,8 +96,11 @@
 
     <!-- Botón volver -->
     <a href="index.html"
-       class="mt-4 inline-block bg-pink-500 text-white text-xl font-extrabold py-3 px-6 rounded-2xl shadow-lg hover:scale-105 transition">
-      🔙 Volver
+       class="mt-6 inline-flex items-center gap-2 bg-pink-500 text-white text-xl font-extrabold py-3.5 px-7 rounded-2xl shadow-lg hover:scale-105 transition">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+      </svg>
+      Volver
     </a>
   </section>
 
@@ -150,68 +160,63 @@
       });
     }
 
-    // Carga con preloader para evitar flash de imagen rota
+    // Mostrar imagen con precarga y animación
     function showImage(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
       currentIndex = index;
-      loader.style.display = 'flex';
-      imgElement.classList.add('fade-out');
-      imgElement.classList.remove('fade-in');
 
-      const tmp = new Image();
-      tmp.onload = () => {
-        imgElement.src = images[index];
-        imgElement.alt = `Imagen ${index + 1}`;
-        // small delay para transición
-        setTimeout(() => {
-          imgElement.classList.remove('fade-out');
-          imgElement.classList.add('fade-in');
-          loader.style.display = 'none';
-          updateDots();
-        }, 80);
-      };
-      tmp.onerror = () => {
-        loader.style.display = 'none';
-        imgElement.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450"><rect width="100%" height="100%" fill="%23ddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-size="20">Imagen no disponible</text></svg>';
-        imgElement.alt = 'Imagen no disponible';
-        imgElement.classList.remove('fade-out');
+      loader.style.display = "flex";
+      imgElement.style.opacity = 0;
+
+      const preloader = new Image();
+      preloader.src = images[currentIndex];
+      preloader.onload = () => {
+        imgElement.src = images[currentIndex];
+        loader.style.display = "none";
+        imgElement.style.opacity = 1;
+        imgElement.classList.remove('fade-in');
+        void imgElement.offsetWidth;
         imgElement.classList.add('fade-in');
-        updateDots();
       };
-      tmp.src = images[index];
+
+      updateDots();
     }
 
-    function nextImage(){ showImage((currentIndex + 1) % images.length); }
-    function prevImage(){ showImage((currentIndex - 1 + images.length) % images.length); }
+    nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+    prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
 
-    nextBtn.addEventListener('click', nextImage);
-    prevBtn.addEventListener('click', prevImage);
-
-    // teclado
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
+    // Teclado
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+      if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
     });
 
-    // swipe sencillo (móvil)
-    let startX = null;
-    carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-    carousel.addEventListener('touchend', e => {
-      if (startX === null) return;
-      const endX = (e.changedTouches && e.changedTouches[0].clientX) || 0;
-      const diff = startX - endX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) nextImage(); else prevImage();
+    // Touch / Swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, {passive: true});
+
+    function handleSwipe() {
+      const threshold = 40;
+      if (touchEndX < touchStartX - threshold) {
+        showImage(currentIndex + 1);
+      } else if (touchEndX > touchStartX + threshold) {
+        showImage(currentIndex - 1);
       }
-      startX = null;
-    });
+    }
 
-    // Iniciar
+    // Inicializar
     buildDots();
     showImage(0);
-
-    // Si quieres autoplay, descomenta:
-    // const AUTOPLAY = setInterval(nextImage, 5000);
-    // para parar: clearInterval(AUTOPLAY);
   </script>
   <script src="../legal/banner.js"></script>
 </body>

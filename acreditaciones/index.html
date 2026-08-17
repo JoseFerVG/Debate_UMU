@@ -131,7 +131,9 @@
           <p class="text-sm text-zinc-600">Sube imagen base y CSV. <br><strong>Truco:</strong> Guarda tu Excel como CSV UTF-8.</p>
 
           <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-start gap-2">
-            <span class="text-base">🔒</span>
+            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+            </svg>
             <div>
               <strong>Privacidad por diseño (RGPD):</strong> El procesamiento de archivos CSV e imágenes ocurre 100% en local en tu navegador. No se envía ni almacena ningún dato en servidores externos.
             </div>
@@ -301,7 +303,12 @@
           <div class="canvas-border shadow-inner">
             <canvas id="preview" width="800" height="450"></canvas>
           </div>
-          <p class="text-xs text-center text-zinc-400">💡 Haz click en la imagen para mover el texto manualmente.</p>
+          <p class="text-xs text-center text-zinc-500 flex items-center justify-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.516 0c.85.493 1.508 1.333 1.508 2.316V18"/>
+            </svg>
+            Haz click en la imagen para mover el texto manualmente.
+          </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
