@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JFK Precision Timer</title>
+    <title>Timer Pomodoro Online | Temporizador de Estudio y Concentración — Club de Debate UMU</title>
+    <meta name="description" content="Temporizador Pomodoro minimalista con modo flotante Picture-in-Picture (PiP), intervalos personalizables y modo oscuro para estudio y productividad." />
+    <meta name="keywords" content="pomodoro timer, temporizador pomodoro online, timer estudio, productividad universitaria, pomodoro flotante, club de debate UMU" />
+    <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/pomodoro.html" />
+    <link rel="icon" href="./img/logos/LogoClubBocatas.png">
+
+    <!-- GEO & Local SEO -->
+    <meta name="geo.region" content="ES-MU" />
+    <meta name="geo.placename" content="Murcia" />
+    <meta name="geo.position" content="38.0163;-1.1685" />
+    <meta name="ICBM" content="38.0163, -1.1685" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Timer Pomodoro Club de Debate UMU",
+      "url": "https://josefervg.github.io/Debate_UMU/pomodoro.html",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "description": "Temporizador Pomodoro para concentración y estudio con soporte Picture-in-Picture.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Club de Debate UMU",
+        "url": "https://josefervg.github.io/Debate_UMU/"
+      }
+    }
+    </script>
     <style>
         /* --- VARIABLES & THEME --- */
         :root {
@@ -413,6 +441,13 @@
             </button>
         </div>
 
+        <div style="margin-top: 18px; font-size: 0.7rem; color: var(--text-secondary); text-align: center; display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;" class="pomodoro-footer">
+            <a href="./legal/aviso-legal.html" style="color: inherit; text-decoration: none;">Aviso Legal</a> ·
+            <a href="./legal/privacidad.html" style="color: inherit; text-decoration: none;">Privacidad</a> ·
+            <a href="./legal/cookies.html" style="color: inherit; text-decoration: none;">Cookies</a> ·
+            <a href="./" style="color: inherit; text-decoration: none; font-weight: bold;">← Inicio</a>
+        </div>
+
     </div>
 
     <script>
@@ -539,7 +574,7 @@
                 const timeStr = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
                 
                 this.ui.timer.innerText = timeStr;
-                document.title = `${timeStr} - JFK Timer`;
+                document.title = `${timeStr} - Timer Pomodoro | Club de Debate UMU`;
 
                 // Cálculo del anillo
                 // 2 * PI * r(90) = 565.48
@@ -643,5 +678,6 @@
         // Global Instance
         window.onload = () => { window.jfkApp = new PomodoroEngine(); };
     </script>
+    <script src="./legal/banner.js"></script>
 </body>
 </html>

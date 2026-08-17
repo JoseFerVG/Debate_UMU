@@ -1,0 +1,29 @@
+# Club de Debate UMU (Universidad de Murcia)
+
+> Portal oficial y suite de herramientas web de código abierto del Club de Debate de la Universidad de Murcia (España). Formación en oratoria, argumentación, pensamiento crítico y formato de debate Parlamentario Británico (BP). Organizador del torneo nacional BP Murcia 2026.
+
+## Información de la Entidad
+- **Nombre Oficial:** Club de Debate UMU / Club de Debate de la Universidad de Murcia
+- **Institución Matriz:** Universidad de Murcia (UMU), España
+- **Ubicación:** Campus de Espinardo y Campus de La Merced, 30100 Murcia, Región de Murcia, España
+- **Coordenadas Geográficas:** 38.0163, -1.1685
+- **Contacto:** josef.caniles.murcia@gmail.com
+- **Instagram Oficial:** https://www.instagram.com/clubdedebateum/
+- **Web Oficial:** https://josefervg.github.io/Debate_UMU/
+- **Formulario de Inscripción:** https://forms.gle/95BciRRU9UGjvAjF6
+- **Créditos Académicos:** Reconocimiento de créditos CRAU por actividades de extensión universitaria en la UMU.
+
+## Suite de Herramientas Web Gratuitas (Client-Side / Sin Backend)
+Todas las herramientas procesan la información 100% en el navegador web del usuario, garantizando privacidad absoluta conforme al RGPD:
+
+- [Mocionero de Debate BP](https://josefervg.github.io/Debate_UMU/mocionero/): Buscador reactivo y generador aleatorio de mociones de debate parlamentario clasificadas por torneos, categorías y tipos de moción.
+- [Timer de Debate BP](https://josefervg.github.io/Debate_UMU/timer/): Cronómetro oficial de 7 minutos con avisos acústicos de tiempo protegido, modo oscuro y atajos de teclado.
+- [Timer de Preptime 15 Minutos](https://josefervg.github.io/Debate_UMU/timer/preptime.html): Cronómetro con fases guiadas para el tiempo de preparación en formato BP.
+- [Timer Pomodoro con PiP](https://josefervg.github.io/Debate_UMU/pomodoro.html): Temporizador de estudio y concentración con soporte flotante Picture-in-Picture.
+- [Generador de Acreditaciones](https://josefervg.github.io/Debate_UMU/acreditaciones/): Diseñador y generador masivo en PDF de credenciales para torneos mediante CSV y Canvas.
+- [Generador de Justificantes](https://josefervg.github.io/Debate_UMU/autorizaciones/): Creador masivo de autorizaciones y justificantes en formato Word (.docx) a partir de listados CSV.
+- [Centro Legal y Transparencia](https://josefervg.github.io/Debate_UMU/legal/): Políticas de privacidad RGPD, Aviso Legal LSSI-CE, cookies y términos de uso.
+
+## Circuito de Competición
+- **Torneo BP Murcia 2026:** Torneo universitario de debate en formato Parlamentario Británico organizado por el club. Web: https://debateumu.github.io/BPMurcia/2026/ | Instagram: https://www.instagram.com/bpmurcia_/
+- **Competiciones Nacionales:** Participación activa en el TNDA (Torneo Nacional de Debate Académico) y torneos de universidades de toda España.

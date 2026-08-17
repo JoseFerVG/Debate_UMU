@@ -1,0 +1,49 @@
+# =======================================================
+# SISTEMAS OPERATIVOS Y METADATOS
+# =======================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# =======================================================
+# ENTORNOS DE DESARROLLO (IDEs / EDITORES)
+# =======================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# =======================================================
+# PYTHON (Scripts ETL de mociones)
+# =======================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+mociones_*/
+
+# =======================================================
+# ARCHIVOS TEMPORALES Y LOGS
+# =======================================================
+*.log
+*.tmp
+*.bak
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

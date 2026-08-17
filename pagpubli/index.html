@@ -64,8 +64,15 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-6 text-center text-xs bg-black text-white w-full">
-    © <span id="year"></span> Club de Debate UMU · Hecho con ❤️ por el club
+  <footer class="py-6 text-center text-xs bg-black text-white w-full space-y-2">
+    <p>© <span id="year"></span> Club de Debate UMU — Universidad de Murcia</p>
+    <nav aria-label="Información legal" class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-zinc-400 text-[11px]">
+      <a href="../legal/aviso-legal.html" class="hover:text-white hover:underline">Aviso Legal</a> ·
+      <a href="../legal/privacidad.html" class="hover:text-white hover:underline">Privacidad</a> ·
+      <a href="../legal/cookies.html" class="hover:text-white hover:underline">Cookies</a> ·
+      <a href="../legal/terminos.html" class="hover:text-white hover:underline">Términos</a> ·
+      <a href="../" class="hover:text-white hover:underline font-bold">Inicio</a>
+    </nav>
   </footer>
 
   <script>
@@ -83,5 +90,6 @@
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="../legal/banner.js"></script>
 </body>
 </html>

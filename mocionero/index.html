@@ -3,8 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mocionero | Buscador de Mociones de Debate</title>
-  <meta name="description" content="Encuentra las mejores mociones de debate parlamentario británico. Buscador avanzado y mociones aleatorias." />
+  <title>Mocionero | Buscador de Mociones de Debate Parlamentario Británico (BP) — Club de Debate UMU</title>
+  <meta name="description" content="Buscador avanzado y generador aleatorio de mociones de debate en formato Parlamentario Británico (BP). Filtra por torneo, temática, edición y tipo de moción. Club de Debate de la Universidad de Murcia." />
+  <meta name="keywords" content="mociones de debate, mocionero debate, mociones BP, mociones parlamentario británico, temas para debatir, debate universitario, club de debate murcia, debate UMU" />
+  <meta name="author" content="Club de Debate UMU — Universidad de Murcia" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/mocionero/" />
+  <link rel="icon" type="image/png" href="../img/logos/LogoClubBocatas.png" />
+
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mocionero | Buscador de Mociones de Debate BP — Club de Debate UMU" />
+  <meta property="og:description" content="Encuentra mociones oficiales de debate parlamentario británico clasificadas por temáticas y torneos. Herramienta abierta del Club de Debate UMU." />
+  <meta property="og:url" content="https://josefervg.github.io/Debate_UMU/mocionero/" />
+  <meta property="og:image" content="https://josefervg.github.io/Debate_UMU/img/equipo-debate-umu.jpg" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Mocionero de Debate BP",
+    "url": "https://josefervg.github.io/Debate_UMU/mocionero/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "description": "Buscador y generador de mociones de debate parlamentario británico (BP) de torneos universitarios.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Club de Debate UMU",
+      "url": "https://josefervg.github.io/Debate_UMU/"
+    }
+  }
+  </script>
 
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -189,8 +226,22 @@
         <h3 class="text-2xl font-bold text-slate-700 mb-2">No encontramos nada</h3>
         <p class="text-slate-500">Intenta con otros términos o genera una moción aleatoria.</p>
       </div>
-    </main>
-    
+    <!-- FOOTER LEGAL Y DECLARACIÓN DE NEUTRALIDAD -->
+    <footer class="mt-16 pt-8 border-t border-slate-200/80 text-center text-xs text-slate-500">
+      <div class="max-w-2xl mx-auto p-3.5 rounded-2xl bg-white/70 border border-slate-200 mb-4 text-slate-600 leading-relaxed">
+        <strong>⚖️ Nota de Neutralidad Académica:</strong> Las mociones listadas corresponden a debates competitivos en formato Parlamentario Británico y responden a fines estrictamente didácticos. Su inclusión no refleja la opinión, ideología ni postura oficial del Club de Debate UMU ni de la Universidad de Murcia.
+      </div>
+      <p>© Club de Debate UMU — Universidad de Murcia</p>
+      <nav aria-label="Información legal" class="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1 text-slate-500">
+        <a href="../legal/aviso-legal.html" class="hover:text-slate-800 hover:underline">Aviso Legal</a> ·
+        <a href="../legal/privacidad.html" class="hover:text-slate-800 hover:underline">Política de Privacidad</a> ·
+        <a href="../legal/cookies.html" class="hover:text-slate-800 hover:underline">Cookies</a> ·
+        <a href="../legal/terminos.html" class="hover:text-slate-800 hover:underline">Términos de Uso</a> ·
+        <a href="../legal/index.html" class="hover:text-slate-800 hover:underline font-semibold">Centro Legal</a> ·
+        <a href="../" class="hover:text-slate-800 hover:underline font-semibold">← Inicio</a>
+      </nav>
+    </footer>
+
     <!-- MODAL DE MOCIÓN -->
     <div id="motionModal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
       <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer" onclick="closeModal()"></div>
@@ -520,5 +571,6 @@
       motionsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   </script>
+  <script src="../legal/banner.js"></script>
 </body>
 </html>

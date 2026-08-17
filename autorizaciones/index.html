@@ -4,8 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
-   <title>Generador de Justificantes</title>
+   <title>Generador de Justificantes y Autorizaciones | Club de Debate UMU</title>
+  <meta name="description" content="Generador de justificantes de asistencia y autorizaciones para torneos y actividades de debate universitario a partir de plantillas Word (.docx) y listados CSV." />
+  <meta name="keywords" content="generador justificantes debate, autorizaciones debate, justificantes universitarios Word CSV, club debate UMU" />
+  <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/autorizaciones/" />
   <link rel="icon" href="./../img/logos/LogoClubBocatas.png">
+
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Generador de Justificantes de Debate",
+    "url": "https://josefervg.github.io/Debate_UMU/autorizaciones/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "description": "Generador asistido en local para maquetar justificantes y autorizaciones en formato Word.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Club de Debate UMU",
+      "url": "https://josefervg.github.io/Debate_UMU/"
+    }
+  }
+  </script>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -75,14 +102,32 @@
 
   <main class="w-full max-w-5xl glass-card rounded-3xl p-8 md:p-12 mb-20">
     
-    <header class="text-center mb-12">
+    <header class="text-center mb-8">
       <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
         Generador de <span class="text-orange-500">Justificantes</span>
       </h1>
       <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-        Herramienta para crear justificantes
+        Herramienta para crear justificantes de asistencia y autorizaciones
       </p>
     </header>
+
+    <!-- Avisos de Privacidad RGPD y Validez Legal -->
+    <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-start gap-2.5">
+        <span class="text-lg">🔒</span>
+        <div>
+          <strong class="block font-bold">Privacidad RGPD (Procesamiento en Local):</strong>
+          Los datos personales (nombres y DNI) se procesan 100% en la memoria de tu navegador. Ningún dato se sube a internet ni se almacena en ningún servidor.
+        </div>
+      </div>
+      <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-950 flex items-start gap-2.5">
+        <span class="text-lg">⚖️</span>
+        <div>
+          <strong class="block font-bold">Aviso de Validez Legal:</strong>
+          Esta herramienta genera borradores en Word. Para tener validez académica oficial, el documento debe estar debidamente firmado y sellado por la autoridad competente.
+        </div>
+      </div>
+    </div>
 
     <section class="mb-12">
       <div class="flex items-center gap-3 mb-6">
@@ -167,11 +212,23 @@
       </div>
 
       <button id="btnGenerate" class="btn-main w-full py-5 rounded-2xl text-white font-extrabold text-xl shadow-xl flex justify-center items-center gap-3">
-        <span>🚀 Generar ZIP de Acreditaciones</span>
+        <span>🚀 Generar ZIP de Justificantes</span>
         <div id="spinner" class="hidden animate-spin w-6 h-6 border-4 border-white/30 border-t-white rounded-full"></div>
       </button>
 
     </section>
+
+    <!-- Footer Legal -->
+    <footer class="mt-12 pt-6 border-t border-slate-200 text-center text-xs text-slate-500">
+      <p>© Club de Debate UMU — Universidad de Murcia</p>
+      <nav aria-label="Información legal" class="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1 text-slate-500">
+        <a href="../legal/aviso-legal.html" class="hover:text-slate-800 hover:underline">Aviso Legal</a> ·
+        <a href="../legal/privacidad.html" class="hover:text-slate-800 hover:underline">Política de Privacidad</a> ·
+        <a href="../legal/cookies.html" class="hover:text-slate-800 hover:underline">Cookies</a> ·
+        <a href="../legal/terminos.html" class="hover:text-slate-800 hover:underline">Términos de Uso</a> ·
+        <a href="../legal/index.html" class="hover:text-slate-800 hover:underline font-semibold">Centro Legal</a>
+      </nav>
+    </footer>
 
   </main>
 
@@ -321,5 +378,6 @@
     });
 
   </script>
+  <script src="../legal/banner.js"></script>
 </body>
 </html>

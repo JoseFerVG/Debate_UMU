@@ -3,9 +3,35 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Generador de Acreditaciones v2</title>
+  <title>Generador de Acreditaciones y Diplomas | Torneos de Debate — Club de Debate UMU</title>
+  <meta name="description" content="Generador automático y gratuito de acreditaciones, gafetes y diplomas para torneos de debate parlamentario y eventos universitarios mediante CSV." />
+  <meta name="keywords" content="generador acreditaciones, acreditaciones torneo debate, diplomas debate, generador gafetes CSV, club de debate UMU" />
+  <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/acreditaciones/" />
   <link rel="icon" href="../img/logos/LogoClubBocatas.png">
+
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Generador de Acreditaciones y Diplomas",
+    "url": "https://josefervg.github.io/Debate_UMU/acreditaciones/",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "description": "Herramienta en local para diseñar y generar acreditaciones en PDF por lotes mediante CSV para eventos y torneos de debate.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Club de Debate UMU",
+      "url": "https://josefervg.github.io/Debate_UMU/"
+    }
+  }
+  </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -103,6 +129,13 @@
         <div class="space-y-4">
           <h2 class="text-xl font-semibold">Configuración</h2>
           <p class="text-sm text-zinc-600">Sube imagen base y CSV. <br><strong>Truco:</strong> Guarda tu Excel como CSV UTF-8.</p>
+
+          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-start gap-2">
+            <span class="text-base">🔒</span>
+            <div>
+              <strong>Privacidad por diseño (RGPD):</strong> El procesamiento de archivos CSV e imágenes ocurre 100% en local en tu navegador. No se envía ni almacena ningún dato en servidores externos.
+            </div>
+          </div>
 
           <div id="imgDropzone" class="dropzone" title="Arrastra / suelta imagen o haz click">
             <input id="imgInput" type="file" accept="image/*" class="hidden" />
@@ -292,9 +325,16 @@
       </div>
     </section>
 
-    <section class="mt-10 text-center pb-10">
-      <p class="text-xs text-zinc-500">© <span id="year"></span> Club de Debate UMU · Hecho por JFK</p>
-    </section>
+    <footer class="mt-10 text-center pb-10 text-xs text-zinc-500">
+      <p>© <span id="year"></span> Club de Debate UMU — Universidad de Murcia</p>
+      <nav aria-label="Información legal" class="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1 text-zinc-500">
+        <a href="../legal/aviso-legal.html" class="hover:text-zinc-800 hover:underline">Aviso Legal</a> ·
+        <a href="../legal/privacidad.html" class="hover:text-zinc-800 hover:underline">Política de Privacidad</a> ·
+        <a href="../legal/cookies.html" class="hover:text-zinc-800 hover:underline">Cookies</a> ·
+        <a href="../legal/terminos.html" class="hover:text-zinc-800 hover:underline">Términos de Uso</a> ·
+        <a href="../legal/index.html" class="hover:text-zinc-800 hover:underline font-semibold">Centro Legal</a>
+      </nav>
+    </footer>
   </main>
 
   <script>
@@ -794,6 +834,7 @@
     // Init
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="../legal/banner.js"></script>
 </body>
 </html>
 

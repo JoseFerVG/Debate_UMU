@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer | Club de Debate UMU</title>
+    <title>Timer de Debate BP Online | Cronómetro Oficial — Club de Debate UMU</title>
+    <meta name="description" content="Temporizador online para debates parlamentarios en formato Británico (BP) y debate académico. Campanas automáticas, tiempo de cortesía y control por teclado." />
+    <meta name="keywords" content="timer debate, cronometro debate BP, timer parlamentario británico, debate timer online, campanas debate, club de debate UMU" />
+    <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/timer/" />
     <link rel="icon" href="../img/logos/LogoClubBocatas.png">
+
+    <!-- GEO & Local SEO -->
+    <meta name="geo.region" content="ES-MU" />
+    <meta name="geo.placename" content="Murcia" />
+    <meta name="geo.position" content="38.0163;-1.1685" />
+    <meta name="ICBM" content="38.0163, -1.1685" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -12,6 +21,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Timer de Debate BP",
+      "url": "https://josefervg.github.io/Debate_UMU/timer/",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "description": "Cronómetro especializado para debates en formato Parlamentario Británico con señales acústicas de tiempo protegido y cortesía.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Club de Debate UMU",
+        "url": "https://josefervg.github.io/Debate_UMU/"
+      }
+    }
+    </script>
 
     <script>
         tailwind.config = {
@@ -274,8 +301,14 @@
                 <audio id="alarmAudio" src="audio/alarma.mp3" preload="auto"></audio>
             </div>
             
-            <div class="mt-auto pt-6 text-center text-xs text-slate-400 font-medium border-t border-slate-200/50 dark:border-slate-700/50">
-                Club de Debate UMU
+            <div class="mt-auto pt-6 text-center text-xs text-slate-400 font-medium border-t border-slate-200/50 dark:border-slate-700/50 space-y-1">
+                <div>Club de Debate UMU — Universidad de Murcia</div>
+                <div class="text-[10px] space-x-1 text-slate-400">
+                    <a href="../legal/aviso-legal.html" class="hover:underline">Aviso Legal</a> ·
+                    <a href="../legal/privacidad.html" class="hover:underline">Privacidad</a> ·
+                    <a href="../legal/cookies.html" class="hover:underline">Cookies</a> ·
+                    <a href="../legal/terminos.html" class="hover:underline">Términos</a>
+                </div>
             </div>
         </div>
     </div>
@@ -770,5 +803,6 @@
         });
 
     </script>
+    <script src="../legal/banner.js"></script>
 </body>
 </html>
