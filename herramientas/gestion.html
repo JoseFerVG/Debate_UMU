@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Organización y Gestión de Torneos | Club de Debate UMU</title>
+  <meta name="description" content="Herramientas web para organizadores de torneos de debate: Generador de acreditaciones en PDF y creador de justificantes en Word (.docx)." />
+  <meta name="keywords" content="generador acreditaciones debate, crear justificantes asistencia debate, club de debate umu" />
+  <meta name="author" content="Club de Debate UMU — Universidad de Murcia" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/herramientas/gestion.html" />
+  <link rel="icon" type="image/png" href="../img/logos/LogoClubBocatas.png" />
+  <meta name="theme-color" content="#FFD8B1" />
+
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#FFD8B1',
+              green: '#C1E1C1',
+              dark: '#1e293b',
+              light: '#f8fafc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans relative overflow-x-hidden selection:bg-brand-orange selection:text-brand-dark">
+
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-orange/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-brand-green/35 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+    <!-- NAVBAR -->
+    <nav class="flex items-center justify-between pb-6 mb-6 border-b border-slate-200" aria-label="Navegación principal">
+      <a href="../index.html" class="flex items-center gap-3 group">
+        <img src="../img/logos/LogoClubBocatas.png" alt="Logo Club de Debate UMU" class="w-9 h-9 drop-shadow-sm group-hover:scale-105 transition-transform" />
+        <div>
+          <span class="font-bold text-slate-800 text-sm block">Club de Debate UMU</span>
+          <span class="text-[11px] text-slate-500">Universidad de Murcia</span>
+        </div>
+      </a>
+
+      <a href="./index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/80 border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-all">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+        </svg>
+        Todas las Categorías
+      </a>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <nav class="mb-6" aria-label="Ruta de exploración">
+      <ol class="flex items-center gap-2 text-xs text-slate-500">
+        <li><a href="../index.html" class="hover:text-slate-800">Inicio</a></li>
+        <li>/</li>
+        <li><a href="./index.html" class="hover:text-slate-800">Herramientas</a></li>
+        <li>/</li>
+        <li class="font-semibold text-slate-800" aria-current="page">Organización y Gestión</li>
+      </ol>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="mb-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        Organización y Gestión de Torneos
+      </h1>
+      <p class="text-slate-600 text-sm max-w-xl">
+        Herramientas para generar acreditaciones en PDF y justificantes de asistencia a partir de listados CSV.
+      </p>
+    </header>
+
+    <!-- LISTA DE HERRAMIENTAS -->
+    <div class="space-y-4 mb-12">
+
+      <!-- Acreditaciones -->
+      <article class="glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-brand-orange flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1 max-w-xl">
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-slate-800">Generador de Acreditaciones</h2>
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-semibold">PDF por CSV</span>
+          </div>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Diseñador e impresor por lotes de identificaciones, credenciales de orador, jueces y diplomas en PDF.
+          </p>
+        </div>
+        <div class="shrink-0">
+          <a href="../acreditaciones/" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-dark text-white text-xs font-semibold hover:bg-slate-800 transition-all">
+            Abrir Acreditaciones →
+          </a>
+        </div>
+      </article>
+
+      <!-- Justificantes -->
+      <article class="glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-brand-orange flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1 max-w-xl">
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-slate-800">Generador de Justificantes</h2>
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-semibold">Word .docx</span>
+          </div>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Generador automático de cartas de autorización y justificantes académicos para los participantes de torneos.
+          </p>
+        </div>
+        <div class="shrink-0">
+          <a href="../autorizaciones/" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-dark text-white text-xs font-semibold hover:bg-slate-800 transition-all">
+            Abrir Justificantes →
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 border-t border-slate-200 text-xs text-slate-500">
+      <p>© <span id="year"></span> Club de Debate UMU · Universidad de Murcia</p>
+      <nav class="mt-2 flex justify-center gap-3">
+        <a href="../index.html" class="hover:underline">Inicio</a>
+        <span>·</span>
+        <a href="./index.html" class="hover:underline">Herramientas</a>
+        <span>·</span>
+        <a href="./debate.html" class="hover:underline">Debate BP</a>
+        <span>·</span>
+        <a href="./diseno.html" class="hover:underline">Diseño</a>
+        <span>·</span>
+        <a href="./productividad.html" class="hover:underline">Productividad</a>
+        <span>·</span>
+        <a href="../legal/privacidad.html" class="hover:underline">Privacidad</a>
+      </nav>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="../legal/banner.js"></script>
+</body>
+</html>

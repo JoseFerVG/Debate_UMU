@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ═══════════════════════════════════════════════
+       TÍTULO Y METADATOS SEO
+       ═══════════════════════════════════════════════ -->
+  <title>Herramientas de Debate | Club de Debate UMU — Universidad de Murcia</title>
+  <meta name="description" content="Suite de herramientas web gratuitas para debate parlamentario británico (BP), gestión de torneos, diseño y productividad. Club de Debate UMU." />
+  <meta name="keywords" content="herramientas debate, mocionero bp, timer debate bp, generador acreditaciones, creador logos debate, timer pomodoro, club de debate umu" />
+  <meta name="author" content="Club de Debate UMU — Universidad de Murcia" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- URL canónica -->
+  <link rel="canonical" href="https://josefervg.github.io/Debate_UMU/herramientas/" />
+  <link rel="icon" type="image/png" href="../img/logos/LogoClubBocatas.png" />
+  <meta name="theme-color" content="#FFD8B1" />
+
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Suite de Herramientas de Debate UMU",
+    "url": "https://josefervg.github.io/Debate_UMU/herramientas/",
+    "description": "Directorio estructurado por categorías de utilidades web para oratoria, debate parlamentario y torneos.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Club de Debate UMU",
+      "url": "https://josefervg.github.io/Debate_UMU/"
+    }
+  }
+  </script>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#FFD8B1',
+              green: '#C1E1C1',
+              dark: '#1e293b',
+              light: '#f8fafc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.92);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.08);
+    }
+    .pill-active {
+      background-color: #1e293b;
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans relative overflow-x-hidden selection:bg-brand-orange selection:text-brand-dark">
+
+  <!-- Fondo decorativo sutil -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-orange/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-brand-green/35 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+    <!-- ══════════════════════ NAVBAR ══════════════════════ -->
+    <nav class="flex items-center justify-between pb-6 mb-8 border-b border-slate-200" aria-label="Navegación principal">
+      <a href="../index.html" class="flex items-center gap-3 group">
+        <img src="../img/logos/LogoClubBocatas.png" alt="Logo Club de Debate UMU" class="w-9 h-9 drop-shadow-sm group-hover:scale-105 transition-transform" />
+        <div>
+          <span class="font-bold text-slate-800 text-sm block">Club de Debate UMU</span>
+          <span class="text-[11px] text-slate-500">Universidad de Murcia</span>
+        </div>
+      </a>
+
+      <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/80 border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-all">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+        </svg>
+        Inicio
+      </a>
+    </nav>
+
+    <!-- ══════════════════════ ENCABEZADO ══════════════════════ -->
+    <header class="mb-8 text-center sm:text-left">
+      <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+        Suite de Herramientas Web
+      </span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        Categorías de Herramientas
+      </h1>
+      <p class="text-slate-600 text-sm max-w-xl">
+        Aplicaciones web para oratoria, debate parlamentario británico (BP), organización de torneos y estudio.
+      </p>
+    </header>
+
+    <!-- ══════════════════════ LISTA DE CATEGORÍAS ══════════════════════ -->
+    <div class="space-y-8 mb-12">
+
+      <!-- Categoría 1: Debate & Competición -->
+      <section class="glass-card rounded-2xl p-6 border-t-4 border-t-brand-green" aria-labelledby="cat-debate-heading">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200/80">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </span>
+            <div>
+              <h2 id="cat-debate-heading" class="text-base font-bold text-slate-800">
+                Debate y Competición BP
+              </h2>
+              <p class="text-xs text-slate-500">Mociones, cronómetro oficial de discursos y tiempo de preparación.</p>
+            </div>
+          </div>
+          <a href="./debate.html" class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors">
+            Ver categoría →
+          </a>
+        </div>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-3" role="list">
+          <li>
+            <a href="../mocionero/" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-emerald-700 transition-colors">Mocionero</span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Buscador y generador de mociones.</span>
+            </a>
+          </li>
+          <li>
+            <a href="../timer/" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-emerald-700 transition-colors">Timer BP 7 min</span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Cronómetro con campanas oficiales.</span>
+            </a>
+          </li>
+          <li>
+            <a href="../timer/preptime.html" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-emerald-700 transition-colors">Preptime 15 min</span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Preparación guiada en parejas.</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Categoría 2: Organización & Gestión -->
+      <section class="glass-card rounded-2xl p-6 border-t-4 border-t-brand-orange" aria-labelledby="cat-gestion-heading">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200/80">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </span>
+            <div>
+              <h2 id="cat-gestion-heading" class="text-base font-bold text-slate-800">
+                Organización y Gestión
+              </h2>
+              <p class="text-xs text-slate-500">Automatización de acreditaciones e impresiones mediante CSV.</p>
+            </div>
+          </div>
+          <a href="./gestion.html" class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors">
+            Ver categoría →
+          </a>
+        </div>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
+          <li>
+            <a href="../acreditaciones/" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-slate-900 transition-colors">Acreditaciones</span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Generación de gafetes y diplomas en PDF.</span>
+            </a>
+          </li>
+          <li>
+            <a href="../autorizaciones/" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-slate-900 transition-colors">Justificantes</span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Certificados de asistencia en Word (.docx).</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Categoría 3: Diseño & Identidad -->
+      <section class="glass-card rounded-2xl p-6 border-t-4 border-t-brand-dark" aria-labelledby="cat-diseno-heading">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200/80">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
+              </svg>
+            </span>
+            <div>
+              <h2 id="cat-diseno-heading" class="text-base font-bold text-slate-800">
+                Diseño e Identidad
+              </h2>
+              <p class="text-xs text-slate-500">Creación de escudos y logotipos de equipos de debate.</p>
+            </div>
+          </div>
+          <a href="./diseno.html" class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors">
+            Ver categoría →
+          </a>
+        </div>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
+          <li>
+            <a href="../logos-bpmurcia/" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-slate-900 transition-colors flex items-center gap-1.5">
+                Creador de Logos BP Murcia
+                <span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.2 rounded font-semibold">Oficial</span>
+              </span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Generador del logo oficial con skyline y exportación milimétrica.</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Categoría 4: Productividad & Estudio -->
+      <section class="glass-card rounded-2xl p-6 border-t-4 border-t-brand-green" aria-labelledby="cat-prod-heading">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200/80">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+              </svg>
+            </span>
+            <div>
+              <h2 id="cat-prod-heading" class="text-base font-bold text-slate-800">
+                Productividad y Estudio
+              </h2>
+              <p class="text-xs text-slate-500">Temporizadores para estudio y preparación de casos.</p>
+            </div>
+          </div>
+          <a href="./productividad.html" class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors">
+            Ver categoría →
+          </a>
+        </div>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
+          <li>
+            <a href="../pomodoro.html" class="p-3.5 rounded-xl bg-white/60 hover:bg-slate-100/80 border border-slate-200/80 block transition-all group">
+              <span class="text-xs font-bold text-slate-800 block group-hover:text-slate-900 transition-colors">Timer Pomodoro</span>
+              <span class="text-[11px] text-slate-500 block mt-0.5">Técnica 25/5 con modo flotante Picture-in-Picture.</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- ══════════════════════ FOOTER ══════════════════════ -->
+    <footer class="text-center py-6 border-t border-slate-200 text-xs text-slate-500">
+      <p>© <span id="year"></span> Club de Debate UMU · Universidad de Murcia</p>
+      <nav class="mt-2 flex justify-center gap-3">
+        <a href="../index.html" class="hover:underline">Inicio</a>
+        <span>·</span>
+        <a href="./debate.html" class="hover:underline">Debate BP</a>
+        <span>·</span>
+        <a href="./gestion.html" class="hover:underline">Gestión</a>
+        <span>·</span>
+        <a href="./diseno.html" class="hover:underline">Diseño</a>
+        <span>·</span>
+        <a href="./productividad.html" class="hover:underline">Productividad</a>
+        <span>·</span>
+        <a href="../legal/privacidad.html" class="hover:underline">Privacidad</a>
+      </nav>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="../legal/banner.js"></script>
+</body>
+</html>

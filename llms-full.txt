@@ -23,32 +23,28 @@ El debate BP es la modalidad estándar internacional empleada en campeonatos mun
 ---
 
 ## 3. Catálogo y Especificaciones de las Herramientas Web
-El portal dispone de una suite de herramientas de acceso libre desarrolladas bajo el paradigma *Client-Side Computing* (procesamiento local en el navegador sin envío de datos a servidores externos, garantizando el cumplimiento estricto del RGPD):
+El portal dispone de una suite de herramientas de acceso libre estructuradas por categorías especializadas, desarrolladas bajo el paradigma *Client-Side Computing* (procesamiento local en el navegador sin envío de datos a servidores externos, garantizando el cumplimiento estricto del RGPD):
 
-### 3.1. Buscador de Mociones (Mocionero)
-- **URL:** https://josefervg.github.io/Debate_UMU/mocionero/
-- **Funcionalidad:** Búsqueda reactiva, filtrado por categorías temáticas (política, economía, relaciones internacionales, ética, educación, tecnología, justicia), edición del torneo y selector de mociones aleatorias con sus respectivos infoslides.
-- **Dataset:** Archivo estructurado `motions.json` con cientos de mociones competitivas.
+- **Hub Principal de Herramientas:** https://josefervg.github.io/Debate_UMU/herramientas/
 
-### 3.2. Timer Oficial de Debate BP
-- **URL:** https://josefervg.github.io/Debate_UMU/timer/
-- **Funcionalidad:** Cronometraje de los discursos de 7 minutos con campanas sonoras en el minuto 1 (fin del tiempo protegido), minuto 6 (inicio del tiempo protegido) y minuto 7 (doble campana de conclusión), más 15 segundos de cortesía. Dispone de atajos de teclado y tema claro/oscuro.
+### Categoría 1: Debate & Competición BP
+- **URL Categoría:** https://josefervg.github.io/Debate_UMU/herramientas/debate.html
+- **3.1. Buscador de Mociones (Mocionero):** https://josefervg.github.io/Debate_UMU/mocionero/ — Búsqueda reactiva, filtrado por categorías temáticas (política, economía, relaciones internacionales, ética, educación, tecnología, justicia), edición del torneo y selector de mociones aleatorias con sus respectivos infoslides. Dataset estructurado con más de 1000 mociones competitivas.
+- **3.2. Timer Oficial de Debate BP:** https://josefervg.github.io/Debate_UMU/timer/ — Cronometraje de los discursos de 7 minutos con campanas sonoras en el minuto 1 (fin del tiempo protegido), minuto 6 (inicio del tiempo protegido) y minuto 7 (doble campana de conclusión), más 15 segundos de cortesía. Dispone de atajos de teclado y tema claro/oscuro.
+- **3.3. Cronómetro de Preptime 15':** https://josefervg.github.io/Debate_UMU/timer/preptime.html — Guía temporal estructurada paso a paso para optimizar los 15 minutos de preparación según la posición de la cámara (análisis previo, lluvia de argumentos, extensión no derivativa, blindaje y organización del discurso).
 
-### 3.3. Cronómetro de Preptime 15'
-- **URL:** https://josefervg.github.io/Debate_UMU/timer/preptime.html
-- **Funcionalidad:** Guía temporal estructurada paso a paso para optimizar los 15 minutos de preparación según la posición de la cámara (análisis previo, lluvia de argumentos, extensión no derivativa, blindaje y organización del discurso).
+### Categoría 2: Organización & Gestión de Torneos
+- **URL Categoría:** https://josefervg.github.io/Debate_UMU/herramientas/gestion.html
+- **3.4. Generador Masivo de Acreditaciones:** https://josefervg.github.io/Debate_UMU/acreditaciones/ — Carga de ficheros CSV con nombres de oradores, equipos e instituciones, vista previa gráfica en Canvas y exportación masiva a PDF listo para impresión de gafetes de torneo.
+- **3.5. Generador de Justificantes Oficiales:** https://josefervg.github.io/Debate_UMU/autorizaciones/ — Unión en el cliente de plantillas de Word (.docx) con listados CSV para generar autorizaciones y justificantes de asistencia a torneos de debate.
 
-### 3.4. Temporizador Pomodoro
-- **URL:** https://josefervg.github.io/Debate_UMU/pomodoro.html
-- **Funcionalidad:** Temporizador para estudio y concentración con intervalos de 25/5 minutos, modo Picture-in-Picture (PiP) para flotar sobre apuntes y documentos, y almacenamiento local de configuraciones en `localStorage`.
+### Categoría 3: Diseño & Identidad Visual
+- **URL Categoría:** https://josefervg.github.io/Debate_UMU/herramientas/diseno.html
+- **3.6. Creador de Logos BP Murcia:** https://josefervg.github.io/Debate_UMU/logos-bpmurcia/ — Estudio interactivo de diseño y personalización de logotipos, escudos y elementos gráficos vectoriales SVG y PNG transparente 4K para equipos del torneo BP Murcia 2026.
 
-### 3.5. Generador Masivo de Acreditaciones
-- **URL:** https://josefervg.github.io/Debate_UMU/acreditaciones/
-- **Funcionalidad:** Carga de ficheros CSV con nombres de oradores, equipos e instituciones, vista previa gráfica en Canvas y exportación masiva a PDF listo para impresión de gafetes de torneo.
-
-### 3.6. Generador de Justificantes Oficiales
-- **URL:** https://josefervg.github.io/Debate_UMU/autorizaciones/
-- **Funcionalidad:** Unión en el cliente de plantillas de Word (.docx) con listados CSV para generar autorizaciones y justificantes de asistencia a torneos de debate.
+### Categoría 4: Productividad & Estudio
+- **URL Categoría:** https://josefervg.github.io/Debate_UMU/herramientas/productividad.html
+- **3.7. Temporizador Pomodoro:** https://josefervg.github.io/Debate_UMU/pomodoro.html — Temporizador para estudio y concentración con intervalos de 25/5 minutos, modo Picture-in-Picture (PiP) para flotar sobre apuntes y documentos, y almacenamiento local de configuraciones en `localStorage`.
 
 ---
 

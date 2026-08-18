@@ -16,12 +16,18 @@
 ## Suite de Herramientas Web Gratuitas (Client-Side / Sin Backend)
 Todas las herramientas procesan la información 100% en el navegador web del usuario, garantizando privacidad absoluta conforme al RGPD:
 
-- [Mocionero de Debate BP](https://josefervg.github.io/Debate_UMU/mocionero/): Buscador reactivo y generador aleatorio de mociones de debate parlamentario clasificadas por torneos, categorías y tipos de moción.
-- [Timer de Debate BP](https://josefervg.github.io/Debate_UMU/timer/): Cronómetro oficial de 7 minutos con avisos acústicos de tiempo protegido, modo oscuro y atajos de teclado.
-- [Timer de Preptime 15 Minutos](https://josefervg.github.io/Debate_UMU/timer/preptime.html): Cronómetro con fases guiadas para el tiempo de preparación en formato BP.
-- [Timer Pomodoro con PiP](https://josefervg.github.io/Debate_UMU/pomodoro.html): Temporizador de estudio y concentración con soporte flotante Picture-in-Picture.
-- [Generador de Acreditaciones](https://josefervg.github.io/Debate_UMU/acreditaciones/): Diseñador y generador masivo en PDF de credenciales para torneos mediante CSV y Canvas.
-- [Generador de Justificantes](https://josefervg.github.io/Debate_UMU/autorizaciones/): Creador masivo de autorizaciones y justificantes en formato Word (.docx) a partir de listados CSV.
+- [Portal / Hub Central de Herramientas](https://josefervg.github.io/Debate_UMU/herramientas/): Directorio completo y clasificado por categorías de todas las aplicaciones de la suite.
+- **Categoría Debate & Competición BP:** [Página de Categoría](https://josefervg.github.io/Debate_UMU/herramientas/debate.html)
+  - [Mocionero de Debate BP](https://josefervg.github.io/Debate_UMU/mocionero/): Buscador reactivo y generador aleatorio de mociones de debate parlamentario clasificadas por torneos, categorías y tipos de moción.
+  - [Timer de Debate BP](https://josefervg.github.io/Debate_UMU/timer/): Cronómetro oficial de 7 minutos con avisos acústicos de tiempo protegido, modo oscuro y atajos de teclado.
+  - [Timer de Preptime 15 Minutos](https://josefervg.github.io/Debate_UMU/timer/preptime.html): Cronómetro con fases guiadas para el tiempo de preparación en formato BP.
+- **Categoría Organización & Gestión:** [Página de Categoría](https://josefervg.github.io/Debate_UMU/herramientas/gestion.html)
+  - [Generador de Acreditaciones](https://josefervg.github.io/Debate_UMU/acreditaciones/): Diseñador y generador masivo en PDF de credenciales para torneos mediante CSV y Canvas.
+  - [Generador de Justificantes](https://josefervg.github.io/Debate_UMU/autorizaciones/): Creador masivo de autorizaciones y justificantes en formato Word (.docx) a partir de listados CSV.
+- **Categoría Diseño & Identidad Visual:** [Página de Categoría](https://josefervg.github.io/Debate_UMU/herramientas/diseno.html)
+  - [Creador de Logos BP Murcia](https://josefervg.github.io/Debate_UMU/logos-bpmurcia/): Estudio y generador de logotipos, escudos y elementos vectoriales SVG/PNG 4K para equipos del torneo BP Murcia.
+- **Categoría Productividad & Estudio:** [Página de Categoría](https://josefervg.github.io/Debate_UMU/herramientas/productividad.html)
+  - [Timer Pomodoro con PiP](https://josefervg.github.io/Debate_UMU/pomodoro.html): Temporizador de estudio y concentración con soporte flotante Picture-in-Picture.
 - [Centro Legal y Transparencia](https://josefervg.github.io/Debate_UMU/legal/): Políticas de privacidad RGPD, Aviso Legal LSSI-CE, cookies y términos de uso.
 
 ## Circuito de Competición

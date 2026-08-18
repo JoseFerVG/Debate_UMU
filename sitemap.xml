@@ -93,6 +93,42 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://josefervg.github.io/Debate_UMU/herramientas/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://josefervg.github.io/Debate_UMU/herramientas/debate.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josefervg.github.io/Debate_UMU/herramientas/gestion.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josefervg.github.io/Debate_UMU/herramientas/diseno.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josefervg.github.io/Debate_UMU/herramientas/productividad.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josefervg.github.io/Debate_UMU/logos-bpmurcia/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://josefervg.github.io/Debate_UMU/llms.txt</loc>
     <lastmod>2026-08-18</lastmod>
     <changefreq>weekly</changefreq>

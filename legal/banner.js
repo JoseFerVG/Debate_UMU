@@ -9,6 +9,8 @@
                      window.location.pathname.includes('/mocionero/') ||
                      window.location.pathname.includes('/timer/') ||
                      window.location.pathname.includes('/pagpubli/') ||
+                     window.location.pathname.includes('/herramientas/') ||
+                     window.location.pathname.includes('/logos-bpmurcia/') ||
                      window.location.pathname.includes('/legal/');
     
     const basePath = isSubdir ? '../legal/' : './legal/';
