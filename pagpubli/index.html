@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="¿Quieres que tus ideas hagan ruido? | Club de Debate UMU">
   <meta property="og:description" content="Aprende oratoria, pensamiento crítico y conoce a gente increíble en la UMU. ¡Inscripciones abiertas!">
-  <meta property="og:image" content="../img/equipo-debate-umu.jpg">
+  <meta property="og:image" content="fotosPubli/BPGranadaFinos.jpg">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -124,28 +124,65 @@
         </span>
       </div>
 
-      <!-- FOTO REAL DEL EQUIPO (Social Proof Inmediato) -->
+      <!-- CARRUSEL REAL DEL EQUIPO (Social Proof Inmediato) -->
       <div class="mt-8 sm:mt-10 w-full max-w-3xl">
-        <div class="neo-box bg-white p-2.5 sm:p-4 rounded-3xl relative transform hover:-rotate-0.5 transition-transform duration-300">
+        <div id="clubCarousel" class="neo-box bg-white p-2.5 sm:p-4 rounded-3xl relative transform sm:hover:-rotate-0.5 transition-transform duration-300 select-none">
           
           <!-- Sticker cinta adhesiva decorativa -->
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-300 border-2 border-black px-3.5 py-0.5 text-[11px] font-black uppercase tracking-wider rotate-1 shadow-sm inline-flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-black shrink-0" fill="currentColor" viewBox="0 0 24 24">
+          <div class="absolute -top-3.5 sm:-top-4 left-1/2 -translate-x-1/2 bg-yellow-300 border-2 border-black px-2.5 sm:px-3.5 py-1 text-[10px] sm:text-xs font-black uppercase tracking-wider rotate-1 shadow-[2px_2px_0px_#000] inline-flex items-center gap-1.5 z-30 whitespace-nowrap">
+            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-black shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6l.8.8.8-.8v-6H18v-2l-2-2z"/>
             </svg>
             <span>¡Comunidad real de la UMU!</span>
           </div>
 
-          <div class="relative overflow-hidden rounded-2xl aspect-[16/9] sm:aspect-[21/9] bg-zinc-900">
-            <img src="../img/equipo-debate-umu.jpg" 
-                 alt="Equipo del Club de Debate de la Universidad de Murcia" 
-                 class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-3 sm:p-5">
-              <p class="text-white text-xs sm:text-sm font-bold text-left drop-shadow flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-pink-500 inline-block"></span>
-                <span>Torneos nacionales, talleres presenciales y un ambiente inmejorable.</span>
-              </p>
+          <!-- Marco del carrusel con aspect ratio optimizado -->
+          <div class="relative overflow-hidden rounded-2xl aspect-[16/10] sm:aspect-[16/9] bg-zinc-950">
+            
+            <!-- Slides con cross-fade continuo -->
+            <img id="carouselSlideA"
+                 src="fotosPubli/BPGranadaFinos.jpg" 
+                 alt="Miembros del Club de Debate UMU en salas de debate" 
+                 class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-400 ease-in-out opacity-100 z-10">
+                 
+            <img id="carouselSlideB"
+                 src="" 
+                 alt="" 
+                 class="absolute inset-0 w-full h-full object-cover transition-opacity duration-400 ease-in-out opacity-0 z-10 pointer-events-none">
+
+            <!-- Botones de navegación Neo-Brutalistas -->
+            <button id="carouselPrevBtn" type="button" aria-label="Foto anterior"
+                    class="absolute top-1/2 left-2 sm:left-3 -translate-y-1/2 z-30 w-10 h-10 rounded-xl bg-white hover:bg-yellow-300 active:bg-yellow-300 text-black border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 flex items-center justify-center transition-all cursor-pointer touch-manipulation">
+              <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+              </svg>
+            </button>
+
+            <button id="carouselNextBtn" type="button" aria-label="Siguiente foto"
+                    class="absolute top-1/2 right-2 sm:right-3 -translate-y-1/2 z-30 w-10 h-10 rounded-xl bg-white hover:bg-yellow-300 active:bg-yellow-300 text-black border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 flex items-center justify-center transition-all cursor-pointer touch-manipulation">
+              <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+              </svg>
+            </button>
+
+            <!-- Badge Superior de Evento / Torneo -->
+            <div class="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 z-20">
+              <span id="carouselBadge" class="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg bg-black/80 text-yellow-300 border border-black sm:border-2 text-[10px] sm:text-xs font-black shadow-[1px_1px_0px_#000] sm:shadow-[2px_2px_0px_#000] tracking-wide backdrop-blur-xs">
+                BP Granada
+              </span>
             </div>
+
+            <!-- Overlay Inferior con Leyenda y Puntos Indicadores -->
+            <div class="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/90 via-black/40 to-transparent pt-6 sm:pt-10 pb-2.5 sm:pb-3 px-3 sm:px-5 flex flex-col sm:flex-row sm:items-end justify-between gap-1.5 sm:gap-2.5">
+              <p class="text-white text-[11px] sm:text-sm font-medium sm:font-bold leading-tight sm:leading-normal text-left drop-shadow flex items-center gap-1.5 sm:gap-2">
+                <span class="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-pink-500 inline-block shrink-0 animate-pulse"></span>
+                <span id="carouselCaption">Compañerismo y ambiente en torneos por toda España</span>
+              </p>
+
+              <!-- Indicadores / Dots -->
+              <div id="carouselDots" class="flex items-center gap-1.5 self-center sm:self-auto shrink-0 pb-0.5"></div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -507,6 +544,290 @@
     </footer>
 
   </div>
+
+  <!-- SCRIPT: Carrusel Dinámico (Primero BP Granada, luego aleatorias todo el rato) -->
+  <script>
+    (function() {
+      const slides = [
+        {
+          src: "fotosPubli/BPGranadaFinos.jpg",
+          alt: "Miembros del Club de Debate UMU en salas de debate",
+          caption: "Compañerismo y ambiente en torneos por toda España",
+          badge: "BP Granada",
+          position: "object-center"
+        },
+        {
+          src: "fotosPubli/muchaGente2025.jpg",
+          alt: "Comunidad de estudiantes en el Club de Debate UMU",
+          caption: "Nuestra comunidad: talleres presenciales abiertos a todas las carreras",
+          badge: "Comunidad UMU",
+          position: "object-[center_25%]"
+        },
+        {
+          src: "fotosPubli/bpGranadaBeltranJFK.jpg",
+          alt: "Debatiendo en el torneo BP Granada",
+          caption: "Estrategia, oratoria y emoción en cada ronda",
+          badge: "BP Granada",
+          position: "object-center"
+        },
+        {
+          src: "fotosPubli/jimanaVic.png",
+          alt: "Compañeras del Club de Debate UMU en el Torneo Interpoli",
+          caption: "Compañerismo, risas y complicidad en el Torneo Interpoli",
+          badge: "Interpoli",
+          position: "object-[center_30%]"
+        },
+        {
+          src: "fotosPubli/pepeYcompanyia.png",
+          alt: "Compañeros del Club de Debate UMU en el Torneo Rétor",
+          caption: "Amigos inseparables dentro y fuera de los debates en Rétor",
+          badge: "Rétor",
+          position: "object-[center_35%]"
+        },
+        {
+          src: "fotosPubli/LuciaAlba.jpg",
+          alt: "Sesión de formación del Club de Debate",
+          caption: "Práctica en confianza, sin miedo y a tu propio ritmo",
+          badge: "Formación",
+          position: "object-center"
+        },
+        {
+          src: "fotosPubli/carmenP.jpg",
+          alt: "Preparando intervenciones en torneo de debate",
+          caption: "Aprende a preparar argumentos sólidos e irrebatibles",
+          badge: "Preparación",
+          position: "object-[center_20%]"
+        },
+        {
+          src: "fotosPubli/bpMurcia.jpg",
+          alt: "Participantes del Torneo BP Murcia",
+          caption: "Amigos de todas las facultades y momentos únicos entre debates",
+          badge: "BP Murcia",
+          position: "object-center"
+        }
+      ];
+
+      // Precargar todas las imágenes para transiciones instantáneas
+      slides.forEach(item => {
+        const img = new Image();
+        img.src = item.src;
+      });
+
+      let currentIndex = 0;
+
+      const slideA = document.getElementById('carouselSlideA');
+      const slideB = document.getElementById('carouselSlideB');
+      const badgeEl = document.getElementById('carouselBadge');
+      const captionEl = document.getElementById('carouselCaption');
+      const dotsContainer = document.getElementById('carouselDots');
+      const prevBtn = document.getElementById('carouselPrevBtn');
+      const nextBtn = document.getElementById('carouselNextBtn');
+      const carouselContainer = document.getElementById('clubCarousel');
+
+      if (!slideA || !slideB || !badgeEl || !captionEl || !dotsContainer) return;
+
+      let activeSlide = slideA;
+      let inactiveSlide = slideB;
+      let isAnimating = false;
+      let animTimeout = null;
+
+      // Renderizar indicadores/dots
+      function renderDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', 'Ver foto ' + (i + 1));
+          dot.className = (i === currentIndex)
+            ? 'w-6 h-2 sm:h-2.5 rounded-full bg-yellow-300 border border-black shadow-[1px_1px_0px_#000] transition-all cursor-pointer touch-manipulation'
+            : 'w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-white/70 hover:bg-white border border-black/80 transition-all cursor-pointer touch-manipulation';
+          
+          function handleDot() {
+            if (i !== currentIndex) {
+              goToSlide(i);
+              resetTimer();
+            }
+          }
+          dot.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleDot();
+          });
+          dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleDot();
+          });
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      function updateDots() {
+        Array.from(dotsContainer.children).forEach((dot, i) => {
+          if (i === currentIndex) {
+            dot.className = 'w-6 h-2 sm:h-2.5 rounded-full bg-yellow-300 border border-black shadow-[1px_1px_0px_#000] transition-all cursor-pointer touch-manipulation';
+          } else {
+            dot.className = 'w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-white/70 hover:bg-white border border-black/80 transition-all cursor-pointer touch-manipulation';
+          }
+        });
+      }
+
+      function finishAnimationImmediately() {
+        if (isAnimating) {
+          clearTimeout(animTimeout);
+          inactiveSlide.classList.remove('opacity-0', 'pointer-events-none');
+          inactiveSlide.classList.add('opacity-100');
+          activeSlide.classList.remove('opacity-100');
+          activeSlide.classList.add('opacity-0', 'pointer-events-none');
+          const temp = activeSlide;
+          activeSlide = inactiveSlide;
+          inactiveSlide = temp;
+          isAnimating = false;
+        }
+      }
+
+      function goToSlide(newIndex) {
+        if (newIndex === currentIndex) return;
+        if (isAnimating) {
+          finishAnimationImmediately();
+        }
+        isAnimating = true;
+
+        const nextData = slides[newIndex];
+        currentIndex = newIndex;
+
+        // Cargar datos en slide inactivo
+        inactiveSlide.src = nextData.src;
+        inactiveSlide.alt = nextData.alt;
+        inactiveSlide.className = 'absolute inset-0 w-full h-full object-cover ' + nextData.position + ' transition-opacity duration-400 ease-in-out opacity-0 z-10';
+
+        // Actualizar badge y pie de foto
+        badgeEl.textContent = nextData.badge;
+        captionEl.textContent = nextData.caption;
+        updateDots();
+
+        // Efecto crossfade fluido
+        requestAnimationFrame(() => {
+          inactiveSlide.classList.remove('opacity-0', 'pointer-events-none');
+          inactiveSlide.classList.add('opacity-100');
+          activeSlide.classList.remove('opacity-100');
+          activeSlide.classList.add('opacity-0', 'pointer-events-none');
+
+          animTimeout = setTimeout(() => {
+            const temp = activeSlide;
+            activeSlide = inactiveSlide;
+            inactiveSlide = temp;
+            isAnimating = false;
+          }, 400);
+        });
+      }
+
+      // Avance secuencial 1 por 1 con ciclo infinito:
+      // Cuando llega al final (slide 7), vuelve a la foto 1 (slide 0)
+      function goNext() {
+        const next = (currentIndex + 1) % slides.length;
+        goToSlide(next);
+      }
+
+      function goPrev() {
+        const prev = (currentIndex - 1 + slides.length) % slides.length;
+        goToSlide(prev);
+      }
+
+      // Controlador robusto para eventos táctiles y de ratón
+      function bindNavButton(btn, action) {
+        if (!btn) return;
+        let touched = false;
+
+        btn.addEventListener('touchstart', (e) => {
+          e.stopPropagation();
+        }, { passive: true });
+
+        btn.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          touched = true;
+          action();
+          resetTimer();
+          setTimeout(() => { touched = false; }, 400);
+        });
+
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (touched) return;
+          action();
+          resetTimer();
+        });
+      }
+
+      bindNavButton(nextBtn, goNext);
+      bindNavButton(prevBtn, goPrev);
+
+      // Autoplay: 4 segundos por imagen
+      const INTERVAL_TIME = 4000;
+      let autoplayTimer = setInterval(goNext, INTERVAL_TIME);
+      let isPaused = false;
+
+      function resetTimer() {
+        clearInterval(autoplayTimer);
+        if (!isPaused) {
+          autoplayTimer = setInterval(goNext, INTERVAL_TIME);
+        }
+      }
+
+      // Pausa en hover para ratón
+      carouselContainer.addEventListener('mouseenter', () => {
+        isPaused = true;
+        clearInterval(autoplayTimer);
+      });
+      carouselContainer.addEventListener('mouseleave', () => {
+        isPaused = false;
+        resetTimer();
+      });
+
+      // Gestos táctiles Swipe sobre la foto
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      carouselContainer.addEventListener('touchstart', (e) => {
+        if (e.target.closest('#carouselPrevBtn, #carouselNextBtn, #carouselDots')) {
+          return;
+        }
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselContainer.addEventListener('touchend', (e) => {
+        if (e.target.closest('#carouselPrevBtn, #carouselNextBtn, #carouselDots')) {
+          return;
+        }
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          if (diff < 0) {
+            goNext();
+          } else {
+            goPrev();
+          }
+          resetTimer();
+        }
+      }, { passive: true });
+
+      // Teclado (flechas izquierda/derecha)
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          goNext();
+          resetTimer();
+        } else if (e.key === 'ArrowLeft') {
+          goPrev();
+          resetTimer();
+        }
+      });
+
+      // Iniciar dots
+      renderDots();
+    })();
+  </script>
 
   <!-- SCRIPT: Color vibrante aleatorio y año -->
   <script>
