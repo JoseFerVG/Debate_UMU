@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ═══════════════════════════════════════════════
+       RESOLUCIÓN DINÁMICA DE BASE PARA GITHUB PAGES
+       Garantiza que imágenes, estilos y enlaces relativos
+       funcionen sin importar la profundidad de la URL fallida
+       ═══════════════════════════════════════════════ -->
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      var repo = '/Debate_UMU/';
+      var baseHref = path.indexOf(repo) !== -1 ? repo : (window.location.hostname.endsWith('github.io') ? repo : '/');
+      if (window.location.protocol === 'file:') {
+        baseHref = './';
+      }
+      document.write('<base href="' + baseHref + '">');
+    })();
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       METADATOS SEO
+       ═══════════════════════════════════════════════ -->
+  <title>Error 404 — Moción No Encontrada | Club de Debate UMU</title>
+  <meta name="description" content="Página no encontrada (Error 404). Explora el Club de Debate de la Universidad de Murcia, nuestras herramientas de debate BP, el mocionero y los cronómetros oficiales." />
+  <meta name="author" content="Club de Debate UMU — Universidad de Murcia" />
+  <meta name="robots" content="noindex, follow" />
+
+  <!-- Favicon y tema -->
+  <link rel="icon" type="image/png" href="img/logos/LogoClubBocatas.png" />
+  <link rel="apple-touch-icon" href="img/logos/LogoClubBocatas.png" />
+  <meta name="theme-color" content="#FFD8B1" />
+  <meta name="msapplication-TileColor" content="#FFD8B1" />
+
+  <!-- GEO & Local SEO -->
+  <meta name="geo.region" content="ES-MU" />
+  <meta name="geo.placename" content="Murcia" />
+  <meta name="geo.position" content="38.0163;-1.1685" />
+  <meta name="ICBM" content="38.0163, -1.1685" />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#FFD8B1',
+              green: '#C1E1C1',
+              dark: '#1e293b',
+              light: '#f8fafc',
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+          },
+          keyframes: {
+            blob: {
+              '0%':   { transform: 'translate(0px,0px) scale(1)' },
+              '33%':  { transform: 'translate(30px,-50px) scale(1.1)' },
+              '66%':  { transform: 'translate(-20px,20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px,0px) scale(1)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+      border-radius: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+      border-color: rgba(255, 216, 177, 0.8);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans relative overflow-x-hidden selection:bg-brand-orange selection:text-brand-dark flex flex-col justify-between">
+
+  <!-- Fondos y Blobs decorativos -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-orange/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-green/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style="animation-delay: 2s;"></div>
+    <div class="absolute -bottom-8 left-1/3 w-96 h-96 bg-brand-orange/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style="animation-delay: 4s;"></div>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 w-full">
+
+    <!-- ══════════════════════ CABECERA / BRAND ══════════════════════ -->
+    <header class="text-center mb-8" role="banner">
+      <a href="index.html" class="inline-flex items-center gap-3 p-2 px-5 rounded-full bg-white/70 backdrop-blur-md shadow-sm hover:shadow-md border border-white/80 transition-all duration-300 group">
+        <img
+          src="img/logos/sinf.png"
+          alt="Logo del Club de Debate UMU"
+          width="40"
+          height="40"
+          class="h-10 w-auto group-hover:rotate-6 transition-transform duration-300"
+          onerror="this.src='img/logos/LogoClubBocatas.png'"
+        />
+        <div class="text-left">
+          <span class="block text-sm font-extrabold text-slate-900 tracking-tight leading-tight">Club de Debate UMU</span>
+          <span class="block text-xs font-semibold text-slate-500">Universidad de Murcia</span>
+        </div>
+      </a>
+    </header>
+
+    <!-- ══════════════════════ CONTENIDO PRINCIPAL ══════════════════════ -->
+    <main id="main-content" role="main" class="space-y-8">
+
+      <!-- Tarjeta Principal de Error 404 -->
+      <section class="glass-card p-8 sm:p-12 text-center relative overflow-hidden">
+        <!-- Insignia visual 404 -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-100/80 text-rose-700 text-xs font-bold uppercase tracking-wider mb-6 border border-rose-200 shadow-sm animate-pulse-slow">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          Error 404 · Moción Caída
+        </div>
+
+        <div class="relative inline-block mb-4">
+          <div class="text-7xl sm:text-9xl font-black tracking-tighter text-slate-900/90 select-none font-sans drop-shadow-sm animate-float">
+            4<span class="text-amber-500">0</span>4
+          </div>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-gradient mb-4 font-serif">
+          ¡Punto de Información! Esta página ha sido refutada
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
+          El argumento o enlace que buscas no figura en el acta de adjudicación, ha agotado su tiempo de cortesía o fue trasladado a otra sede.
+        </p>
+
+        <!-- Indicador de URL fallida -->
+        <div id="url-box" class="hidden mb-8 inline-block max-w-full">
+          <p class="text-xs text-slate-500 font-medium mb-1">Ruta solicitada no disponible:</p>
+          <code id="requested-url" class="font-mono text-xs text-rose-600 bg-rose-50/80 border border-rose-200 px-3 py-1.5 rounded-lg break-all inline-block max-w-lg"></code>
+        </div>
+
+        <!-- Botones de Acción Rápida -->
+        <div class="flex flex-wrap justify-center items-center gap-3.5">
+          <a href="index.html" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 text-white font-bold text-sm shadow-lg shadow-slate-900/15 hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98] transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            Volver al Inicio
+          </a>
+
+          <button onclick="window.history.length > 1 ? window.history.back() : window.location.href='index.html'" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/90 text-slate-700 font-bold text-sm border border-slate-200 shadow-sm hover:bg-white hover:text-slate-900 hover:shadow transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Volver a la página anterior
+          </button>
+
+          <a href="herramientas/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-orange/40 text-slate-900 font-bold text-sm border border-brand-orange/60 shadow-sm hover:bg-brand-orange/60 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            Ver Suite de Herramientas
+          </a>
+        </div>
+      </section>
+
+      <!-- ══════════════════════ WIDGET INTERACTIVO: MOCIÓN DE CONSUELO ══════════════════════ -->
+      <section class="glass-card p-6 sm:p-8 bg-gradient-to-br from-white/80 via-white/60 to-orange-50/60 border border-orange-200/50">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-200/60">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-800 text-lg font-bold shadow-sm">
+              ⚖️
+            </span>
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 leading-tight">Moción de debate de consuelo</h2>
+              <p class="text-xs text-slate-500 font-medium">Aprovecha el error 404 para poner a prueba tus 15 minutos de preparación (preptime)</p>
+            </div>
+          </div>
+          <button id="btn-nueva-mocion" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs border border-slate-200 shadow-sm transition-all active:scale-95 self-start sm:self-auto">
+            <svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Nueva moción aleatoria
+          </button>
+        </div>
+
+        <div id="motion-container" class="bg-white/90 backdrop-blur rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-2 mb-2">
+            <span id="motion-tag" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 uppercase tracking-wider">
+              Debate BP
+            </span>
+            <span id="motion-tournament" class="text-xs text-slate-500 font-medium"></span>
+          </div>
+          <p id="motion-text" class="text-base sm:text-lg font-bold text-slate-900 leading-snug mb-3"></p>
+          <div id="motion-infoslide-container" class="hidden text-xs text-slate-600 bg-amber-50/70 border-l-4 border-amber-400 p-3 rounded-r-lg mb-3">
+            <span class="font-bold text-amber-900 block mb-1">InfoSlide / Contexto:</span>
+            <p id="motion-infoslide" class="leading-relaxed"></p>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2 text-xs">
+            <a href="mocionero/" class="text-amber-700 hover:text-amber-800 font-semibold hover:underline flex items-center gap-1">
+              Ver buscador completo en el Mocionero BP →
+            </a>
+            <a href="timer/" class="text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-1 hover:underline">
+              ⏱️ Abrir cronómetro de 7 min
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════ DIRECTORIO DE ENLACES POPULARES ══════════════════════ -->
+      <section>
+        <div class="text-center mb-6">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">¿Qué estabas buscando?</h2>
+          <p class="text-sm text-slate-500 mt-1 font-medium">Acceso directo a las herramientas y secciones oficiales del Club de Debate UMU</p>
+        </div>
+
+        <!-- Barra de filtro rápido -->
+        <div class="max-w-md mx-auto mb-6">
+          <div class="relative">
+            <input
+              type="text"
+              id="quick-search"
+              placeholder="Buscar sección o herramienta (ej. timer, logos, inscripción)..."
+              class="w-full px-4 py-2.5 pl-10 text-xs sm:text-sm bg-white/80 backdrop-blur-md rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white transition-all shadow-sm"
+              aria-label="Buscar herramienta o página"
+            />
+            <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Grid de Tarjetas -->
+        <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+          <!-- 1. Inicio -->
+          <a href="index.html" class="tool-card glass-card p-5 block group" data-keywords="inicio home club debate umu universidad murcia principal">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-amber-100 text-amber-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                🏛️
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-amber-800 transition-colors text-sm">Página Principal</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Portada oficial del Club de Debate UMU, actividades, formación y reconocimientos CRAU.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 2. Mocionero BP -->
+          <a href="mocionero/" class="tool-card glass-card p-5 block group" data-keywords="mocionero mociones temas debate bp parlamentario britanico entrenamiento">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-emerald-100 text-emerald-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                📚
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-emerald-800 transition-colors text-sm">Mocionero de Debate BP</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Buscador y generador con cientos de mociones clasificadas por temática y torneo.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 3. Timer BP -->
+          <a href="timer/" class="tool-card glass-card p-5 block group" data-keywords="timer cronometro reloj campana cortesía protegido discursos 7 minutos bp">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-blue-100 text-blue-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                ⏱️
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-blue-800 transition-colors text-sm">Timer de Debate BP</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Cronómetro oficial de 7 minutos con señales acústicas de tiempo protegido y cortesía.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 4. Suite Completa de Herramientas -->
+          <a href="herramientas/" class="tool-card glass-card p-5 block group" data-keywords="herramientas utilidades suite software aplicaciones gestion diseño">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-purple-100 text-purple-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                🧰
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-purple-800 transition-colors text-sm">Suite de Herramientas</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Directorio integral clasificado en debate, diseño, gestión académica y productividad.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 5. Pomodoro -->
+          <a href="pomodoro.html" class="tool-card glass-card p-5 block group" data-keywords="pomodoro timer estudio concentracion productividad tiempo descansos">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-rose-100 text-rose-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                🍅
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-rose-800 transition-colors text-sm">Pomodoro de Estudio</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Temporizador de concentración para preparar rondas de debate y sesiones de estudio.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 6. Creador de Logos BP -->
+          <a href="logos-bpmurcia/" class="tool-card glass-card p-5 block group" data-keywords="logos escudos creador generador diseño bp murcia vectoriales torneos">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-indigo-100 text-indigo-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                🛡️
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-indigo-800 transition-colors text-sm">Creador de Logos BP</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Generador y personalizador de escudos y logotipos vectoriales para equipos de debate.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 7. Acreditaciones -->
+          <a href="acreditaciones/" class="tool-card glass-card p-5 block group" data-keywords="acreditaciones diplomas identificaciones pdf generador csv torneos">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-cyan-100 text-cyan-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                🪪
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-cyan-800 transition-colors text-sm">Acreditaciones y Diplomas</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Generación automática masiva en PDF para jueces, debatientes y participantes.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 8. Justificantes Académicos -->
+          <a href="autorizaciones/" class="tool-card glass-card p-5 block group" data-keywords="justificantes autorizaciones word docx faltas universidad asistencia torneos">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-teal-100 text-teal-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                📄
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-teal-800 transition-colors text-sm">Justificantes Académicos</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Generador oficial de autorizaciones y justificantes de asistencia en formato Word (.docx).</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 9. BP Murcia 2026 -->
+          <a href="https://debateumu.github.io/BPMurcia/2026/" target="_blank" rel="noopener noreferrer" class="tool-card glass-card p-5 block group" data-keywords="bp murcia 2026 torneo nacional inscripcion equipos adjudicacion">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-amber-100 text-amber-900 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                🏆
+              </div>
+              <div>
+                <div class="flex items-center gap-1">
+                  <h3 class="font-bold text-slate-900 group-hover:text-amber-800 transition-colors text-sm">BP Murcia 2026</h3>
+                  <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Portal oficial del torneo nacional de debate en formato Parlamentario Británico en la UMU.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 10. Formulario de Inscripción -->
+          <a href="https://forms.gle/95BciRRU9UGjvAjF6" target="_blank" rel="noopener noreferrer" class="tool-card glass-card p-5 block group" data-keywords="inscripcion unirse apuntarse club formulario google alumnos umu">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-orange-100 text-orange-900 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                ✍️
+              </div>
+              <div>
+                <div class="flex items-center gap-1">
+                  <h3 class="font-bold text-slate-900 group-hover:text-orange-800 transition-colors text-sm">Inscripción al Club</h3>
+                  <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Únete al Club de Debate UMU. Abierto a todos los estudiantes de la Universidad de Murcia.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 11. Instagram -->
+          <a href="https://www.instagram.com/clubdedebateum/" target="_blank" rel="noopener noreferrer" class="tool-card glass-card p-5 block group" data-keywords="instagram redes contacto social fotos anuncios entrenamientos">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-pink-100 text-pink-900 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                📸
+              </div>
+              <div>
+                <div class="flex items-center gap-1">
+                  <h3 class="font-bold text-slate-900 group-hover:text-pink-800 transition-colors text-sm">@clubdedebateum</h3>
+                  <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Síguenos en Instagram para conocer fechas de entrenamientos, torneos y actividades.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- 12. Centro Legal -->
+          <a href="legal/" class="tool-card glass-card p-5 block group" data-keywords="legal aviso privacidad cookies terminos rgpd transparencia">
+            <div class="flex items-start gap-3.5">
+              <div class="p-3 rounded-2xl bg-slate-100 text-slate-800 text-xl shrink-0 group-hover:scale-110 transition-transform">
+                ⚖️
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-slate-700 transition-colors text-sm">Centro Legal y Privacidad</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Políticas de privacidad, aviso legal, cookies y compromisos de transparencia del Club.</p>
+              </div>
+            </div>
+          </a>
+
+        </div>
+
+        <p id="no-results" class="hidden text-center text-sm text-slate-500 py-8">
+          No se han encontrado herramientas o secciones que coincidan con tu búsqueda. <br>
+          <a href="index.html" class="text-slate-900 font-bold underline mt-1 inline-block">Ir a la página principal</a>
+        </p>
+      </section>
+
+    </main>
+
+    <!-- ══════════════════════ PIE DE PÁGINA ══════════════════════ -->
+    <footer class="mt-16 text-center py-8 border-t border-slate-200/60" role="contentinfo">
+      <p class="text-sm text-slate-500 font-medium">
+        © <span id="year"></span>
+        <span itemscope itemtype="https://schema.org/Organization">
+          <span itemprop="name">Club de Debate UMU</span> —
+          <span itemprop="memberOf" itemscope itemtype="https://schema.org/CollegeOrUniversity">
+            <span itemprop="name">Universidad de Murcia</span>
+          </span>
+        </span>
+      </p>
+
+      <!-- Enlaces legales -->
+      <nav aria-label="Información legal" class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-slate-500">
+        <a href="legal/aviso-legal.html" class="hover:text-slate-800 hover:underline transition-colors">Aviso Legal</a>
+        <span>·</span>
+        <a href="legal/privacidad.html" class="hover:text-slate-800 hover:underline transition-colors">Política de Privacidad</a>
+        <span>·</span>
+        <a href="legal/cookies.html" class="hover:text-slate-800 hover:underline transition-colors">Política de Cookies</a>
+        <span>·</span>
+        <a href="legal/terminos.html" class="hover:text-slate-800 hover:underline transition-colors">Términos de Uso</a>
+        <span>·</span>
+        <a href="legal/" class="hover:text-slate-800 hover:underline transition-colors font-medium">Centro Legal</a>
+      </nav>
+
+      <!-- Enlaces a herramientas -->
+      <nav aria-label="Suite de herramientas" class="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-slate-500 font-medium">
+        <a href="herramientas/" class="text-slate-700 hover:text-slate-900 hover:underline">Herramientas</a>
+        <span>·</span>
+        <a href="herramientas/debate.html" class="hover:text-slate-800 hover:underline">Debate BP</a>
+        <span>·</span>
+        <a href="herramientas/gestion.html" class="hover:text-slate-800 hover:underline">Gestión</a>
+        <span>·</span>
+        <a href="herramientas/diseno.html" class="hover:text-slate-800 hover:underline">Diseño</a>
+        <span>·</span>
+        <a href="herramientas/productividad.html" class="hover:text-slate-800 hover:underline">Productividad</a>
+        <span>·</span>
+        <a href="logos-bpmurcia/" class="hover:text-slate-800 hover:underline">Creador Logos BP</a>
+      </nav>
+    </footer>
+
+  </div><!-- /container -->
+
+  <!-- ══════════════════════ SCRIPTS Y LÓGICA ══════════════════════ -->
+  <script>
+    // 1. Mostrar la URL que dio error si está disponible
+    (function() {
+      try {
+        var currentPath = window.location.pathname + window.location.search;
+        if (currentPath && currentPath !== '/' && currentPath !== '/404.html' && currentPath !== '/404') {
+          var el = document.getElementById('requested-url');
+          var box = document.getElementById('url-box');
+          if (el && box) {
+            el.textContent = decodeURIComponent(currentPath);
+            box.classList.remove('hidden');
+          }
+        }
+      } catch (e) {}
+    })();
+
+    // 2. Actualizar año del footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 3. Generador de Mociones de Debate Interactivas
+    var debateMotions = [
+      {
+        tag: "Inteligencia Artificial",
+        tournament: "BP Murcia & Granada",
+        motion: "EC, siendo la Unión Europea, desregularizaría fuertemente los sectores relacionados con la Inteligencia Artificial General (AGI) en vez de continuar con políticas restrictivas.",
+        infoslide: "La Inteligencia Artificial General (AGI) se refiere a sistemas capaces de comprender y aplicar conocimiento en múltiples dominios superando o igualando las capacidades humanas."
+      },
+      {
+        tag: "Cultura y Sociedad",
+        tournament: "Circuito Nacional BP",
+        motion: "EC se opone a la presencia generalizada de la cultura de la ironía en el discurso público y las redes sociales.",
+        infoslide: "La cultura de la ironía describe la adopción sistemática de sarcasmo, distanciamiento cínico y memeificación frente a problemas sociales relevantes."
+      },
+      {
+        tag: "Universidad & Educación",
+        tournament: "Torneo Nacional UMU",
+        motion: "EC obligaría a todas las universidades públicas a incluir una asignatura obligatoria de Retórica, Argumentación y Pensamiento Crítico en todos los grados.",
+        infoslide: ""
+      },
+      {
+        tag: "Economía & Juventud",
+        tournament: "BP Madrid Open",
+        motion: "EC toparía el precio del alquiler en zonas con alta densidad universitaria con carácter de urgencia.",
+        infoslide: ""
+      },
+      {
+        tag: "Filosofía Política",
+        tournament: "BP Granada Open",
+        motion: "EC prefiere un mundo donde las decisiones judiciales penales sean asistidas de manera vinculante por algoritmos predictivos para evitar sesgos humanos.",
+        infoslide: ""
+      },
+      {
+        tag: "Relaciones Internacionales",
+        tournament: "CMUDE & BP",
+        motion: "EC, como país en vías de desarrollo, rechazaría la ayuda exterior condicionada a reformas estructurales impuestas por organismos multilaterales.",
+        infoslide: ""
+      },
+      {
+        tag: "Medios y Comunicación",
+        tournament: "Torneo Nacional de Debate",
+        motion: "EC prohibiría a los medios de comunicación publicar encuestas electorales durante el último mes previo a unos comicios.",
+        infoslide: ""
+      },
+      {
+        tag: "Salud y Bioética",
+        tournament: "Circuito BP España",
+        motion: "EC legalizaría la edición genética de embriones humanos no solo con fines terapéuticos sino también para la mejora de capacidades cognitivas.",
+        infoslide: ""
+      }
+    ];
+
+    function renderRandomMotion() {
+      var rand = Math.floor(Math.random() * debateMotions.length);
+      var item = debateMotions[rand];
+
+      document.getElementById('motion-tag').textContent = item.tag;
+      document.getElementById('motion-tournament').textContent = item.tournament ? '· ' + item.tournament : '';
+      document.getElementById('motion-text').textContent = item.motion;
+
+      var infoBox = document.getElementById('motion-infoslide-container');
+      var infoText = document.getElementById('motion-infoslide');
+      if (item.infoslide && item.infoslide.trim() !== '') {
+        infoText.textContent = item.infoslide;
+        infoBox.classList.remove('hidden');
+      } else {
+        infoBox.classList.add('hidden');
+      }
+    }
+
+    // Inicializar moción al cargar
+    renderRandomMotion();
+    document.getElementById('btn-nueva-mocion').addEventListener('click', renderRandomMotion);
+
+    // 4. Filtro de búsqueda rápida de enlaces
+    var searchInput = document.getElementById('quick-search');
+    var toolCards = document.querySelectorAll('.tool-card');
+    var noResults = document.getElementById('no-results');
+
+    searchInput.addEventListener('input', function() {
+      var query = this.value.toLowerCase().trim();
+      var visibleCount = 0;
+
+      toolCards.forEach(function(card) {
+        var text = card.textContent.toLowerCase();
+        var keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+        if (text.includes(query) || keywords.includes(query)) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    });
+  </script>
+
+  <!-- Banner legal -->
+  <script src="legal/banner.js"></script>
+</body>
+</html>

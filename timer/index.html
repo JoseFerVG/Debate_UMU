@@ -124,32 +124,34 @@
         <div class="absolute -bottom-8 left-1/3 w-96 h-96 bg-brand-orange/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000 dark:opacity-30"></div>
     </div>
 
-    <header class="relative z-20 flex justify-between items-center p-6 bg-white/40 backdrop-blur-md border-b border-white/50 dark:bg-slate-900/50 dark:border-slate-800 shrink-0">
-        <div class="flex items-center gap-4">
-            <img src="../img/logos/sinf.png" alt="Logo UMU" class="h-12 w-auto drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/100x50/FFD8B1/1e293b?text=UMU'">
-            <h1 class="text-xl font-bold tracking-tight text-gradient hidden sm:block">Debate Timer</h1>
+    <header class="relative z-20 flex justify-between items-center p-4 sm:p-6 bg-white/40 backdrop-blur-md border-b border-white/50 dark:bg-slate-900/50 dark:border-slate-800 shrink-0">
+        <div class="flex items-center gap-3 sm:gap-4">
+            <a href="../index.html" class="flex items-center gap-2">
+                <img src="../img/logos/sinf.png" alt="Logo UMU" class="h-10 sm:h-12 w-auto drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/100x50/FFD8B1/1e293b?text=UMU'">
+            </a>
+            <h1 class="text-lg sm:text-xl font-bold tracking-tight text-gradient hidden sm:block">Debate Timer</h1>
         </div>
         
-        <div class="flex items-center gap-4">
-            <span id="bpBadge" class="hidden px-3 py-1 bg-brand-green/80 text-brand-dark text-xs font-bold rounded-full uppercase tracking-wider shadow-sm backdrop-blur-sm animate-pulse-slow">
+        <div class="flex items-center gap-2 sm:gap-4">
+            <span id="bpBadge" class="hidden px-2.5 sm:px-3 py-1 bg-brand-green/80 text-brand-dark text-xs font-bold rounded-full uppercase tracking-wider shadow-sm backdrop-blur-sm animate-pulse-slow">
                 Modo BP
             </span>
-            <button onclick="toggleFullScreen()" class="text-2xl p-2 rounded-full hover:bg-white/50 dark:hover:bg-slate-800 transition-colors" title="Pantalla Completa">
+            <button onclick="toggleFullScreen()" class="text-xl sm:text-2xl p-2 rounded-full hover:bg-white/50 dark:hover:bg-slate-800 transition-colors" title="Pantalla Completa">
                 <i id="fsIcon" class="ph-bold ph-arrows-out"></i>
             </button>
-            <button id="menuToggleBtn" class="text-3xl p-2 rounded-full hover:bg-white/50 dark:hover:bg-slate-800 transition-colors">
+            <button id="menuToggleBtn" class="text-2xl sm:text-3xl p-2 rounded-full hover:bg-white/50 dark:hover:bg-slate-800 transition-colors" title="Ajustes">
                 <i class="ph-bold ph-list"></i>
             </button>
         </div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center justify-center p-4 z-10 relative w-full max-w-5xl mx-auto">
+    <main class="flex-grow flex flex-col items-center justify-center p-3 sm:p-4 z-10 relative w-full max-w-5xl mx-auto">
         
-        <div class="w-full text-center mb-8 relative group flex justify-center mt-16 sm:mt-0">
-            <div class="glass-card p-10 md:p-16 pt-20 relative overflow-hidden min-w-[300px] md:min-w-[600px] flex justify-center items-center flex-col border-t-4 border-t-brand-orange transition-all duration-300">
+        <div class="w-full text-center mb-6 sm:mb-8 relative group flex justify-center mt-6 sm:mt-0">
+            <div class="glass-card p-4 sm:p-8 md:p-14 pt-16 sm:pt-20 relative overflow-hidden w-full max-w-3xl flex justify-center items-center flex-col border-t-4 border-t-brand-orange transition-all duration-300">
                 
-                <div id="prepTimerContainer" class="hidden absolute top-6 left-1/2 -translate-x-1/2 z-50 cursor-pointer group transition-all duration-500 ease-in-out hover:scale-105" onclick="togglePrepTimer()" title="Clic para iniciar / Clic para reiniciar">
-                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-600/50 shadow-sm hover:shadow-md rounded-full px-5 py-2 flex items-center gap-3 transition-colors duration-300">
+                <div id="prepTimerContainer" class="hidden absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 cursor-pointer group transition-all duration-500 ease-in-out hover:scale-105" onclick="togglePrepTimer()" title="Clic para iniciar / Clic para reiniciar">
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-600/50 shadow-sm hover:shadow-md rounded-full px-4 sm:px-5 py-1.5 sm:py-2 flex items-center gap-2.5 sm:gap-3 transition-colors duration-300">
                         
                         <div class="relative w-5 h-5 flex items-center justify-center">
                             <svg class="w-5 h-5 transform -rotate-90 absolute inset-0">
@@ -159,63 +161,63 @@
                             <i id="prepIcon" class="ph-fill ph-play text-slate-400 group-hover:text-brand-orange text-[10px] transition-colors z-10"></i>
                         </div>
                         
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-[11px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-brand-dark dark:group-hover:text-white transition-colors duration-200">Prep</span>
-                            <span id="prepDisplay" class="font-mono text-xl font-extrabold text-slate-700 dark:text-slate-200 tracking-tight transition-colors duration-200">01:00</span>
+                        <div class="flex items-baseline gap-1.5 sm:gap-2">
+                            <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-brand-dark dark:group-hover:text-white transition-colors duration-200">Prep</span>
+                            <span id="prepDisplay" class="font-mono text-lg sm:text-xl font-extrabold text-slate-700 dark:text-slate-200 tracking-tight transition-colors duration-200">01:00</span>
                         </div>
                     </div>
                 </div>
 
-                <div id="modeLabel" class="hidden absolute top-4 right-6 font-mono text-xs text-slate-400 tracking-widest uppercase font-bold">CRONÓMETRO</div>
+                <div id="modeLabel" class="hidden absolute top-3 sm:top-4 right-4 sm:right-6 font-mono text-[10px] sm:text-xs text-slate-400 tracking-widest uppercase font-bold">CRONÓMETRO</div>
 
-                <h1 id="display" class="text-[15vw] md:text-[11rem] leading-none tracking-tight font-extrabold text-gradient digit-box select-none relative z-10">
-                    <span id="hVal">00</span><span class="text-brand-orange/80 pb-4 inline-block align-top text-[0.8em]">:</span><span id="mVal">00</span><span class="text-brand-orange/80 pb-4 inline-block align-top text-[0.8em]">:</span><span id="sVal">00</span>
+                <h1 id="display" class="text-[11vw] sm:text-[13vw] md:text-[8rem] lg:text-[10rem] leading-none tracking-tight font-extrabold text-gradient digit-box select-none relative z-10 whitespace-nowrap">
+                    <span id="hVal">00</span><span class="text-brand-orange/80 pb-2 sm:pb-4 inline-block align-top text-[0.8em]">:</span><span id="mVal">00</span><span class="text-brand-orange/80 pb-2 sm:pb-4 inline-block align-top text-[0.8em]">:</span><span id="sVal">00</span>
                 </h1>
 
                 <div id="courtesyOverlay" class="hidden absolute inset-0 z-50 bg-brand-alert/90 backdrop-blur-md flex flex-col items-center justify-center rounded-3xl transition-opacity duration-300">
-                    <div class="text-white font-serif italic text-3xl md:text-5xl mb-4">Tiempo de cortesía</div>
-                    <div id="courtesyBigCount" class="text-white font-bold text-[8rem] md:text-[10rem] leading-none drop-shadow-lg">15</div>
+                    <div class="text-white font-serif italic text-2xl sm:text-4xl md:text-5xl mb-4">Tiempo de cortesía</div>
+                    <div id="courtesyBigCount" class="text-white font-bold text-[6rem] sm:text-[8rem] md:text-[10rem] leading-none drop-shadow-lg">15</div>
                 </div>
             </div>
         </div>
 
         <div id="setupPanel" class="w-full max-w-sm mb-8">
-            <div class="grid grid-cols-3 gap-3">
-                <button onclick="addNumber(1)" class="btn-numpad py-4">1</button>
-                <button onclick="addNumber(2)" class="btn-numpad py-4">2</button>
-                <button onclick="addNumber(3)" class="btn-numpad py-4">3</button>
-                <button onclick="addNumber(4)" class="btn-numpad py-4">4</button>
-                <button onclick="addNumber(5)" class="btn-numpad py-4">5</button>
-                <button onclick="addNumber(6)" class="btn-numpad py-4">6</button>
-                <button onclick="addNumber(7)" class="btn-numpad py-4">7</button>
-                <button onclick="addNumber(8)" class="btn-numpad py-4">8</button>
-                <button onclick="addNumber(9)" class="btn-numpad py-4">9</button>
-                <button onclick="clearInput()" class="btn-numpad py-4 text-sm uppercase tracking-widest text-slate-500 hover:text-brand-alert hover:bg-red-50 dark:hover:bg-red-900/20">Borrar</button>
-                <button onclick="addNumber(0)" class="btn-numpad py-4">0</button>
-                <button onclick="setTimer()" class="btn-numpad py-4 bg-brand-dark text-white hover:bg-slate-800 dark:bg-brand-orange dark:text-brand-dark dark:hover:bg-orange-200 text-sm uppercase tracking-widest">SET</button>
+            <div class="grid grid-cols-3 gap-2.5 sm:gap-3">
+                <button onclick="addNumber(1)" class="btn-numpad py-3.5 sm:py-4">1</button>
+                <button onclick="addNumber(2)" class="btn-numpad py-3.5 sm:py-4">2</button>
+                <button onclick="addNumber(3)" class="btn-numpad py-3.5 sm:py-4">3</button>
+                <button onclick="addNumber(4)" class="btn-numpad py-3.5 sm:py-4">4</button>
+                <button onclick="addNumber(5)" class="btn-numpad py-3.5 sm:py-4">5</button>
+                <button onclick="addNumber(6)" class="btn-numpad py-3.5 sm:py-4">6</button>
+                <button onclick="addNumber(7)" class="btn-numpad py-3.5 sm:py-4">7</button>
+                <button onclick="addNumber(8)" class="btn-numpad py-3.5 sm:py-4">8</button>
+                <button onclick="addNumber(9)" class="btn-numpad py-3.5 sm:py-4">9</button>
+                <button onclick="clearInput()" class="btn-numpad py-3.5 sm:py-4 text-xs sm:text-sm uppercase tracking-widest text-slate-500 hover:text-brand-alert hover:bg-red-50 dark:hover:bg-red-900/20">Borrar</button>
+                <button onclick="addNumber(0)" class="btn-numpad py-3.5 sm:py-4">0</button>
+                <button onclick="setTimer()" class="btn-numpad py-3.5 sm:py-4 bg-brand-dark text-white hover:bg-slate-800 dark:bg-brand-orange dark:text-brand-dark dark:hover:bg-orange-200 text-xs sm:text-sm uppercase tracking-widest">SET</button>
             </div>
         </div>
 
-        <div id="timerControls" class="w-full max-w-md hidden grid grid-cols-1 md:grid-cols-2 gap-4">
-            <button id="startStopBtn" onclick="toggleStartStop()" class="glass-card bg-brand-green/80 hover:bg-brand-green text-brand-dark font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-md transition-all duration-300">
+        <div id="timerControls" class="w-full max-w-md hidden grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <button id="startStopBtn" onclick="toggleStartStop()" class="glass-card bg-brand-green/80 hover:bg-brand-green text-brand-dark font-bold uppercase tracking-wider text-lg sm:text-xl py-4 sm:py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-md transition-all duration-300">
                 <i class="ph-fill ph-play text-2xl" id="playIcon"></i>
                 <span id="btnText">Empezar</span>
             </button>
 
-            <button onclick="resetTimer()" class="glass-card bg-white/50 hover:bg-white/80 text-slate-700 dark:bg-slate-800/50 dark:text-slate-200 font-bold uppercase tracking-wider text-xl py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-sm transition-all duration-300">
+            <button onclick="resetTimer()" class="glass-card bg-white/50 hover:bg-white/80 text-slate-700 dark:bg-slate-800/50 dark:text-slate-200 font-bold uppercase tracking-wider text-lg sm:text-xl py-4 sm:py-5 flex items-center justify-center gap-3 active:scale-95 border-none shadow-sm transition-all duration-300">
                 <i class="ph-bold ph-arrow-counter-clockwise text-2xl"></i>
                 <span>Reset</span>
             </button>
         </div>
 
-        <button id="changeTimeBtn" onclick="changeTime()" class="hidden mt-8 px-6 py-2 rounded-full bg-white/40 backdrop-blur-md text-sm font-semibold uppercase tracking-wider text-slate-600 hover:bg-white/70 hover:text-slate-900 dark:bg-slate-800/40 dark:text-slate-300 dark:hover:bg-slate-800 transition-all flex items-center gap-2 border border-white/50 shadow-sm">
+        <button id="changeTimeBtn" onclick="changeTime()" class="hidden mt-6 sm:mt-8 px-5 sm:px-6 py-2 rounded-full bg-white/40 backdrop-blur-md text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-600 hover:bg-white/70 hover:text-slate-900 dark:bg-slate-800/40 dark:text-slate-300 dark:hover:bg-slate-800 transition-all flex items-center gap-2 border border-white/50 shadow-sm">
             <i class="ph-bold ph-pencil-simple"></i> Cambiar Tiempo
         </button>
 
     </main>
 
     <div id="optionsModal" class="fixed inset-0 bg-slate-900/40 z-50 hidden flex justify-end transition-opacity duration-300 backdrop-blur-sm">
-        <div class="glass-panel w-full md:w-[450px] h-full p-8 flex flex-col overflow-y-auto">
+        <div class="glass-panel w-full sm:w-[450px] max-w-full h-full p-5 sm:p-8 flex flex-col overflow-y-auto">
             
             <div class="flex justify-between items-center mb-8 border-b border-slate-200/50 dark:border-slate-700/50 pb-6">
                 <h2 class="font-serif text-3xl font-bold text-slate-800 dark:text-white">Ajustes</h2>

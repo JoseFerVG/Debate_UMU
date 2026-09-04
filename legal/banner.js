@@ -19,7 +19,7 @@
     banner.id = 'debate-legal-banner';
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', 'Aviso de privacidad y almacenamiento local');
-    banner.style.cssText = 'position:fixed;bottom:1.25rem;left:1.25rem;right:1.25rem;max-width:46rem;margin:0 auto;z-index:9999;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border:1px solid rgba(226,232,240,0.9);box-shadow:0 20px 35px -10px rgba(0,0,0,0.15);border-radius:1.25rem;padding:1rem 1.25rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;font-family:Inter,system-ui,-apple-system,sans-serif;color:#1e293b;font-size:0.8125rem;transition:all 0.3s ease;animation:fadeInBanner 0.4s ease;';
+    banner.style.cssText = 'position:fixed;bottom:0.75rem;left:0.75rem;right:0.75rem;max-width:46rem;margin:0 auto;z-index:9999;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(226,232,240,0.9);box-shadow:0 20px 35px -10px rgba(0,0,0,0.15);border-radius:1.25rem;padding:0.75rem 1rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;font-family:Inter,system-ui,-apple-system,sans-serif;color:#1e293b;font-size:0.8125rem;transition:all 0.3s ease;animation:fadeInBanner 0.4s ease;';
 
     banner.innerHTML = `
       <style>
@@ -27,8 +27,16 @@
           from { opacity: 0; transform: translateY(12px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @media (min-width: 640px) {
+          #debate-legal-banner {
+            bottom: 1.25rem !important;
+            left: 1.25rem !important;
+            right: 1.25rem !important;
+            padding: 1rem 1.25rem !important;
+          }
+        }
       </style>
-      <div style="flex:1;min-width:260px;line-height:1.4;">
+      <div style="flex:1;min-width:180px;line-height:1.4;">
         <span style="font-weight:700;display:inline-flex;align-items:center;gap:0.4rem;color:#0f172a;">
           <svg style="width:14px;height:14px;color:#16a34a;flex-shrink:0;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>

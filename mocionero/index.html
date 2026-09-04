@@ -124,26 +124,37 @@
     <div class="absolute -bottom-8 left-1/3 w-[30rem] h-[30rem] bg-brand-orange/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style="animation-delay: 4s"></div>
   </div>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-14 sm:px-6 lg:px-8 flex flex-col min-h-screen">
     
+    <!-- TOP NAVIGATION -->
+    <nav class="w-full flex items-center justify-between mb-8 text-sm font-semibold">
+      <a href="../index.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/70 hover:bg-white text-slate-700 hover:text-brand-dark border border-slate-200/80 shadow-sm transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+        <span>Inicio</span>
+      </a>
+      <a href="../herramientas/debate.html" class="text-xs sm:text-sm text-slate-500 hover:text-slate-800 transition">
+        Herramientas Debate →
+      </a>
+    </nav>
+
     <!-- HEADER -->
-    <header class="text-center mb-16 animate-fade-in-up">
-      <div class="inline-flex items-center justify-center p-5 rounded-[2.5rem] bg-white/60 backdrop-blur-md shadow-sm mb-8 border border-white/80">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-brand-accent drop-shadow-sm transition-transform hover:rotate-12 duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <header class="text-center mb-12 sm:mb-16 animate-fade-in-up">
+      <div class="inline-flex items-center justify-center p-4 sm:p-5 rounded-[2.5rem] bg-white/60 backdrop-blur-md shadow-sm mb-6 sm:mb-8 border border-white/80">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 sm:h-14 sm:w-14 text-brand-accent drop-shadow-sm transition-transform hover:rotate-12 duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
       </div>
-      <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6 text-gradient drop-shadow-sm">
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 text-gradient drop-shadow-sm">
         Mocionero
       </h1>
-      <p class="text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
+      <p class="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
         El buscador definitivo de mociones para Parlamentario Británico. <br class="hidden sm:block"/>
         Inspírate, prepárate y domina el atril.
       </p>
     </header>
 
     <!-- SEARCH & CONTROLS -->
-    <section class="max-w-4xl mx-auto w-full mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
+    <section class="max-w-4xl mx-auto w-full mb-12 sm:mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
       <div class="glass-card p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-center">
         
         <div class="relative w-full flex-grow">
@@ -155,13 +166,13 @@
           <input 
             type="text" 
             id="searchInput"
-            class="block w-full pl-12 pr-4 py-4 bg-white/50 border border-slate-200 rounded-2xl text-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 focus:bg-white transition-all shadow-inner" 
+            class="block w-full pl-12 pr-4 py-3.5 sm:py-4 bg-white/50 border border-slate-200 rounded-2xl text-base sm:text-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 focus:bg-white transition-all shadow-inner" 
             placeholder="Busca por tema, torneo, palabras clave..."
           />
         </div>
         
-        <button id="randomBtn" class="btn-primary w-full sm:w-auto shrink-0 py-4 px-8 text-lg">
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="randomBtn" class="btn-primary w-full sm:w-auto shrink-0 py-3.5 sm:py-4 px-6 sm:px-8 text-base sm:text-lg">
+          <svg class="h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
           Aleatoria
@@ -169,9 +180,9 @@
 
       </div>
 
-      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full animate-fade-in-up" style="animation-delay: 0.15s">
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full animate-fade-in-up" style="animation-delay: 0.15s">
         <div class="relative w-full">
-          <select id="torneoSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+          <select id="torneoSelect" class="block w-full pl-4 pr-10 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner text-sm sm:text-base">
             <option value="">Todos los torneos</option>
           </select>
           <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
@@ -179,7 +190,7 @@
           </div>
         </div>
         <div class="relative w-full">
-          <select id="edicionSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+          <select id="edicionSelect" class="block w-full pl-4 pr-10 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner text-sm sm:text-base">
             <option value="">Todas las ediciones</option>
           </select>
           <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
@@ -187,7 +198,7 @@
           </div>
         </div>
         <div class="relative w-full">
-          <select id="tematicaSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+          <select id="tematicaSelect" class="block w-full pl-4 pr-10 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner text-sm sm:text-base">
             <option value="">Todas las temáticas</option>
           </select>
           <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
@@ -195,7 +206,7 @@
           </div>
         </div>
         <div class="relative w-full">
-          <select id="tipoSelect" class="block w-full px-4 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner">
+          <select id="tipoSelect" class="block w-full pl-4 pr-10 py-3 bg-white/50 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-4 focus:ring-brand-orange/50 appearance-none cursor-pointer shadow-inner text-sm sm:text-base">
             <option value="">Todos los tipos</option>
           </select>
           <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
@@ -226,6 +237,8 @@
         <h3 class="text-2xl font-bold text-slate-700 mb-2">No encontramos nada</h3>
         <p class="text-slate-500">Intenta con otros términos o genera una moción aleatoria.</p>
       </div>
+    </main>
+
     <!-- FOOTER LEGAL Y DECLARACIÓN DE NEUTRALIDAD -->
     <footer class="mt-16 pt-8 border-t border-slate-200/80 text-center text-xs text-slate-500">
       <div class="max-w-2xl mx-auto p-3.5 rounded-2xl bg-white/70 border border-slate-200 mb-4 text-slate-600 leading-relaxed flex items-start gap-2.5 text-left">
@@ -248,11 +261,11 @@
     </footer>
 
     <!-- MODAL DE MOCIÓN -->
-    <div id="motionModal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+    <div id="motionModal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center p-3 sm:p-6 opacity-0 transition-opacity duration-300">
       <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer" onclick="closeModal()"></div>
-      <div class="relative w-full max-w-4xl glass-card bg-white p-6 sm:p-10 max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 shadow-2xl">
-        <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      <div class="relative w-full max-w-4xl glass-card bg-white p-5 sm:p-10 max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 shadow-2xl">
+        <button onclick="closeModal()" aria-label="Cerrar modal" class="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
         <div id="modalContent" class="mt-2 relative z-0"></div>
       </div>
@@ -405,7 +418,7 @@
       motions.forEach((m, index) => {
         const absoluteIndex = append ? (displayedCount - motions.length) + index : index;
         const card = document.createElement('article');
-        card.className = 'motion-card glass-card p-8 flex flex-col h-full relative group cursor-pointer';
+        card.className = 'motion-card glass-card p-5 sm:p-8 flex flex-col h-full relative group cursor-pointer';
         card.onclick = () => openModal(absoluteIndex);
         // Animación en cascada suave
         card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.05}s forwards`;
@@ -442,7 +455,7 @@
             ${infoSlideHtml}
 
             <div class="flex-grow flex flex-col justify-center">
-              <h2 class="text-2xl sm:text-3xl font-serif font-bold text-brand-dark leading-tight mb-4">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-brand-dark leading-tight mb-4 break-words">
                 ${m.mocion}
               </h2>
             </div>
@@ -521,13 +534,13 @@
         
         ${infoSlideHtml}
 
-        <div class="my-8">
-          <h2 class="text-3xl sm:text-5xl font-serif font-bold text-brand-dark leading-tight">
+        <div class="my-6 sm:my-8">
+          <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-dark leading-tight break-words">
             ${m.mocion}
           </h2>
         </div>
         
-        <footer class="mt-8 pt-6 border-t border-slate-200/60 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-semibold text-slate-500 uppercase tracking-wide">
+        <footer class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-slate-200/60 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs sm:text-sm font-semibold text-slate-500 uppercase tracking-wide">
           ${m.Tematica ? `<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full ${m.Tematica === 'Sin clasificar' ? 'bg-slate-300' : 'bg-brand-green'}"></span>${m.Tematica}</span>` : ''}
           ${m['Tipo de Mocion'] ? `<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full ${m['Tipo de Mocion'] === 'Sin clasificar' ? 'bg-slate-300' : 'bg-brand-orange'}"></span>${m['Tipo de Mocion']}</span>` : ''}
           ${m.titulo && m.titulo !== m.mocion ? `<span class="text-slate-400 font-normal">#${m.titulo}</span>` : ''}
@@ -554,6 +567,10 @@
         document.body.style.overflow = '';
       }, 300);
     }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
 
     // Funcionalidad de moción aleatoria
     randomBtn.addEventListener('click', () => {

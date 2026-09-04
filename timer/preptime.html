@@ -82,43 +82,49 @@
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
 
-    <header class="flex justify-between items-center p-5 md:px-10 glass-panel !rounded-none !border-x-0 !border-t-0 z-20 sticky top-0">
-        <div class="font-serif italic font-bold text-xl md:text-2xl tracking-tight text-gradient">Prep Time 15'</div>
+    <header class="flex justify-between items-center p-3 sm:p-5 md:px-10 glass-panel !rounded-none !border-x-0 !border-t-0 z-20 sticky top-0 gap-3">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors" title="Volver al inicio">
+                <i class="ph-bold ph-arrow-left text-sm"></i>
+                <span class="hidden sm:inline">Inicio</span>
+            </a>
+            <div class="font-serif italic font-bold text-lg sm:text-xl md:text-2xl tracking-tight text-gradient whitespace-nowrap">Prep Time 15'</div>
+        </div>
         
-        <div class="flex items-center gap-6">
-            <label class="flex items-center gap-3 cursor-pointer group">
-                <span id="labelAltas" class="text-sm font-bold uppercase tracking-wider text-brand-dark dark:text-white transition-colors">Altas</span>
+        <div class="flex items-center gap-3 sm:gap-6">
+            <label class="flex items-center gap-2 sm:gap-3 cursor-pointer group">
+                <span id="labelAltas" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-dark dark:text-white transition-colors">Altas</span>
                 <div class="relative">
                     <input type="checkbox" id="modeToggle" class="sr-only" onchange="switchMode()">
                     <div class="toggle-track"><div class="toggle-thumb"></div></div>
                 </div>
-                <span id="labelBajas" class="text-sm font-bold uppercase tracking-wider text-slate-400 transition-colors">Bajas</span>
+                <span id="labelBajas" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-400 transition-colors">Bajas</span>
             </label>
-            <button onclick="document.documentElement.classList.toggle('dark')" class="text-2xl p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+            <button onclick="document.documentElement.classList.toggle('dark')" class="text-xl sm:text-2xl p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors" title="Cambiar modo oscuro">
                 <i class="ph-bold ph-moon"></i>
             </button>
         </div>
     </header>
 
-    <main class="flex-grow flex flex-col lg:flex-row items-center justify-center p-4 md:p-8 gap-8 max-w-7xl mx-auto w-full">
+    <main class="flex-grow flex flex-col lg:flex-row items-center justify-center p-3 sm:p-6 md:p-8 gap-6 md:gap-8 max-w-7xl mx-auto w-full">
         
-        <div class="flex-shrink-0 relative w-[320px] h-[320px] md:w-[400px] md:h-[400px] flex items-center justify-center">
+        <div class="flex-shrink-0 relative w-[270px] h-[270px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] max-w-full flex items-center justify-center">
             <svg class="absolute inset-0 w-full h-full drop-shadow-lg" viewBox="0 0 100 100">
                 <circle class="text-slate-200 dark:text-slate-700 stroke-current" stroke-width="4" cx="50" cy="50" r="46" fill="transparent"></circle>
                 <circle id="progressRing" class="text-brand-dark dark:text-brand-orange stroke-current progress-ring__circle" stroke-width="4" stroke-linecap="round" cx="50" cy="50" r="46" fill="transparent"></circle>
             </svg>
             
             <div class="relative z-10 flex flex-col items-center justify-center text-center mt-4">
-                <div id="nextPhaseHint" class="text-xs uppercase tracking-widest font-semibold text-slate-500 mb-2 h-4"></div>
-                <h1 id="timeDisplay" class="text-[5.5rem] md:text-[7rem] leading-none font-extrabold tracking-tighter text-gradient tabular-nums">
+                <div id="nextPhaseHint" class="text-[11px] sm:text-xs uppercase tracking-widest font-semibold text-slate-500 mb-2 h-4"></div>
+                <h1 id="timeDisplay" class="text-6xl sm:text-7xl md:text-[7rem] leading-none font-extrabold tracking-tighter text-gradient tabular-nums">
                     15:00
                 </h1>
                 
-                <div class="flex gap-4 mt-6">
-                    <button id="startStopBtn" onclick="toggleTimer()" class="w-16 h-16 rounded-full bg-brand-green hover:bg-[#a8d3a8] text-brand-dark flex items-center justify-center text-3xl shadow-lg active:scale-95 transition-all">
+                <div class="flex gap-4 mt-5 sm:mt-6">
+                    <button id="startStopBtn" onclick="toggleTimer()" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-green hover:bg-[#a8d3a8] text-brand-dark flex items-center justify-center text-2xl sm:text-3xl shadow-lg active:scale-95 transition-all" title="Iniciar / Pausar">
                         <i class="ph-fill ph-play" id="playIcon"></i>
                     </button>
-                    <button onclick="resetTimer()" class="w-16 h-16 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-2xl shadow-sm active:scale-95 transition-all">
+                    <button onclick="resetTimer()" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-xl sm:text-2xl shadow-sm active:scale-95 transition-all" title="Reiniciar">
                         <i class="ph-bold ph-arrow-counter-clockwise"></i>
                     </button>
                 </div>
@@ -128,33 +134,33 @@
         <div class="flex-1 w-full max-w-2xl flex flex-col gap-6">
             
             <div id="stepperContainer" class="flex justify-between items-end w-full px-2 h-12">
-                </div>
+            </div>
 
-            <div class="glass-panel p-6 md:p-10 w-full min-h-[350px] flex flex-col">
+            <div class="glass-panel p-5 sm:p-8 md:p-10 w-full min-h-[320px] sm:min-h-[350px] flex flex-col">
                 <div class="flex items-center gap-3 mb-2">
-                    <div class="px-3 py-1 bg-brand-dark dark:bg-brand-orange text-white dark:text-brand-dark text-xs font-bold rounded-full uppercase tracking-widest shadow-sm">Fase Actual</div>
-                    <span id="phaseTimeLimit" class="text-sm font-mono font-semibold text-slate-500"></span>
+                    <div class="px-3 py-1 bg-brand-dark dark:bg-brand-orange text-white dark:text-brand-dark text-[11px] sm:text-xs font-bold rounded-full uppercase tracking-widest shadow-sm">Fase Actual</div>
+                    <span id="phaseTimeLimit" class="text-xs sm:text-sm font-mono font-semibold text-slate-500"></span>
                 </div>
                 
-                <h2 id="phaseTitle" class="text-3xl md:text-4xl font-serif italic font-bold text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-slate-700 pb-4">
+                <h2 id="phaseTitle" class="text-2xl sm:text-3xl md:text-4xl font-serif italic font-bold text-slate-800 dark:text-white mb-4 sm:mb-6 border-b border-slate-200 dark:border-slate-700 pb-3 sm:pb-4">
                     Preparación
                 </h2>
                 
-                <ul id="taskList" class="space-y-4 text-slate-700 dark:text-slate-300 text-base md:text-lg flex-grow">
+                <ul id="taskList" class="space-y-3 sm:space-y-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base md:text-lg flex-grow"></ul>
             </div>
         </div>
-
-        <footer class="mt-8 text-center text-xs text-slate-400 space-y-1">
-            <p>© Club de Debate UMU — Universidad de Murcia</p>
-            <nav aria-label="Información legal" class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-slate-500">
-                <a href="../legal/aviso-legal.html" class="hover:underline">Aviso Legal</a> ·
-                <a href="../legal/privacidad.html" class="hover:underline">Privacidad</a> ·
-                <a href="../legal/cookies.html" class="hover:underline">Cookies</a> ·
-                <a href="../legal/terminos.html" class="hover:underline">Términos</a> ·
-                <a href="../" class="hover:underline font-semibold">← Inicio</a>
-            </nav>
-        </footer>
     </main>
+
+    <footer class="py-6 px-4 text-center text-xs text-slate-400 space-y-1 border-t border-slate-200/50 dark:border-slate-800 shrink-0">
+        <p>© Club de Debate UMU — Universidad de Murcia</p>
+        <nav aria-label="Información legal" class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-slate-500">
+            <a href="../legal/aviso-legal.html" class="hover:underline">Aviso Legal</a> ·
+            <a href="../legal/privacidad.html" class="hover:underline">Privacidad</a> ·
+            <a href="../legal/cookies.html" class="hover:underline">Cookies</a> ·
+            <a href="../legal/terminos.html" class="hover:underline">Términos</a> ·
+            <a href="../" class="hover:underline font-semibold">← Inicio</a>
+        </nav>
+    </footer>
 
     <script>
         // --- DATA ESTRUCTURADA ---

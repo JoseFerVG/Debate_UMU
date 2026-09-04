@@ -54,17 +54,17 @@
           <span class="text-xs text-slate-500">Universidad de Murcia</span>
         </div>
       </a>
-      <nav class="flex items-center gap-4 text-xs sm:text-sm font-medium">
+      <nav class="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
         <a href="./index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Centro Legal</a>
-        <a href="../" class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">← Volver al sitio</a>
+        <a href="../" class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors shrink-0">← Volver<span class="hidden sm:inline"> al sitio</span></a>
       </nav>
     </div>
   </header>
 
   <!-- Contenido principal -->
-  <main class="max-w-4xl mx-auto px-4 py-10 sm:px-6">
+  <main class="max-w-4xl mx-auto px-4 py-8 sm:py-10 sm:px-6">
     
-    <nav class="text-xs text-slate-500 mb-6 flex items-center gap-2">
+    <nav class="text-xs text-slate-500 mb-6 flex items-center gap-2 overflow-x-auto whitespace-nowrap">
       <a href="../" class="hover:underline">Inicio</a>
       <span>/</span>
       <a href="./index.html" class="hover:underline">Información Legal</a>
@@ -72,18 +72,18 @@
       <span class="text-slate-800 font-semibold">Política de Cookies</span>
     </nav>
 
-    <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200">
+    <div class="glass-card rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200">
       
       <div class="border-b border-slate-200 pb-6 mb-8">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-3 py-1 rounded-full">Cumplimiento LSSI-CE (Art. 22.2) y Directiva ePrivacy</span>
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Política de Cookies y Almacenamiento Local</h1>
-        <p class="text-sm text-slate-500 mt-2">Última actualización: Agosto de 2026</p>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-3 py-1 rounded-full inline-block">Cumplimiento LSSI-CE (Art. 22.2) y Directiva ePrivacy</span>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-4">Política de Cookies y Almacenamiento Local</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">Última actualización: Agosto de 2026</p>
       </div>
 
       <div class="prose prose-slate max-w-none space-y-6 text-sm sm:text-base text-slate-700 leading-relaxed">
         
         <section>
-          <h2 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-amber-500"></span>
             1. ¿Qué son las Cookies y el Almacenamiento Local (Local Storage)?
           </h2>
@@ -93,7 +93,7 @@
         </section>
 
         <section>
-          <h2 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-amber-500"></span>
             2. Tipología de Cookies y Tecnologías Usadas en este Sitio Web
           </h2>
@@ -107,36 +107,38 @@
               <p class="text-xs text-slate-600 mt-1">
                 Conforme al art. 22.2 de la LSSI-CE y la Guía sobre el uso de cookies de la AEPD, las cookies y almacenamientos con finalidad técnica (permitir la navegación o recordar opciones elegidas expresamente por el usuario) están exentos de la obligación de obtener el consentimiento previo.
               </p>
-              <table class="w-full mt-3 text-xs text-left border-collapse">
-                <thead>
-                  <tr class="border-b border-slate-300 font-semibold text-slate-700">
-                    <th class="py-1">Clave / Variable</th>
-                    <th class="py-1">Finalidad</th>
-                    <th class="py-1">Duración</th>
-                    <th class="py-1">Ubicación</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200 text-slate-600">
-                  <tr>
-                    <td class="py-1 font-mono text-orange-600">jfk-settings</td>
-                    <td class="py-1">Guardar minutos de trabajo y descansos seleccionados en el reloj Pomodoro.</td>
-                    <td class="py-1">Persistente</td>
-                    <td class="py-1">Pomodoro</td>
-                  </tr>
-                  <tr>
-                    <td class="py-1 font-mono text-orange-600">jfk-theme</td>
-                    <td class="py-1">Recordar el tema visual elegido (Modo Oscuro / Modo Claro).</td>
-                    <td class="py-1">Persistente</td>
-                    <td class="py-1">Pomodoro</td>
-                  </tr>
-                  <tr>
-                    <td class="py-1 font-mono text-orange-600">debate_umu_legal_banner</td>
-                    <td class="py-1">Recordar que el usuario ha revisado o cerrado el aviso informativo legal.</td>
-                    <td class="py-1">1 año</td>
-                    <td class="py-1">Global</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="overflow-x-auto mt-3">
+                <table class="min-w-[500px] w-full text-xs text-left border-collapse">
+                  <thead>
+                    <tr class="border-b border-slate-300 font-semibold text-slate-700">
+                      <th class="py-1.5 pr-2">Clave / Variable</th>
+                      <th class="py-1.5 pr-2">Finalidad</th>
+                      <th class="py-1.5 pr-2">Duración</th>
+                      <th class="py-1.5">Ubicación</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200 text-slate-600">
+                    <tr>
+                      <td class="py-1.5 pr-2 font-mono text-orange-600">jfk-settings</td>
+                      <td class="py-1.5 pr-2">Guardar minutos de trabajo y descansos seleccionados en el reloj Pomodoro.</td>
+                      <td class="py-1.5 pr-2">Persistente</td>
+                      <td class="py-1.5">Pomodoro</td>
+                    </tr>
+                    <tr>
+                      <td class="py-1.5 pr-2 font-mono text-orange-600">jfk-theme</td>
+                      <td class="py-1.5 pr-2">Recordar el tema visual elegido (Modo Oscuro / Modo Claro).</td>
+                      <td class="py-1.5 pr-2">Persistente</td>
+                      <td class="py-1.5">Pomodoro</td>
+                    </tr>
+                    <tr>
+                      <td class="py-1.5 pr-2 font-mono text-orange-600">debate_umu_legal_banner</td>
+                      <td class="py-1.5 pr-2">Recordar que el usuario ha revisado o cerrado el aviso informativo legal.</td>
+                      <td class="py-1.5 pr-2">1 año</td>
+                      <td class="py-1.5">Global</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">

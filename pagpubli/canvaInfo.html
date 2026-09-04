@@ -41,30 +41,40 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between text-black">
 
+  <!-- TOP NAV -->
+  <header class="w-full max-w-4xl mx-auto px-4 pt-6 flex justify-between items-center text-xs font-bold">
+    <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 hover:bg-black text-white transition shadow">
+      ← Inicio
+    </a>
+    <a href="index.html" class="px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-black transition shadow">
+      Página Inscripción →
+    </a>
+  </header>
+
   <!-- HERO -->
-  <section class="flex flex-col items-center justify-center text-center px-6 py-12">
-    <h1 class="frase text-5xl sm:text-7xl font-extrabold uppercase leading-tight drop-shadow-lg">
+  <section class="flex flex-col items-center justify-center text-center px-4 sm:px-6 py-8 sm:py-12">
+    <h1 class="frase text-3xl sm:text-5xl md:text-7xl font-extrabold uppercase leading-tight drop-shadow-lg break-words max-w-full">
       ¿Quieres que tus <br>
-      <span class="bg-black text-pink-400 px-3">ideas hagan ruido?</span>
+      <span class="bg-black text-pink-400 px-2 sm:px-3 inline-block mt-1">ideas hagan ruido?</span>
     </h1>
-    <p class="mt-6 text-lg sm:text-xl font-medium">
+    <p class="mt-4 sm:mt-6 text-base sm:text-xl font-medium">
       Debate, lo estás deseando.<br>
       <span class="underline decoration-pink-600 font-bold">Y 3 CRÉDITOS</span> que te llevas.
     </p>
   </section>
 
   <!-- GALERÍA / CARRUSEL -->
-  <section class="px-6 py-4 text-center">
-    <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-6 drop-shadow-lg flex items-center justify-center gap-3">
-      <svg class="w-10 h-10 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+  <section class="px-4 sm:px-6 py-4 text-center">
+    <h2 class="frase text-2xl sm:text-4xl md:text-5xl uppercase text-black mb-6 drop-shadow-lg flex items-center justify-center gap-2 sm:gap-3">
+      <svg class="w-7 h-7 sm:w-10 sm:h-10 text-pink-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
       </svg>
-      Galería del Club
+      <span>Galería del Club</span>
     </h2>
 
     <div class="relative max-w-4xl mx-auto">
       <!-- Contenedor 16:9 -->
-      <div id="carousel" class="my-aspect-video rounded-3xl shadow-xl border-4 border-black">
+      <div id="carousel" class="my-aspect-video rounded-2xl sm:rounded-3xl shadow-xl border-3 sm:border-4 border-black">
         <!-- loader -->
         <div id="loader" class="absolute inset-0 flex items-center justify-center">
           <div class="animate-spin border-4 border-transparent border-t-black rounded-full w-10 h-10"></div>
@@ -78,14 +88,14 @@
 
       <!-- Botones de navegación -->
       <button id="prevBtn" type="button" aria-label="Foto anterior"
-              class="absolute top-1/2 left-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full transition flex items-center justify-center">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              class="absolute top-1/2 left-2 sm:left-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center z-10">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
         </svg>
       </button>
       <button id="nextBtn" type="button" aria-label="Siguiente foto"
-              class="absolute top-1/2 right-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full transition flex items-center justify-center">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              class="absolute top-1/2 right-2 sm:right-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center z-10">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
         </svg>
       </button>
@@ -96,11 +106,11 @@
 
     <!-- Botón volver -->
     <a href="index.html"
-       class="mt-6 inline-flex items-center gap-2 bg-pink-500 text-white text-xl font-extrabold py-3.5 px-7 rounded-2xl shadow-lg hover:scale-105 transition">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+       class="mt-6 inline-flex items-center gap-2 bg-pink-500 text-white text-base sm:text-xl font-extrabold py-3 sm:py-3.5 px-6 sm:px-7 rounded-2xl shadow-lg hover:scale-105 transition">
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
       </svg>
-      Volver
+      <span>Volver</span>
     </a>
   </section>
 
@@ -123,13 +133,13 @@
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // IMÁGENES 
+    // IMÁGENES LOCALES CON FALLBACK REMOTO
     const images = [
-      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%281%29.jpg",
-      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%282%29.jpg",
-      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%283%29.jpg",
-      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%284%29.jpg",
-      "https://raw.githubusercontent.com/JoseFerVG/Debate_UMU/main/img/imagenesInfo/info%285%29.jpg"
+      "../img/imagenesInfo/info(1).jpg",
+      "../img/imagenesInfo/info(2).jpg",
+      "../img/imagenesInfo/info(3).jpg",
+      "../img/imagenesInfo/info(4).jpg",
+      "../img/imagenesInfo/info(5).jpg"
     ];
 
     let currentIndex = 0;

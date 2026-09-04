@@ -67,7 +67,7 @@
   <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
     <!-- NAVBAR -->
-    <nav class="flex items-center justify-between pb-6 mb-6 border-b border-slate-200" aria-label="Navegación principal">
+    <nav class="flex flex-wrap items-center justify-between gap-3 pb-6 mb-6 border-b border-slate-200" aria-label="Navegación principal">
       <a href="../index.html" class="flex items-center gap-3 group">
         <img src="../img/logos/LogoClubBocatas.png" alt="Logo Club de Debate UMU" class="w-9 h-9 drop-shadow-sm group-hover:scale-105 transition-transform" />
         <div>
@@ -80,13 +80,13 @@
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
         </svg>
-        Todas las Categorías
+        <span class="hidden sm:inline">Todas las </span>Categorías
       </a>
     </nav>
 
     <!-- BREADCRUMB -->
-    <nav class="mb-6" aria-label="Ruta de exploración">
-      <ol class="flex items-center gap-2 text-xs text-slate-500">
+    <nav class="mb-6 overflow-x-auto" aria-label="Ruta de exploración">
+      <ol class="flex items-center gap-2 text-xs text-slate-500 whitespace-nowrap">
         <li><a href="../index.html" class="hover:text-slate-800">Inicio</a></li>
         <li>/</li>
         <li><a href="./index.html" class="hover:text-slate-800">Herramientas</a></li>
@@ -149,7 +149,7 @@
     <!-- FOOTER -->
     <footer class="text-center py-6 border-t border-slate-200 text-xs text-slate-500">
       <p>© <span id="year"></span> Club de Debate UMU · Universidad de Murcia</p>
-      <nav class="mt-2 flex justify-center gap-3">
+      <nav class="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1">
         <a href="../index.html" class="hover:underline">Inicio</a>
         <span>·</span>
         <a href="./index.html" class="hover:underline">Herramientas</a>
