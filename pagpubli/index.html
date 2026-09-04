@@ -3,120 +3,533 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club de Debate UMU</title>
-    <link rel="icon" href="../img/logos/sinf.png">
+  <title>¡Únete al Club de Debate UMU! | Universidad de Murcia</title>
+  <meta name="description" content="Aprende a hablar en público sin miedo, defiende tus ideas con seguridad y haz amigos para toda la vida en el Club de Debate de la Universidad de Murcia. ¡100% gratuito y sin experiencia previa!">
+  <link rel="icon" href="../img/logos/sinf.png">
+
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="¿Quieres que tus ideas hagan ruido? | Club de Debate UMU">
+  <meta property="og:description" content="Aprende oratoria, pensamiento crítico y conoce a gente increíble en la UMU. ¡Inscripciones abiertas!">
+  <meta property="og:image" content="../img/equipo-debate-umu.jpg">
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Google Fonts: Anton & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
-    h1, h2, .frase { font-family: 'Anton', sans-serif; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.4s ease;
+    }
+    .font-display {
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.03em;
+    }
+    /* Estilo Neo-Brutalista con sombras sólidas */
+    .neo-box {
+      border: 3px solid #000;
+      box-shadow: 5px 5px 0px 0px #000;
+    }
+    .neo-box-sm {
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0px 0px #000;
+    }
+    .neo-btn {
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px 0px #000;
+      transition: all 0.15s ease-in-out;
+    }
+    .neo-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px 0px #000;
+    }
+    .neo-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px 0px #000;
+    }
+    /* Patrón de puntos sutil en el fondo */
+    .bg-pattern {
+      background-image: radial-gradient(#000000 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+      opacity: 0.08;
+    }
+    /* Animación flotante sutil */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(1deg); }
+    }
+    .animate-float {
+      animation: floatSlow 4s ease-in-out infinite;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between text-black">
+<body id="pageBody" class="min-h-screen flex flex-col justify-between text-slate-900 bg-[#ffe814] relative selection:bg-black selection:text-yellow-300">
 
-  <!-- TOP NAV -->
-  <header class="w-full max-w-4xl mx-auto px-4 pt-6 flex justify-between items-center text-xs font-bold">
-    <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 hover:bg-black text-white transition shadow">
-      ← Inicio
-    </a>
-    <a href="canvaInfo.html" class="px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-black transition shadow">
-      Dossier Informativo →
-    </a>
-  </header>
+  <!-- Patrón decorativo transparente sobre el fondo -->
+  <div class="fixed inset-0 bg-pattern pointer-events-none z-0"></div>
 
-  <!-- HERO -->
-  <section class="flex flex-col items-center justify-center text-center px-4 sm:px-6 py-10 sm:py-16">
-    <h1 class="frase text-3xl sm:text-5xl md:text-7xl font-extrabold uppercase leading-tight drop-shadow-lg break-words max-w-full">
-      ¿Quieres que tus <br>
-      <span class="bg-black text-pink-400 px-2 sm:px-3 inline-block mt-1">ideas hagan ruido?</span>
-    </h1>
-    <p class="mt-4 sm:mt-6 text-base sm:text-xl font-medium">
-      Debate, lo estás deseando.<br>
-      <span class="underline decoration-pink-600 font-bold">Y 3 CRÉDITOS</span> que te llevas.
-    </p>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="relative z-10 w-full flex flex-col">
 
-    <!-- Botones -->
-    <div class="mt-8 sm:mt-12 space-y-3 sm:space-y-4 w-full max-w-md">
-      <a href="https://forms.gle/95BciRRU9UGjvAjF6" rel="noopener"
-         class="flex items-center justify-center gap-2 sm:gap-3 w-full bg-pink-500 text-white text-base sm:text-lg md:text-xl font-extrabold py-4 sm:py-5 px-4 rounded-2xl shadow-lg hover:scale-105 transition text-center">
-         <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
-         </svg>
-         <span>Rellenar Formulario de Inscripción</span>
-      </a>
-      <a href="https://www.instagram.com/clubdedebateum/" rel="noopener"
-         class="flex items-center justify-center gap-2 sm:gap-3 w-full bg-yellow-300 text-black text-base sm:text-lg md:text-xl font-extrabold py-4 sm:py-5 px-4 rounded-2xl shadow-lg hover:scale-105 transition text-center">
-         <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0 fill-current" viewBox="0 0 24 24">
-           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-         </svg>
-         <span>Ir al Instagram Oficial</span>
-      </a>
-      <a href="canvaInfo.html" rel="noopener"
-         class="flex items-center justify-center gap-2 sm:gap-3 w-full bg-lime-400 text-black text-base sm:text-lg md:text-xl font-extrabold py-4 sm:py-5 px-4 rounded-2xl shadow-lg hover:scale-105 transition text-center">
-         <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-         </svg>
-         <span>Dossier Informativo</span>
-      </a>
+    <!-- HERO SECTION -->
+    <main class="w-full max-w-5xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-12 sm:pb-16 flex flex-col items-center text-center">
 
-       <a href="https://goo.su/nnykw" rel="noopener"
-         class="flex items-center justify-center gap-2 sm:gap-3 w-full bg-pink-500 text-white text-base sm:text-lg md:text-xl font-extrabold py-4 sm:py-5 px-4 rounded-2xl shadow-lg hover:scale-105 transition text-center">
-         <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
-         </svg>
-         <span>Comunidad de WhatsApp</span>
-      </a>
-      
-    </div>
-  </section>
+      <!-- Título de alto impacto (Anton) -->
+      <h1 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase leading-[0.95] tracking-tight drop-shadow-sm text-slate-950 max-w-4xl">
+        ¿Quieres que tus <br>
+        <span class="inline-block bg-black text-[#00f0ff] px-3 sm:px-5 py-1 -rotate-1 rounded-2xl neo-box mt-2 sm:mt-3 text-3xl sm:text-6xl md:text-7xl lg:text-8xl">
+          ideas hagan ruido?
+        </span>
+      </h1>
 
-  <!-- OPINIONES -->
-  <section class="px-6 py-16 text-center">
-    <h2 class="frase text-4xl sm:text-5xl uppercase text-black mb-12 drop-shadow-lg flex items-center justify-center gap-3">
-      <svg class="w-10 h-10 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
-      </svg>
-      Opiniones del Club
-    </h2>
-    <div class="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
-      <div class="p-6 bg-white border-4 border-black rounded-3xl shadow-xl transform hover:rotate-1 hover:scale-105 transition">
-        <p class="italic text-lg">“El Club de Debate me ayudó a perder el miedo a hablar en público.”</p>
-        <p class="mt-4 font-bold">— Ana, Derecho</p>
+      <!-- Subtítulo convincente para estudiantes -->
+      <p class="mt-6 sm:mt-8 text-base sm:text-xl md:text-2xl font-semibold text-slate-900 max-w-2xl leading-snug">
+        Aprende a <span class="bg-pink-400 text-black px-1.5 py-0.5 rounded font-bold">hablar en público</span> sin temblar, 
+        <span class="bg-white text-black px-1.5 py-0.5 rounded font-bold border-2 border-black">defiende tus ideas</span> 
+        con seguridad y conoce a tus mejores amigos de la carrera.
+      </p>
+
+      <!-- Pastillas de Confianza Rápida -->
+      <div class="mt-5 flex flex-wrap justify-center items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border-2 border-black shadow-[2px_2px_0px_#000]">
+          <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
+          </svg>
+          <span>100% Gratuito</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border-2 border-black shadow-[2px_2px_0px_#000]">
+          <svg class="w-4 h-4 text-rose-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+          </svg>
+          <span>Sin experiencia previa</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border-2 border-black shadow-[2px_2px_0px_#000]">
+          <svg class="w-4 h-4 text-indigo-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.5m-15 10.5V10.5M3 21h18"/>
+          </svg>
+          <span>Todas las carreras UMU</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border-2 border-black shadow-[2px_2px_0px_#000]">
+          <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>Compatible con exámenes</span>
+        </span>
       </div>
-      <div class="p-6 bg-white border-4 border-black rounded-3xl shadow-xl transform hover:-rotate-1 hover:scale-105 transition">
-        <p class="italic text-lg">“He hecho amistades increíbles y me ha permitido viajar representando a la UMU por España.”</p>
-        <p class="mt-4 font-bold">— José Fernando, Ingeniería Informática</p>
+
+      <!-- FOTO REAL DEL EQUIPO (Social Proof Inmediato) -->
+      <div class="mt-8 sm:mt-10 w-full max-w-3xl">
+        <div class="neo-box bg-white p-2.5 sm:p-4 rounded-3xl relative transform hover:-rotate-0.5 transition-transform duration-300">
+          
+          <!-- Sticker cinta adhesiva decorativa -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-300 border-2 border-black px-3.5 py-0.5 text-[11px] font-black uppercase tracking-wider rotate-1 shadow-sm inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-black shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6l.8.8.8-.8v-6H18v-2l-2-2z"/>
+            </svg>
+            <span>¡Comunidad real de la UMU!</span>
+          </div>
+
+          <div class="relative overflow-hidden rounded-2xl aspect-[16/9] sm:aspect-[21/9] bg-zinc-900">
+            <img src="../img/equipo-debate-umu.jpg" 
+                 alt="Equipo del Club de Debate de la Universidad de Murcia" 
+                 class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-3 sm:p-5">
+              <p class="text-white text-xs sm:text-sm font-bold text-left drop-shadow flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-pink-500 inline-block"></span>
+                <span>Torneos nacionales, talleres presenciales y un ambiente inmejorable.</span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="py-6 text-center text-xs bg-black text-white w-full space-y-2">
-    <p>© <span id="year"></span> Club de Debate UMU — Universidad de Murcia</p>
-    <nav aria-label="Información legal" class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-zinc-400 text-[11px]">
-      <a href="../legal/aviso-legal.html" class="hover:text-white hover:underline">Aviso Legal</a> ·
-      <a href="../legal/privacidad.html" class="hover:text-white hover:underline">Privacidad</a> ·
-      <a href="../legal/cookies.html" class="hover:text-white hover:underline">Cookies</a> ·
-      <a href="../legal/terminos.html" class="hover:text-white hover:underline">Términos</a> ·
-      <a href="../" class="hover:text-white hover:underline font-bold">Inicio</a>
-    </nav>
-  </footer>
+      <!-- HUB DE ACCIÓN Y BOTONES (CTAs Diseñados para Convertir) -->
+      <section class="mt-10 sm:mt-12 w-full max-w-xl space-y-3.5 sm:space-y-4">
 
+        <!-- 1. BOTÓN PRINCIPAL: FORMULARIO (Super Destacado) -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFYm-10LTDqIfV-QsM-WzJwumzs5gxxLsGDB2JEX2ZWrmaXw/viewform?usp=dialog" target="_blank" rel="noopener"
+           class="neo-btn group flex flex-col sm:flex-row items-center justify-between gap-3 w-full bg-[#ff2e93] hover:bg-[#ff1584] text-white p-4 sm:p-5 rounded-2xl text-left cursor-pointer">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-white text-pink-600 flex items-center justify-center shrink-0 border-2 border-black group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-display text-2xl sm:text-3xl leading-none uppercase">Rellenar Formulario</span>
+                <span class="bg-yellow-300 text-black text-[10px] font-black px-2 py-0.5 rounded-full uppercase border border-black animate-pulse">
+                  ¡GRATIS!
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm font-medium text-pink-100 mt-0.5">
+                Tardarás solo 1 minuto · Plazas abiertas para este curso
+              </p>
+            </div>
+          </div>
+          <div class="hidden sm:flex items-center justify-center w-10 h-10 rounded-xl bg-black text-white group-hover:translate-x-1 transition-transform shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </div>
+        </a>
+
+        <!-- 3. INSTAGRAM OFICIAL -->
+        <a href="https://www.instagram.com/clubdedebateum/" target="_blank" rel="noopener"
+           class="neo-btn group flex items-center justify-between gap-3 w-full bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white p-3.5 sm:p-4 rounded-2xl text-left cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white text-pink-600 flex items-center justify-center shrink-0 border-2 border-black group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="font-extrabold text-base sm:text-lg block leading-tight">Instagram @clubdedebateum</span>
+              <p class="text-xs font-medium text-pink-100">
+                Mira vídeos de torneos, fotos, memes y el día a día
+              </p>
+            </div>
+          </div>
+          <span class="text-xs font-bold bg-white text-black px-2.5 py-1 rounded-lg border-2 border-black shrink-0 hidden xs:inline-flex items-center gap-1">
+            <span>Seguir</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </a>
+
+        <!-- 4. DOSSIER INFORMATIVO Y GALERÍA -->
+        <a href="canvaInfo.html"
+           class="neo-btn group flex items-center justify-between gap-3 w-full bg-[#00f0ff] hover:bg-[#00d4e3] text-black p-3.5 sm:p-4 rounded-2xl text-left cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white text-cyan-600 flex items-center justify-center shrink-0 border-2 border-black group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <div>
+              <span class="font-extrabold text-base sm:text-lg block leading-tight">Dossier Informativo y Galería</span>
+              <p class="text-xs font-semibold text-slate-800">
+                Descubre cómo funciona el club y mira más fotos de eventos
+              </p>
+            </div>
+          </div>
+          <span class="text-xs font-bold bg-white px-2.5 py-1 rounded-lg border-2 border-black shrink-0 hidden xs:inline-flex items-center gap-1">
+            <span>Ver</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </a>
+
+      </section>
+
+      <!-- ¿POR QUÉ ENTRAR? (Beneficios Clave para Estudiantes) -->
+      <section class="mt-16 sm:mt-20 w-full text-left">
+        <div class="text-center mb-8 sm:mb-10">
+          <h2 class="font-display text-3xl sm:text-5xl uppercase tracking-tight text-black inline-block">
+            ¿Qué ganas entrando al Club?
+          </h2>
+          <p class="text-sm sm:text-base font-bold text-slate-800 mt-2">
+            Mucho más que una actividad universitaria: una experiencia que te transforma.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          
+          <!-- Card 1: Oratoria -->
+          <div class="neo-box bg-white p-5 sm:p-6 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 rounded-2xl bg-amber-200 border-2 border-black flex items-center justify-center text-black mb-4">
+              <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3z"/>
+              </svg>
+            </div>
+            <h3 class="font-extrabold text-xl text-black">Hablar en público sin sudar frío</h3>
+            <p class="mt-2 text-sm text-slate-700 font-medium leading-relaxed">
+              ¿Te bloqueas al exponer en clase o en un examen oral? Aquí practicamos en un ambiente de total confianza donde equivocarse es parte del juego. En pocas semanas notarás un cambio brutal en tu seguridad.
+            </p>
+          </div>
+
+          <!-- Card 2: Pensamiento Crítico -->
+          <div class="neo-box bg-white p-5 sm:p-6 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 rounded-2xl bg-sky-200 border-2 border-black flex items-center justify-center text-black mb-4">
+              <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.516 0c.85.493 1.508 1.333 1.508 2.316V18"/>
+              </svg>
+            </div>
+            <h3 class="font-extrabold text-xl text-black">Pensamiento crítico y argumentación</h3>
+            <p class="mt-2 text-sm text-slate-700 font-medium leading-relaxed">
+              Aprende a analizar cualquier tema de actualidad desde diferentes perspectivas, detectar falacias al instante y estructurar argumentos sólidos e irrebatibles para cualquier debate o examen.
+            </p>
+          </div>
+
+          <!-- Card 3: Comunidad -->
+          <div class="neo-box bg-white p-5 sm:p-6 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 rounded-2xl bg-pink-200 border-2 border-black flex items-center justify-center text-black mb-4">
+              <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.999-3.199a5.96 5.96 0 00-.94 3.198m0 0l.002.031c0 .225.012.447.037.666M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-extrabold text-xl text-black">Amigos de todas las carreras</h3>
+            <p class="mt-2 text-sm text-slate-700 font-medium leading-relaxed">
+              Sal de la burbuja de tu clase. En el club hay gente de Derecho, Medicina, Informática, ADE, Letras, Psicología... Fiestas, cenas, cañas después de entrenar y una piña donde siempre encajas.
+            </p>
+          </div>
+
+          <!-- Card 4: CV y Futuro -->
+          <div class="neo-box bg-white p-5 sm:p-6 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-200 border-2 border-black flex items-center justify-center text-black mb-4">
+              <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-extrabold text-xl text-black">Un currículum que destaca</h3>
+            <p class="mt-2 text-sm text-slate-700 font-medium leading-relaxed">
+              Las empresas ya no buscan solo títulos; buscan pensamiento crítico, persuasión, negociación y resolución rápida de problemas. El debate es el entrenamiento de liderazgo más valorado del mercado.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PASO A PASO (Super Fácil) -->
+      <section class="mt-14 sm:mt-18 w-full max-w-3xl">
+        <div class="neo-box bg-white p-6 sm:p-8 rounded-3xl text-left">
+          <h2 class="font-display text-2xl sm:text-4xl uppercase text-black text-center mb-6">
+            ¿Cómo funciona? (Solo 3 Pasos)
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="flex flex-col items-center text-center p-3">
+              <span class="w-10 h-10 rounded-full bg-black text-white font-black flex items-center justify-center text-lg mb-2">1</span>
+              <h4 class="font-bold text-base">Rellenas el formulario</h4>
+              <p class="text-xs text-slate-600 mt-1">Solo te pide tu nombre, carrera y correo. Cero papeleos.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-3">
+              <span class="w-10 h-10 rounded-full bg-pink-500 text-white font-black flex items-center justify-center text-lg mb-2">2</span>
+              <h4 class="font-bold text-base">Vienes a probar</h4>
+              <p class="text-xs text-slate-600 mt-1">Acudes a tu primera sesión de bienvenida. Puedes venir de oyente o con amigos.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-3">
+              <span class="w-10 h-10 rounded-full bg-yellow-400 text-black font-black flex items-center justify-center text-lg mb-2 border border-black">3</span>
+              <h4 class="font-bold text-base">¡Debates y disfrutas!</h4>
+              <p class="text-xs text-slate-600 mt-1">Tú marcas el ritmo. Asistes cuando te venga bien según tus horarios.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- OPINIONES REALES DE ESTUDIANTES -->
+      <section class="mt-14 sm:mt-18 w-full">
+        <div class="text-center mb-8">
+          <h2 class="font-display text-3xl sm:text-5xl uppercase text-black inline-flex items-center justify-center gap-2.5">
+            <svg class="w-8 h-8 text-amber-500 fill-amber-400 shrink-0" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+            <span>Lo que dicen de nosotros</span>
+          </h2>
+          <p class="text-xs sm:text-sm font-bold text-slate-800 mt-1">Experiencias reales de compañeros de la UMU</p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3 max-w-4xl mx-auto text-left">
+          
+          <!-- Testimonio 1 -->
+          <div class="neo-box bg-white p-5 rounded-3xl flex flex-col justify-between transform hover:-rotate-1 hover:scale-102 transition">
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 mb-2.5">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="italic text-sm text-slate-800 leading-relaxed font-medium">
+                “En 1º de carrera me daba pánico hablar en público. En el club encontré el apoyo que necesitaba. ¡Hoy expongo en clase con total tranquilidad!”
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t-2 border-slate-100 flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-pink-100 text-pink-700 font-bold flex items-center justify-center text-xs border border-pink-300">
+                A
+              </div>
+              <div>
+                <p class="font-extrabold text-xs text-black leading-tight">Ana</p>
+                <p class="text-[11px] text-slate-500 font-medium">Grado en Derecho</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 2 -->
+          <div class="neo-box bg-white p-5 rounded-3xl flex flex-col justify-between transform hover:rotate-1 hover:scale-102 transition">
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 mb-2.5">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="italic text-sm text-slate-800 leading-relaxed font-medium">
+                “Pensaba que debatir era solo para gente de leyes. Soy de informática y es la mejor decisión que tomé en la uni: amigos y momentos inolvidables.”
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t-2 border-slate-100 flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs border border-blue-300">
+                JF
+              </div>
+              <div>
+                <p class="font-extrabold text-xs text-black leading-tight">José Fernando</p>
+                <p class="text-[11px] text-slate-500 font-medium">Ingeniería Informática</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 3 -->
+          <div class="neo-box bg-white p-5 rounded-3xl flex flex-col justify-between transform hover:-rotate-1 hover:scale-102 transition">
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 mb-2.5">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="italic text-sm text-slate-800 leading-relaxed font-medium">
+                “El ambiente es sano, divertido y nada elitista. Da igual que empieces sin saber nada: la gente te enseña con una paciencia y cariño increíbles.”
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t-2 border-slate-100 flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs border border-emerald-300">
+                R
+              </div>
+              <div>
+                <p class="font-extrabold text-xs text-black leading-tight">Rocío</p>
+                <p class="text-[11px] text-slate-500 font-medium">ADE y Economía</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PREGUNTAS FRECUENTES (FAQ RÁPIDA) -->
+      <section class="mt-14 sm:mt-18 w-full max-w-2xl text-left">
+        <h2 class="font-display text-2xl sm:text-4xl uppercase text-black text-center mb-6">
+          Dudas frecuentes de estudiantes
+        </h2>
+        <div class="space-y-3">
+          
+          <details class="neo-box bg-white rounded-2xl p-4 cursor-pointer group">
+            <summary class="font-bold text-sm sm:text-base text-black flex justify-between items-center list-none">
+              <span>¿Tengo que haber debatido antes para unirme?</span>
+              <svg class="w-5 h-5 text-black group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+              </svg>
+            </summary>
+            <p class="mt-2.5 text-xs sm:text-sm text-slate-700 font-medium leading-relaxed pt-2 border-t border-slate-100">
+              ¡Para nada! El 90% de los miembros entra sin haber debatido en su vida ni haber hablado ante un micrófono. Tenemos talleres formativos específicos diseñados para que empieces desde cero absoluto a tu propio ritmo.
+            </p>
+          </details>
+
+          <details class="neo-box bg-white rounded-2xl p-4 cursor-pointer group">
+            <summary class="font-bold text-sm sm:text-base text-black flex justify-between items-center list-none">
+              <span>¿Cuesta dinero apuntarse?</span>
+              <svg class="w-5 h-5 text-black group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+              </svg>
+            </summary>
+            <p class="mt-2.5 text-xs sm:text-sm text-slate-700 font-medium leading-relaxed pt-2 border-t border-slate-100">
+              No, la inscripción y las sesiones de formación semanales son 100% gratuitas para todos los estudiantes de la Universidad de Murcia.
+            </p>
+          </details>
+
+          <details class="neo-box bg-white rounded-2xl p-4 cursor-pointer group">
+            <summary class="font-bold text-sm sm:text-base text-black flex justify-between items-center list-none">
+              <span>¿Qué pasa si tengo entregas o exámenes?</span>
+              <svg class="w-5 h-5 text-black group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+              </svg>
+            </summary>
+            <p class="mt-2.5 text-xs sm:text-sm text-slate-700 font-medium leading-relaxed pt-2 border-t border-slate-100">
+              Lo primero son tus estudios. La asistencia nunca es obligatoria; tú decides cuándo venir, a qué sesiones sumarte y si te apetece ir a un torneo o quedarte a estudiar esa semana.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CTA FINAL (Gran Cierre) -->
+      <section class="mt-16 sm:mt-20 w-full max-w-2xl">
+        <div class="neo-box bg-black text-white p-6 sm:p-10 rounded-3xl text-center relative overflow-hidden">
+          <div class="relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-400 text-black font-black text-xs uppercase mb-3">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.316.492-.53 1.045-.675 1.54a10.875 10.875 0 01-1.04 2.502c-.287.49-.607.95-1.002 1.34A6.974 6.974 0 006 12a6 6 0 1012 0c0-1.45-.44-2.805-1.196-3.928a9.957 9.957 0 01-.734-1.298c-.287-.582-.505-1.222-.675-1.84a10.74 10.74 0 01-.383-1.637 5.922 5.922 0 00-.617-.744zM10 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" clip-rule="evenodd"/>
+              </svg>
+              <span>¿A qué estás esperando?</span>
+            </span>
+            <h2 class="font-display text-3xl sm:text-5xl uppercase tracking-tight text-white">
+              No te quedes con las ganas
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-zinc-300 font-medium max-w-md mx-auto">
+              Da el paso, conoce a gente que vale la pena y vive la universidad de verdad. ¡Te estamos esperando!
+            </p>
+            <div class="mt-6 flex justify-center">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFYm-10LTDqIfV-QsM-WzJwumzs5gxxLsGDB2JEX2ZWrmaXw/viewform?usp=dialog" target="_blank" rel="noopener"
+                 class="neo-btn bg-[#ff2e93] hover:bg-[#ff1584] text-white font-extrabold text-base sm:text-lg py-4 px-8 rounded-2xl transition inline-flex items-center justify-center gap-2.5">
+                <span>¡Quiero Inscribirme Gratis!</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-8 text-center text-xs bg-black text-white w-full space-y-3 neo-box border-x-0 border-b-0">
+      <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-3">
+        <div class="flex items-center gap-2">
+          <img src="../img/logos/sinf.png" alt="Logo UMU Debate" class="w-6 h-6 object-contain">
+          <p class="font-bold">© <span id="year"></span> Club de Debate UMU — Universidad de Murcia</p>
+        </div>
+        <nav aria-label="Información legal" class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-zinc-400 text-[11px]">
+          <a href="../legal/aviso-legal.html" class="hover:text-white hover:underline">Aviso Legal</a> ·
+          <a href="../legal/privacidad.html" class="hover:text-white hover:underline">Privacidad</a> ·
+          <a href="../legal/cookies.html" class="hover:text-white hover:underline">Cookies</a> ·
+          <a href="../legal/terminos.html" class="hover:text-white hover:underline">Términos</a> ·
+          <a href="../" class="hover:text-white hover:underline font-bold text-yellow-400">Inicio del Club</a>
+        </nav>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPT: Color vibrante aleatorio y año -->
   <script>
-    // Paleta fosforita
-    const colores = [
-      "#fffb00", // amarillo fosforito
-      "#39ff14", // verde fosforito
-      //"#ff00ff", // magenta
-      //"#ff3131", // rojo neon
-      "#00f0ff"  // cian brillante
+    // Paleta de colores vibrantes y llamativos para estudiantes
+    const vibras = [
+      "#ffe814", // Amarillo eléctrico
+      "#42e8bb", // Verde menta cyber
+      "#38bdf8", // Azul eléctrico brillante
+      "#ff8cd8", // Rosa chicle pop
+      "#bbf246"  // Lima ácido
     ];
-    // Escoger aleatorio al cargar
-    document.body.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
 
-    // Año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const body = document.getElementById('pageBody');
+    body.style.backgroundColor = vibras[Math.floor(Math.random() * vibras.length)];
+
+    // Actualizar año actual en el pie de página
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
   </script>
+
+  <!-- Banner de cookies legal -->
   <script src="../legal/banner.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
 - **Contacto:** josef.caniles.murcia@gmail.com
 - **Instagram Oficial:** https://www.instagram.com/clubdedebateum/
 - **Web Oficial:** https://josefervg.github.io/Debate_UMU/
-- **Formulario de Inscripción:** https://forms.gle/95BciRRU9UGjvAjF6
+- **Formulario de Inscripción:** https://docs.google.com/forms/d/e/1FAIpQLSdFYm-10LTDqIfV-QsM-WzJwumzs5gxxLsGDB2JEX2ZWrmaXw/viewform?usp=dialog
 - **Créditos Académicos:** Reconocimiento de créditos CRAU por actividades de extensión universitaria en la UMU.
 
 ## Suite de Herramientas Web Gratuitas (Client-Side / Sin Backend)
