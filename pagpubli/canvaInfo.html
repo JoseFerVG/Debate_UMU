@@ -88,14 +88,14 @@
 
       <!-- Botones de navegación -->
       <button id="prevBtn" type="button" aria-label="Foto anterior"
-              class="absolute top-1/2 left-2 sm:left-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center z-10">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              class="absolute top-1/2 left-2 sm:left-3 -translate-y-1/2 bg-black/60 hover:bg-black active:scale-95 text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center z-10 cursor-pointer touch-manipulation select-none">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
         </svg>
       </button>
       <button id="nextBtn" type="button" aria-label="Siguiente foto"
-              class="absolute top-1/2 right-2 sm:right-3 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center z-10">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              class="absolute top-1/2 right-2 sm:right-3 -translate-y-1/2 bg-black/60 hover:bg-black active:scale-95 text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center z-10 cursor-pointer touch-manipulation select-none">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
         </svg>
       </button>
@@ -142,7 +142,14 @@
       "../img/imagenesInfo/info(5).jpg"
     ];
 
+    // Precargar imágenes para que el paso entre fotos sea instantáneo
+    images.forEach(src => {
+      const p = new Image();
+      p.src = src;
+    });
+
     let currentIndex = 0;
+    let requestId = 0;
     const imgElement = document.getElementById('carousel-img');
     const loader = document.getElementById('loader');
     const dotsContainer = document.getElementById('dots');
@@ -156,9 +163,12 @@
       images.forEach((_, i) => {
         const d = document.createElement('button');
         d.type = "button";
-        d.className = "dot";
+        d.className = "dot cursor-pointer transition-all";
         d.setAttribute('aria-label', 'Ir a imagen ' + (i+1));
-        d.addEventListener('click', () => { showImage(i); });
+        d.addEventListener('click', (e) => { 
+          e.preventDefault();
+          showImage(i); 
+        });
         dotsContainer.appendChild(d);
       });
       updateDots();
@@ -170,31 +180,49 @@
       });
     }
 
-    // Mostrar imagen con precarga y animación
+    // Mostrar imagen con precarga inmediata y sin parpadeo en negro
     function showImage(index) {
       if (index < 0) index = images.length - 1;
       if (index >= images.length) index = 0;
       currentIndex = index;
+      updateDots();
 
-      loader.style.display = "flex";
-      imgElement.style.opacity = 0;
+      const thisRequestId = ++requestId;
+      const targetSrc = images[currentIndex];
 
       const preloader = new Image();
-      preloader.src = images[currentIndex];
-      preloader.onload = () => {
-        imgElement.src = images[currentIndex];
+      preloader.src = targetSrc;
+
+      function applyImage() {
+        if (thisRequestId !== requestId) return;
+        imgElement.src = targetSrc;
         loader.style.display = "none";
         imgElement.style.opacity = 1;
         imgElement.classList.remove('fade-in');
         void imgElement.offsetWidth;
         imgElement.classList.add('fade-in');
-      };
+      }
 
-      updateDots();
+      if (preloader.complete) {
+        applyImage();
+      } else {
+        loader.style.display = "flex";
+        preloader.onload = applyImage;
+        preloader.onerror = () => {
+          if (thisRequestId !== requestId) return;
+          loader.style.display = "none";
+        };
+      }
     }
 
-    nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-    prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showImage(currentIndex + 1);
+    });
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showImage(currentIndex - 1);
+    });
 
     // Teclado
     window.addEventListener('keydown', (e) => {
